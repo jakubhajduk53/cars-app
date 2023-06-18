@@ -28,7 +28,7 @@ function App() {
     <div className="App">
       <Header />
       <SearchBar handleSearch={handleSearch} />
-      {cars.length > 0 ? <CarsList cars={cars} /> : <p>Loading...</p>}
+      {cars.length > -1 ? <CarsList cars={cars} /> : <p>Loading...</p>}
     </div>
   );
 }
