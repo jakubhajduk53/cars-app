@@ -1,21 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "./lib/supabaseClient";
 import CarsList from "./components/CarsList";
 
 function App() {
-  console.log(supabase);
+  const [cars, setCars] = useState([]);
+
   async function fetchData() {
     let { data: cars, error } = await supabase.from("cars").select("*");
-
-    console.log(cars);
+    setCars(cars);
   }
+
   useEffect(() => {
     fetchData();
   }, []);
 
   return (
     <div className="App">
-      <CarsList />
+      {cars.length > 0 ? <CarsList cars={cars} /> : <p>Loading...</p>}
     </div>
   );
 }
