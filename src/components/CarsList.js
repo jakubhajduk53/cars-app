@@ -10,6 +10,7 @@ function CarsList(props) {
           <CarsListItem
             key={car.id}
             id={car.id}
+            img={car.image_url}
             name={car.name}
             price={car.price}
             yearOfProduction={car.year_of_production}
