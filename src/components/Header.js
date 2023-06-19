@@ -1,10 +1,10 @@
 function Header() {
   return (
     <div>
-      <a>Home</a>
-      <a>Cars for sale</a>
-      <a>Sell your car</a>
-      <a>Menu</a>
+      <a href="">Home</a>
+      <a href="">Cars for sale</a>
+      <a href="">Sell your car</a>
+      <a href="">Menu</a>
     </div>
   );
 }
