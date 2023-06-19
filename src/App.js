@@ -4,6 +4,7 @@ import CarsList from "./components/CarsList";
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import Footer from "./components/Footer";
+import SellYourCarPage from "./pages/SellYourCarPage";
 
 function App() {
   const [cars, setCars] = useState([]);
@@ -35,6 +36,8 @@ function App() {
       <SearchBar handleSearch={handleSearch} />
       {cars.length > -1 ? <CarsList cars={cars} /> : <p>Loading...</p>}
       <Footer />
+      <hr></hr>
+      <SellYourCarPage />
     </div>
   );
 }
