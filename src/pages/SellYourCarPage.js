@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { nanoid } from "nanoid";
+import Button from "../components/Button";
 
 function SellYourCarPage() {
   const [car, setCar] = useState({
@@ -85,13 +86,12 @@ function SellYourCarPage() {
             uploadImage(event);
           }}
         />
-        <button
+        <Button
           onClick={(event) => {
             handleClick(event);
           }}
-        >
-          Confirm
-        </button>
+          value="Confirm"
+        />
       </form>
     </div>
   );

@@ -10,8 +10,9 @@ function SearchBar(props) {
   };
 
   return (
-    <form>
+    <form className="flex items-center gap-8 m-5">
       <input
+        className="flex-grow px-4 py-2 border border-gray-300 rounded-md"
         type="text"
         value={value}
         onChange={(event) => {
