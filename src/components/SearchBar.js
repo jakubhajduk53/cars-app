@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "./Button";
 
 function SearchBar(props) {
   const [value, setValue] = useState("");
@@ -17,7 +18,7 @@ function SearchBar(props) {
           setValue(event.target.value);
         }}
       />
-      <button onClick={handleClick}>Search</button>
+      <Button onClick={handleClick} value="Search" />
     </form>
   );
 }
