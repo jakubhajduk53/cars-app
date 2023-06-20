@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import SellYourCarPage from "./pages/SellYourCarPage";
 import CarsForSalePage from "./pages/CarsForSalePage";
 import HomePage from "./pages/HomePage";
+import MenuPage from "./pages/MenuPage";
 import { Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -39,9 +40,10 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route
           path="/cars-for-sale"
-          element={<CarsForSalePage cars={cars} />}
+          element={<CarsForSalePage cars={cars} handleSearch={handleSearch} />}
         />
         <Route path="/sell-your-car" element={<SellYourCarPage />} />
+        <Route path="/menu" element={<MenuPage />} />
       </Routes>
       <Footer />
     </div>
