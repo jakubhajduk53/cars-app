@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { supabase } from "./lib/supabaseClient";
-import CarsList from "./components/CarsList";
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import Footer from "./components/Footer";
 import SellYourCarPage from "./pages/SellYourCarPage";
+import CarsForSalePage from "./pages/CarsForSalePage";
+import HomePage from "./pages/HomePage";
+import { Router, Route, Routes } from "react-router-dom";
 
 function App() {
   const [cars, setCars] = useState([]);
@@ -33,11 +35,15 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <SearchBar handleSearch={handleSearch} />
-      {cars.length > -1 ? <CarsList cars={cars} /> : <p>Loading...</p>}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/cars-for-sale"
+          element={<CarsForSalePage cars={cars} />}
+        />
+        <Route path="/sell-your-car" element={<SellYourCarPage />} />
+      </Routes>
       <Footer />
-      <hr></hr>
-      <SellYourCarPage />
     </div>
   );
 }
