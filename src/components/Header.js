@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function Header() {
   return (
-    <div className="flex justify-center bg-neutral-100">
+    <div className="flex justify-center bg-neutral-100 sticky top-0">
       <Link
         to={"/"}
         className="px-8 py-4 text-lg text-black-500 hover:text-blue-700"

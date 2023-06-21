@@ -10,7 +10,7 @@ function SearchBar(props) {
   };
 
   return (
-    <form className="flex items-center gap-8 m-5">
+    <form className="flex items-center gap-8 m-5 w-3/4 mx-auto">
       <input
         className="flex-grow px-4 py-2 border border-gray-300 rounded-md"
         type="text"
