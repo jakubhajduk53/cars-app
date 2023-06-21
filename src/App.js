@@ -28,6 +28,10 @@ function App() {
     const { img, error } = await supabase.storage.from("cars");
   };
 
+  const update = () => {
+    fetchData();
+  };
+
   useEffect(() => {
     fetchData();
     fetchImage();
@@ -45,7 +49,10 @@ function App() {
               <CarsForSalePage cars={cars} handleSearch={handleSearch} />
             }
           />
-          <Route path="/sell-your-car" element={<SellYourCarPage />} />
+          <Route
+            path="/sell-your-car"
+            element={<SellYourCarPage update={update} />}
+          />
           <Route path="/menu" element={<MenuPage />} />
         </Routes>
       </div>
