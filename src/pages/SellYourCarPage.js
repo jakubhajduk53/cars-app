@@ -12,6 +12,8 @@ function SellYourCarPage(props) {
     image_url: "",
   });
 
+  const [formError, setFormError] = useState(false);
+
   const CDNURL =
     "https://fomgpntxpamdvhnbyiyr.supabase.co/storage/v1/object/public/cars/";
 
@@ -31,6 +33,18 @@ function SellYourCarPage(props) {
 
   async function handleClick(event) {
     event.preventDefault();
+
+    if (
+      !car.name ||
+      !car.year_of_production ||
+      !car.price ||
+      !car.location ||
+      !car.image_url
+    ) {
+      setFormError(true);
+      return;
+    }
+
     const { data, error } = await supabase.from("cars").insert([
       {
         name: car.name,
@@ -48,6 +62,8 @@ function SellYourCarPage(props) {
       location: "",
       image_url: "",
     });
+
+    setFormError(false);
 
     props.update();
   }
@@ -127,8 +143,12 @@ function SellYourCarPage(props) {
             onChange={uploadImage}
             className="mb-4"
           />
-
           <Button onClick={handleClick} value="Confirm" className="w-full" />
+          {formError && (
+            <p className="text-red-500 text-center text-lg">
+              All fields are required!
+            </p>
+          )}
         </form>
       </div>
     </div>
