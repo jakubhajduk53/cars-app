@@ -34,17 +34,21 @@ function App() {
   }, [searchValue]);
 
   return (
-    <div className="App">
+    <div className="App flex flex-col min-h-screen">
       <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route
-          path="/cars-for-sale"
-          element={<CarsForSalePage cars={cars} handleSearch={handleSearch} />}
-        />
-        <Route path="/sell-your-car" element={<SellYourCarPage />} />
-        <Route path="/menu" element={<MenuPage />} />
-      </Routes>
+      <div className="flex-grow">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/cars-for-sale"
+            element={
+              <CarsForSalePage cars={cars} handleSearch={handleSearch} />
+            }
+          />
+          <Route path="/sell-your-car" element={<SellYourCarPage />} />
+          <Route path="/menu" element={<MenuPage />} />
+        </Routes>
+      </div>
       <Footer />
     </div>
   );
