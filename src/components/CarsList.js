@@ -4,7 +4,7 @@ function CarsList(props) {
   const cars = props.cars;
 
   return (
-    <div>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       {cars.map((car) => {
         return (
           <CarsListItem
