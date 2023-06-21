@@ -40,6 +40,14 @@ function SellYourCarPage() {
         image_url: car.image_url,
       },
     ]);
+
+    setCar({
+      name: "",
+      year_of_production: 0,
+      price: 0,
+      location: "",
+      image_url: "",
+    });
   }
 
   const handleChange = (event) => {
@@ -51,48 +59,76 @@ function SellYourCarPage() {
   };
 
   return (
-    <div>
-      Sell your car
-      <form>
-        <input
-          type="text"
-          name="name"
-          value={car.name}
-          onChange={handleChange}
-        />
-        <input
-          type="number"
-          name="year_of_production"
-          value={car.year_of_production}
-          onChange={handleChange}
-        />
-        <input
-          type="number"
-          name="price"
-          value={car.price}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="location"
-          value={car.location}
-          onChange={handleChange}
-        />
-        Image:
-        <input
-          type="file"
-          accept="image/png, image/jpeg, image/jpg"
-          onChange={(event) => {
-            uploadImage(event);
-          }}
-        />
-        <Button
-          onClick={(event) => {
-            handleClick(event);
-          }}
-          value="Confirm"
-        />
-      </form>
+    <div className="flex justify-center items-center py-5">
+      <div>
+        <h2 className="text-lg font-bold mb-4 text-center">Sell your car</h2>
+        <form className="flex flex-col px-4 py-2 w-full max-w-md">
+          <label htmlFor="name" className="mb-2">
+            Car name:
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={car.name}
+            onChange={handleChange}
+            className="mb-4 p-2 border border-gray-300 rounded"
+            placeholder="Car name"
+          />
+
+          <label htmlFor="year" className="mb-2">
+            Year of production:
+          </label>
+          <input
+            type="number"
+            id="year"
+            name="year_of_production"
+            value={car.year_of_production}
+            onChange={handleChange}
+            className="mb-4 p-2 border border-gray-300 rounded"
+            placeholder="Year of production"
+          />
+
+          <label htmlFor="price" className="mb-2">
+            Price:
+          </label>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            value={car.price}
+            onChange={handleChange}
+            className="mb-4 p-2 border border-gray-300 rounded"
+            placeholder="Price"
+          />
+
+          <label htmlFor="location" className="mb-2">
+            Location:
+          </label>
+          <input
+            type="text"
+            id="location"
+            name="location"
+            value={car.location}
+            onChange={handleChange}
+            className="mb-4 p-2 border border-gray-300 rounded"
+            placeholder="Location"
+          />
+
+          <label htmlFor="image" className="mb-2">
+            Image:
+          </label>
+          <input
+            type="file"
+            id="image"
+            accept="image/png, image/jpeg, image/jpg"
+            onChange={uploadImage}
+            className="mb-4"
+          />
+
+          <Button onClick={handleClick} value="Confirm" className="w-full" />
+        </form>
+      </div>
     </div>
   );
 }
