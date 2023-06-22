@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { supabase } from "./lib/supabaseClient";
 import Header from "./components/Header";
-import SearchBar from "./components/SearchBar";
 import Footer from "./components/Footer";
 import SellYourCarPage from "./pages/SellYourCarPage";
 import CarsForSalePage from "./pages/CarsForSalePage";
 import HomePage from "./pages/HomePage";
 import MenuPage from "./pages/MenuPage";
-import { Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   const [cars, setCars] = useState([]);
