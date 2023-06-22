@@ -24,9 +24,6 @@ function App() {
       .ilike("name", `%${searchValue}%`);
     setCars(cars);
   }
-  const fetchImage = async () => {
-    const { img, error } = await supabase.storage.from("cars");
-  };
 
   const update = () => {
     fetchData();
