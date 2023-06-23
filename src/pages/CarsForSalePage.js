@@ -20,7 +20,7 @@ function CarsForSalePage() {
   });
 
   return (
-    <div>
+    <div className="w-full">
       <SearchBar />
       {cars.length > -1 ? <CarsList cars={cars} /> : <p>Loading...</p>}
     </div>

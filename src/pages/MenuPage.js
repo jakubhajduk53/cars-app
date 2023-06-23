@@ -1,5 +1,5 @@
 function MenuPage() {
-  return <div>MenuPage</div>;
+  return <div className="w-full">MenuPage</div>;
 }
 
 export default MenuPage;
