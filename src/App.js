@@ -16,6 +16,10 @@ function App() {
     setSearchValue(value);
   };
 
+  //przeniesc to do index.js
+  //usunac formslice
+  //responsem wysylac dane do cars
+
   async function fetchData() {
     let { data: cars, error } = await supabase
       .from("cars")
@@ -30,7 +34,6 @@ function App() {
 
   useEffect(() => {
     fetchData();
-    fetchImage();
   }, [searchValue]);
 
   return (

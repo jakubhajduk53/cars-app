@@ -5,13 +5,11 @@ import {
   addCar,
   importCars,
 } from "./slices/carsSlice";
-import { formReducer, updateForm } from "./slices/formSlice";
 
 const store = configureStore({
   reducer: {
     cars: carsReducer,
-    form: formReducer,
   },
 });
 
-export { store, changeSearchTerm, addCar, importCars, updateForm };
+export { store, changeSearchTerm, addCar, importCars };
