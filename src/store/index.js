@@ -3,7 +3,7 @@ import {
   carsReducer,
   changeSearchTerm,
   addCar,
-  importCars,
+  fetchCars,
 } from "./slices/carsSlice";
 
 const store = configureStore({
@@ -12,4 +12,4 @@ const store = configureStore({
   },
 });
 
-export { store, changeSearchTerm, addCar, importCars };
+export { store, changeSearchTerm, addCar, fetchCars };

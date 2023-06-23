@@ -1,18 +1,26 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { supabase } from "../../lib/supabaseClient";
+
+// Async thunk do pobierania danych samochodów
+export const fetchCars = createAsyncThunk("cars/fetchCars", async () => {
+  const { data: cars, error } = await supabase.from("cars").select("*");
+  return cars;
+});
 
 const carsSlice = createSlice({
   name: "cars",
   initialState: {
     searchTerm: "",
     carsList: [],
-    carsToAdd: [],
+    loading: false,
+    error: null,
   },
   reducers: {
     changeSearchTerm(state, action) {
       state.searchTerm = action.payload;
     },
     addCar(state, action) {
-      state.carsToAdd.push({
+      state.carsList.push({
         name: action.payload.name,
         year_of_production: action.payload.year_of_production,
         price: action.payload.price,
@@ -20,11 +28,23 @@ const carsSlice = createSlice({
         image_url: action.payload.image_url,
       });
     },
-    importCars(state, action) {
-      state.carsList.push(action.payload);
-    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchCars.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchCars.fulfilled, (state, action) => {
+        state.loading = false;
+        state.carsList = action.payload;
+      })
+      .addCase(fetchCars.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
   },
 });
 
-export const { changeSearchTerm, addCar, importCars } = carsSlice.actions;
+export const { changeSearchTerm, addCar } = carsSlice.actions;
 export const carsReducer = carsSlice.reducer;
