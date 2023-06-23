@@ -11,14 +11,18 @@ function CarsForSalePage() {
     dispatch(fetchCars());
   }, []);
 
+  const cars = useSelector(({ cars: { carsList, searchTerm } }) => {
+    const filteredCars = carsList.filter((car) =>
+      car.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    return filteredCars;
+  });
+
   return (
     <div>
       <SearchBar />
-      {/* {props.cars.length > -1 ? (
-        <CarsList cars={props.cars} />
-      ) : (
-        <p>Loading...</p>
-      )} */}
+      {cars.length > -1 ? <CarsList cars={cars} /> : <p>Loading...</p>}
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { supabase } from "../lib/supabaseClient";
 import { nanoid } from "nanoid";
 import Button from "../components/Button";
 
-function SellYourCarPage(props) {
+function SellYourCarPage() {
   const [car, setCar] = useState({
     name: "",
     year_of_production: 0,
@@ -64,8 +64,6 @@ function SellYourCarPage(props) {
     });
 
     setFormError(false);
-
-    props.update();
   }
 
   const handleChange = (event) => {
