@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { supabase } from "../../lib/supabaseClient";
 
-// Async thunk do pobierania danych samochodów
 export const fetchCars = createAsyncThunk("cars/fetchCars", async () => {
   const { data: cars, error } = await supabase.from("cars").select("*");
   return cars;
