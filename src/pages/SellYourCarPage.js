@@ -21,6 +21,8 @@ function SellYourCarPage() {
     id: 0,
   });
 
+  const [imagePreview, setImagePreview] = useState(null);
+
   const [formError, setFormError] = useState(false);
 
   const CDNURL =
@@ -36,6 +38,8 @@ function SellYourCarPage() {
       ...prevCar,
       image_url: CDNURL + id,
     }));
+
+    setImagePreview(URL.createObjectURL(file));
   };
 
   async function handleSubmit(event) {
@@ -81,6 +85,8 @@ function SellYourCarPage() {
     });
 
     setFormError(false);
+
+    setImagePreview(null);
   }
 
   const handleChange = (event) => {
@@ -161,6 +167,10 @@ function SellYourCarPage() {
             onChange={handleImage}
             className="mb-4"
           />
+          {imagePreview && (
+            <img src={imagePreview} alt="Preview" className="mb-4" />
+          )}
+
           <Button value="Confirm" className="w-full" />
           {formError && (
             <p className="text-red-500 text-center text-lg">
