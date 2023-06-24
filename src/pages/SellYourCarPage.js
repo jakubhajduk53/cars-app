@@ -18,10 +18,12 @@ function SellYourCarPage() {
 
   const [image, setImage] = useState({
     file: "",
-    id: 0,
+    id: null,
   });
 
   const [imagePreview, setImagePreview] = useState(null);
+
+  const [imageValue, setImageValue] = useState("");
 
   const [formError, setFormError] = useState(false);
 
@@ -38,6 +40,8 @@ function SellYourCarPage() {
       ...prevCar,
       image_url: CDNURL + id,
     }));
+
+    setImageValue(event.target.value);
 
     setImagePreview(URL.createObjectURL(file));
   };
@@ -84,7 +88,14 @@ function SellYourCarPage() {
       image_url: "",
     });
 
+    setImage({
+      file: "",
+      id: null,
+    });
+
     setFormError(false);
+
+    setImageValue("");
 
     setImagePreview(null);
   }
@@ -164,6 +175,7 @@ function SellYourCarPage() {
             type="file"
             id="image"
             accept="image/png, image/jpeg, image/jpg"
+            value={imageValue}
             onChange={handleImage}
             className="mb-4"
           />
