@@ -21,6 +21,7 @@ const carsSlice = createSlice({
     },
     addCar(state, action) {
       state.carsList.push({
+        id: action.payload.id,
         name: action.payload.name,
         year_of_production: action.payload.year_of_production,
         price: action.payload.price,

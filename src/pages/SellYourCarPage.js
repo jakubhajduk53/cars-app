@@ -2,8 +2,12 @@ import { useState } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { nanoid } from "nanoid";
 import Button from "../components/Button";
+import { useDispatch } from "react-redux";
+import { addCar } from "../store";
 
 function SellYourCarPage() {
+  const dispatch = useDispatch();
+
   const [car, setCar] = useState({
     name: "",
     year_of_production: 0,
@@ -12,26 +16,29 @@ function SellYourCarPage() {
     image_url: "",
   });
 
+  const [image, setImage] = useState({
+    file: "",
+    id: 0,
+  });
+
   const [formError, setFormError] = useState(false);
 
   const CDNURL =
     "https://fomgpntxpamdvhnbyiyr.supabase.co/storage/v1/object/public/cars/";
 
-  async function uploadImage(event) {
-    let file = event.target.files[0];
+  const handleImage = (event) => {
     const id = nanoid();
+    const file = event.target.files[0];
+
+    setImage({ file, id });
 
     setCar((prevCar) => ({
       ...prevCar,
       image_url: CDNURL + id,
     }));
+  };
 
-    const { data, error } = await supabase.storage
-      .from("cars")
-      .upload(id, file);
-  }
-
-  async function handleClick(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     if (
@@ -39,21 +46,31 @@ function SellYourCarPage() {
       !car.year_of_production ||
       !car.price ||
       !car.location ||
-      !car.image_url
+      !image.file
     ) {
       setFormError(true);
       return;
     }
 
-    const { data, error } = await supabase.from("cars").insert([
-      {
-        name: car.name,
-        year_of_production: car.year_of_production,
-        price: car.price,
-        location: car.location,
-        image_url: car.image_url,
-      },
-    ]);
+    await supabase.storage.from("cars").upload(image.id, image.file);
+
+    const { data, error } = await supabase
+      .from("cars")
+      .insert([
+        {
+          name: car.name,
+          year_of_production: car.year_of_production,
+          price: car.price,
+          location: car.location,
+          image_url: CDNURL + image.id,
+        },
+      ])
+      .select();
+
+    if (error) {
+    } else {
+      await dispatch(addCar(data[0]));
+    }
 
     setCar({
       name: "",
@@ -78,7 +95,10 @@ function SellYourCarPage() {
     <div className="flex w-full justify-center py-5">
       <div>
         <h2 className="text-lg font-bold mb-4 text-center">Sell your car</h2>
-        <form className="flex flex-col px-4 py-2 w-full max-w-md">
+        <form
+          className="flex flex-col px-4 py-2 w-full max-w-md"
+          onSubmit={handleSubmit}
+        >
           <label htmlFor="name" className="mb-2">
             Car name:
           </label>
@@ -138,10 +158,10 @@ function SellYourCarPage() {
             type="file"
             id="image"
             accept="image/png, image/jpeg, image/jpg"
-            onChange={uploadImage}
+            onChange={handleImage}
             className="mb-4"
           />
-          <Button onClick={handleClick} value="Confirm" className="w-full" />
+          <Button value="Confirm" className="w-full" />
           {formError && (
             <p className="text-red-500 text-center text-lg">
               All fields are required!
