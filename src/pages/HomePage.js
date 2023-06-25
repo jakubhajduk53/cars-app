@@ -12,7 +12,7 @@ function HomePage() {
       <Link to="/cars-for-sale">
         <Button
           value="Get Started"
-          className="relative overflow-hidden bg-transparent hover:bg-opacity-70 text-white uppercase border border-gray transition duration-150"
+          className="relative overflow-hidden bg-transparent hover:bg-opacity-70 text-white uppercase border border-gray"
         />
       </Link>
     </div>
