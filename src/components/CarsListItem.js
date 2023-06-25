@@ -10,7 +10,7 @@ function CarsListItem(props) {
           Year of production: {props.yearOfProduction}
         </p>
         <p className="text-gray-600">Location: {props.location}</p>
-        <Button value="Buy now" />
+        <Button value="Check Availability" />
       </div>
     </div>
   );
