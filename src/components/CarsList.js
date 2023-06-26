@@ -40,13 +40,13 @@ function CarsList(props) {
           />
         ))}
       </div>
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center items-center mt-4">
         <Button
           value="<"
           onClick={goToPreviousPage}
           disabled={currentPage === 1}
         />
-        <p className="mx-2">
+        <p className="mx-2 text-center">
           Page {currentPage} of {totalPages}
         </p>
         <Button
