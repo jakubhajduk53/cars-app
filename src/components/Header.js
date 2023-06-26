@@ -8,7 +8,7 @@ import {
 import RouterLink from "./RouterLink";
 
 function Header() {
-  const [activeLink, setActiveLink] = useState(null);
+  const [activeLink, setActiveLink] = useState("Home");
 
   const handleLinkClick = (name) => {
     setActiveLink(name);
