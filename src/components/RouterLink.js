@@ -12,8 +12,6 @@ const RouterLink = ({ to, icon: Icon, name, activeLink, onClick }) => {
     "hover:text-blue-700 flex items-center gap-1 transition duration-150"
   );
 
-  console.log(to);
-
   return (
     <Link to={to} onClick={() => onClick(to)}>
       <div className={linkStyles}>
