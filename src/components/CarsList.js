@@ -6,7 +6,7 @@ function CarsList(props) {
   const cars = props.cars;
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 9;
+  const itemsPerPage = 6;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -28,7 +28,7 @@ function CarsList(props) {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 m-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 m-8">
         {itemsToShow.map((car) => (
           <CarsListItem
             key={car.id}
