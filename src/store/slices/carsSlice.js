@@ -1,23 +1,29 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { supabase } from "../../lib/supabaseClient";
 
-export const fetchCars = createAsyncThunk("cars/fetchCars", async () => {
-  const { data: cars, error } = await supabase.from("cars").select("*");
-  return cars;
-});
+export const fetchCars = createAsyncThunk(
+  "cars/fetchCars",
+  async ({ first, last, term }) => {
+    const { data: cars, error } = await supabase
+      .from("cars")
+      .select("*")
+      .range(first, last)
+      .ilike("name", `%${term}%`);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return cars;
+  }
+);
 
 const carsSlice = createSlice({
   name: "cars",
   initialState: {
-    searchTerm: "",
     carsList: [],
     loading: false,
     error: null,
   },
   reducers: {
-    changeSearchTerm(state, action) {
-      state.searchTerm = action.payload;
-    },
     addCar(state, action) {
       state.carsList.push({
         id: action.payload.id,

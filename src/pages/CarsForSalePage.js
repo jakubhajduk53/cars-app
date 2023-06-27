@@ -8,15 +8,17 @@ function CarsForSalePage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchCars());
+    dispatch(
+      fetchCars({
+        first: 0,
+        last: 24,
+        term: "",
+      })
+    );
   }, []);
 
-  const cars = useSelector(({ cars: { carsList, searchTerm } }) => {
-    const filteredCars = carsList.filter((car) =>
-      car.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-    return filteredCars;
+  const cars = useSelector(({ cars: { carsList } }) => {
+    return carsList;
   });
 
   return (
