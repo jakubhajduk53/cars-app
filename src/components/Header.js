@@ -8,10 +8,10 @@ import {
 import RouterLink from "./RouterLink";
 
 function Header() {
-  const [activeLink, setActiveLink] = useState("Home");
+  const [activeLink, setActiveLink] = useState(window.location.pathname);
 
-  const handleLinkClick = (name) => {
-    setActiveLink(name);
+  const handleLinkClick = (to) => {
+    setActiveLink(to);
   };
 
   return (
