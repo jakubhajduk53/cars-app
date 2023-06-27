@@ -13,7 +13,7 @@ const RouterLink = ({ to, icon: Icon, name, activeLink, onClick }) => {
   );
 
   return (
-    <Link to={to} onClick={() => onClick(to)}>
+    <Link to={to}>
       <div className={linkStyles}>
         {Icon && <Icon />}
         {name}

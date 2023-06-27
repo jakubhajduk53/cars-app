@@ -6,13 +6,17 @@ import {
   AiOutlineCar,
 } from "react-icons/ai";
 import RouterLink from "./RouterLink";
+import { useEffect } from "react";
+import { useHref } from "react-router-dom";
 
 function Header() {
-  const [activeLink, setActiveLink] = useState(window.location.pathname);
+  const href = useHref();
 
-  const handleLinkClick = (to) => {
-    setActiveLink(to);
-  };
+  const [activeLink, setActiveLink] = useState(href);
+
+  useEffect(() => {
+    setActiveLink(href);
+  }, [href]);
 
   return (
     <div className="flex justify-center bg-neutral-100 sticky top-0">
@@ -21,28 +25,24 @@ function Header() {
         icon={AiFillHome}
         name="Home"
         activeLink={activeLink}
-        onClick={handleLinkClick}
       />
       <RouterLink
         to="/cars-for-sale"
         icon={AiFillCar}
         name="Cars for sale"
         activeLink={activeLink}
-        onClick={handleLinkClick}
       />
       <RouterLink
         to="/sell-your-car"
         icon={AiOutlineCar}
         name="Sell your car"
         activeLink={activeLink}
-        onClick={handleLinkClick}
       />
       <RouterLink
         to="/menu"
         icon={AiOutlineMenu}
         name="Menu"
         activeLink={activeLink}
-        onClick={handleLinkClick}
       />
     </div>
   );
