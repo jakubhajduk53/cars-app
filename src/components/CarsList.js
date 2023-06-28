@@ -16,12 +16,14 @@ function CarsList() {
     firstItemOnPage,
     lastItemOnPage,
     totalPages,
+    itemsPerPage,
   } = useSelector((state) => ({
     currentPage: state.cars.currentPage,
     searchTerm: state.cars.searchTerm,
     firstItemOnPage: state.cars.firstItemOnPage,
     lastItemOnPage: state.cars.lastItemOnPage,
     totalPages: state.cars.totalPages,
+    itemsPerPage: state.cars.itemsPerPage,
   }));
 
   useEffect(() => {
@@ -43,7 +45,7 @@ function CarsList() {
     dispatch(
       fetchCars({
         first: 0,
-        last: 5,
+        last: itemsPerPage - 1,
         term: searchTerm,
       })
     );
