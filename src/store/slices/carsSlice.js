@@ -46,6 +46,9 @@ const carsSlice = createSlice({
     error: null,
   },
   reducers: {
+    reset(state, action) {
+      return state.initialState;
+    },
     addCar(state, action) {
       state.carsList.push({
         id: action.payload.id,
@@ -88,5 +91,6 @@ const carsSlice = createSlice({
   },
 });
 
-export const { changePage, addCar, changeSearchTerm } = carsSlice.actions;
+export const { changePage, addCar, changeSearchTerm, reset } =
+  carsSlice.actions;
 export const carsReducer = carsSlice.reducer;

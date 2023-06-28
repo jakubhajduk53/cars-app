@@ -5,6 +5,7 @@ import {
   changePage,
   fetchCars,
   changeSearchTerm,
+  reset,
 } from "./slices/carsSlice";
 
 const store = configureStore({
@@ -13,4 +14,4 @@ const store = configureStore({
   },
 });
 
-export { store, addCar, changePage, fetchCars, changeSearchTerm };
+export { store, addCar, changePage, fetchCars, changeSearchTerm, reset };

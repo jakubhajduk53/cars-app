@@ -4,8 +4,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { fetchCars } from "../store";
-import { fetchAmountOfCars } from "../store/slices/carsSlice";
-import { changePage } from "../store/slices/carsSlice";
+import { changePage, changeSearchTerm } from "../store/slices/carsSlice";
 
 function CarsList() {
   const dispatch = useDispatch();
@@ -16,19 +15,28 @@ function CarsList() {
     firstItemOnPage,
     lastItemOnPage,
     totalPages,
-    itemsPerPage,
   } = useSelector((state) => ({
     currentPage: state.cars.currentPage,
     searchTerm: state.cars.searchTerm,
     firstItemOnPage: state.cars.firstItemOnPage,
     lastItemOnPage: state.cars.lastItemOnPage,
     totalPages: state.cars.totalPages,
-    itemsPerPage: state.cars.itemsPerPage,
   }));
 
   useEffect(() => {
-    dispatch(fetchAmountOfCars({ term: searchTerm }));
+    dispatch(changeSearchTerm(""));
+    dispatch(
+      fetchCars({
+        first: 0,
+        last: 5,
+        term: "",
+      })
+    );
   }, []);
+
+  useEffect(() => {
+    dispatch(changePage(1));
+  }, [searchTerm]);
 
   useEffect(() => {
     dispatch(
@@ -38,30 +46,19 @@ function CarsList() {
         term: searchTerm,
       })
     );
-  }, [currentPage]);
-
-  useEffect(() => {
-    dispatch(changePage(1));
-    dispatch(
-      fetchCars({
-        first: 0,
-        last: itemsPerPage - 1,
-        term: searchTerm,
-      })
-    );
-  }, [searchTerm]);
+  }, [currentPage, searchTerm]);
 
   const cars = useSelector(({ cars: { carsList } }) => {
     return carsList;
   });
 
-  const goToNextPage = async () => {
+  const goToNextPage = () => {
     if (currentPage < totalPages) {
       dispatch(changePage(currentPage + 1));
     }
   };
 
-  const goToPreviousPage = async () => {
+  const goToPreviousPage = () => {
     if (currentPage > 1) {
       dispatch(changePage(currentPage - 1));
     }
