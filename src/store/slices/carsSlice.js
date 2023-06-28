@@ -1,6 +1,20 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { supabase } from "../../lib/supabaseClient";
 
+export const fetchAmountOfCars = createAsyncThunk(
+  "cars/fetchAmountOfCars",
+  async ({ term }) => {
+    const { count: amount, error } = await supabase
+      .from("cars")
+      .select("*", { count: "exact", head: true })
+      .ilike("name", `%${term}%`);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return amount;
+  }
+);
+
 export const fetchCars = createAsyncThunk(
   "cars/fetchCars",
   async ({ first, last, term }) => {
@@ -20,6 +34,14 @@ const carsSlice = createSlice({
   name: "cars",
   initialState: {
     carsList: [],
+    carsAmount: 0,
+    currentPage: 1,
+    currentPageIndex: 0,
+    firstItemOnPage: 0,
+    lastItemOnPage: 5,
+    itemsPerPage: 6,
+    totalPages: 0,
+    searchTerm: "",
     loading: false,
     error: null,
   },
@@ -34,9 +56,23 @@ const carsSlice = createSlice({
         image_url: action.payload.image_url,
       });
     },
+    changePage(state, action) {
+      state.currentPage = action.payload;
+      state.currentPageIndex = state.currentPage - 1;
+      state.firstItemOnPage = state.currentPageIndex * state.itemsPerPage;
+      state.lastItemOnPage =
+        state.currentPageIndex * state.itemsPerPage + state.itemsPerPage - 1;
+    },
+    changeSearchTerm(state, action) {
+      state.searchTerm = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchAmountOfCars.fulfilled, (state, action) => {
+        state.carsAmount = action.payload;
+        state.totalPages = Math.ceil(state.carsAmount / state.itemsPerPage);
+      })
       .addCase(fetchCars.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -52,5 +88,5 @@ const carsSlice = createSlice({
   },
 });
 
-export const { changeSearchTerm, addCar } = carsSlice.actions;
+export const { changePage, addCar, changeSearchTerm } = carsSlice.actions;
 export const carsReducer = carsSlice.reducer;

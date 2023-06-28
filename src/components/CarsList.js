@@ -1,35 +1,63 @@
 import CarsListItem from "./CarsListItem";
 import Button from "./Button";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { fetchCars } from "../store";
+import { fetchAmountOfCars } from "../store/slices/carsSlice";
+import { changePage } from "../store/slices/carsSlice";
 
-function CarsList(props) {
-  const cars = props.cars;
+function CarsList() {
+  const dispatch = useDispatch();
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const {
+    currentPage,
+    searchTerm,
+    firstItemOnPage,
+    lastItemOnPage,
+    totalPages,
+  } = useSelector((state) => ({
+    currentPage: state.cars.currentPage,
+    searchTerm: state.cars.searchTerm,
+    firstItemOnPage: state.cars.firstItemOnPage,
+    lastItemOnPage: state.cars.lastItemOnPage,
+    totalPages: state.cars.totalPages,
+  }));
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const itemsToShow = cars.slice(indexOfFirstItem, indexOfLastItem);
+  useEffect(() => {
+    dispatch(fetchAmountOfCars({ term: searchTerm }));
+  }, []);
 
-  const totalPages = Math.ceil(cars.length / itemsPerPage);
+  useEffect(() => {
+    dispatch(
+      fetchCars({
+        first: firstItemOnPage,
+        last: lastItemOnPage,
+        term: searchTerm,
+      })
+    );
+  }, [currentPage]);
 
-  const goToNextPage = () => {
+  const cars = useSelector(({ cars: { carsList } }) => {
+    return carsList;
+  });
+
+  const goToNextPage = async () => {
     if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
+      dispatch(changePage(currentPage + 1));
     }
   };
 
-  const goToPreviousPage = () => {
+  const goToPreviousPage = async () => {
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+      dispatch(changePage(currentPage - 1));
     }
   };
 
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 m-8">
-        {itemsToShow.map((car) => (
+        {cars.map((car) => (
           <CarsListItem
             key={car.id}
             img={car.image_url}

@@ -2,28 +2,34 @@ import { useState } from "react";
 import Button from "./Button";
 import { useDispatch } from "react-redux";
 import { fetchCars } from "../store";
+import { fetchAmountOfCars } from "../store/slices/carsSlice";
+import { changeSearchTerm } from "../store/slices/carsSlice";
 
 function SearchBar() {
   const dispatch = useDispatch();
-  const [searchTerm, setSearchTerm] = useState("");
+  const [localSearchTerm, setLocalSearchTerm] = useState("");
 
   const handleChange = (event) => {
-    setSearchTerm(event.target.value);
+    setLocalSearchTerm(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    dispatch(changeSearchTerm(localSearchTerm));
+
     let items = 999;
-    if (searchTerm === "") {
+    if (localSearchTerm === "") {
       items = 24;
     }
     dispatch(
       fetchCars({
         first: 0,
         last: items,
-        term: searchTerm,
+        term: localSearchTerm,
       })
     );
+    dispatch(fetchAmountOfCars({ term: localSearchTerm }));
   };
 
   return (
@@ -34,8 +40,8 @@ function SearchBar() {
       <input
         className="flex-grow px-4 py-2 border border-gray-300 rounded-md"
         type="text"
-        value={searchTerm}
         onChange={handleChange}
+        value={localSearchTerm}
       />
       <Button value="Search" />
     </form>

@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
   carsReducer,
-  changeSearchTerm,
   addCar,
+  changePage,
   fetchCars,
+  changeSearchTerm,
 } from "./slices/carsSlice";
 
 const store = configureStore({
@@ -12,4 +13,4 @@ const store = configureStore({
   },
 });
 
-export { store, changeSearchTerm, addCar, fetchCars };
+export { store, addCar, changePage, fetchCars, changeSearchTerm };

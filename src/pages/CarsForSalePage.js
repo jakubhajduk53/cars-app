@@ -2,29 +2,23 @@ import CarsList from "../components/CarsList";
 import SearchBar from "../components/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchCars } from "../store";
+import { fetchAmountOfCars } from "../store/slices/carsSlice";
 
 function CarsForSalePage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(
-      fetchCars({
-        first: 0,
-        last: 24,
-        term: "",
-      })
-    );
+    dispatch(fetchAmountOfCars({ term: "" }));
   }, []);
 
-  const cars = useSelector(({ cars: { carsList } }) => {
-    return carsList;
+  const amount = useSelector(({ cars: { carsAmount } }) => {
+    return carsAmount;
   });
 
   return (
     <div className="w-full">
       <SearchBar />
-      {cars.length > -1 ? <CarsList cars={cars} /> : <p>Loading...</p>}
+      {amount > -1 ? <CarsList /> : <p>Loading...</p>}
     </div>
   );
 }
