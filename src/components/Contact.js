@@ -7,6 +7,7 @@ const FormComponent = () => {
     phoneNumber: "",
     email: "",
     comment: "",
+    inquiryType: "checkAvailability",
   });
 
   const handleChange = (event) => {
@@ -19,6 +20,7 @@ const FormComponent = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     console.log(formData);
   };
 
@@ -71,6 +73,19 @@ const FormComponent = () => {
           value={formData.comment}
           onChange={handleChange}
         />
+      </label>
+      <br />
+      <label>
+        Inquiry Type:
+        <select
+          name="inquiryType"
+          value={formData.inquiryType}
+          onChange={handleChange}
+        >
+          <option value="checkAvailability">Check Availability</option>
+          <option value="getPriceQuote">Get a Price Quote</option>
+          <option value="askQuestion">Ask a Question</option>
+        </select>
       </label>
       <br />
       <button type="submit">Submit</button>
