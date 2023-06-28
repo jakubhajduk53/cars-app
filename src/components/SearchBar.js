@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Button from "./Button";
 import { useDispatch } from "react-redux";
-import { fetchCars } from "../store";
 import { fetchAmountOfCars } from "../store/slices/carsSlice";
 import { changeSearchTerm } from "../store/slices/carsSlice";
 
@@ -18,17 +17,6 @@ function SearchBar() {
 
     dispatch(changeSearchTerm(localSearchTerm));
 
-    let items = 999;
-    if (localSearchTerm === "") {
-      items = 24;
-    }
-    dispatch(
-      fetchCars({
-        first: 0,
-        last: items,
-        term: localSearchTerm,
-      })
-    );
     dispatch(fetchAmountOfCars({ term: localSearchTerm }));
   };
 

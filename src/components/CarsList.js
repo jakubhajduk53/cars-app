@@ -38,6 +38,17 @@ function CarsList() {
     );
   }, [currentPage]);
 
+  useEffect(() => {
+    dispatch(changePage(1));
+    dispatch(
+      fetchCars({
+        first: 0,
+        last: 5,
+        term: searchTerm,
+      })
+    );
+  }, [searchTerm]);
+
   const cars = useSelector(({ cars: { carsList } }) => {
     return carsList;
   });
