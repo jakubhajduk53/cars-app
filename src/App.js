@@ -5,8 +5,19 @@ import CarsForSalePage from "./pages/CarsForSalePage";
 import HomePage from "./pages/HomePage";
 import MenuPage from "./pages/MenuPage";
 import { Route, Routes } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { resetCars, resetPage } from "./store";
 
 function App() {
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  useEffect(() => {
+    dispatch(resetCars());
+    dispatch(resetPage());
+  }, [location]);
   return (
     <div className="App flex flex-col min-h-screen">
       <Header />

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import { fetchAmountOfCars } from "../index";
 
 const pageSlice = createSlice({
@@ -13,6 +13,15 @@ const pageSlice = createSlice({
     searchTerm: "",
   },
   reducers: {
+    resetPage(state, action) {
+      state.currentPage = 1;
+      state.currentPageIndex = 0;
+      state.firstItemOnPage = 0;
+      state.lastItemOnPage = 5;
+      state.itemsPerPage = 6;
+      state.totalPages = 0;
+      state.searchTerm = "";
+    },
     changePage(state, action) {
       state.currentPage = action.payload;
       state.currentPageIndex = state.currentPage - 1;
@@ -37,5 +46,5 @@ const pageSlice = createSlice({
   },
 });
 
-export const { changePage, changeSearchTerm } = pageSlice.actions;
+export const { changePage, changeSearchTerm, resetPage } = pageSlice.actions;
 export const pageReducer = pageSlice.reducer;

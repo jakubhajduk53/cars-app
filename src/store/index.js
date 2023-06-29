@@ -4,9 +4,14 @@ import {
   addCar,
   fetchCars,
   fetchAmountOfCars,
-  reset,
+  resetCars,
 } from "./slices/carsSlice";
-import { changePage, pageReducer, changeSearchTerm } from "./slices/pageSlice";
+import {
+  changePage,
+  pageReducer,
+  changeSearchTerm,
+  resetPage,
+} from "./slices/pageSlice";
 
 const store = configureStore({
   reducer: {
@@ -22,5 +27,6 @@ export {
   fetchCars,
   fetchAmountOfCars,
   changeSearchTerm,
-  reset,
+  resetCars,
+  resetPage,
 };

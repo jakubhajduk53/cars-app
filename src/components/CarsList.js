@@ -22,10 +22,6 @@ function CarsList() {
   }));
 
   useEffect(() => {
-    dispatch(changeSearchTerm(""));
-  }, []);
-
-  useEffect(() => {
     dispatch(
       fetchCars({
         first: firstItemOnPage,
