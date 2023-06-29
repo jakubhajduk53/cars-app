@@ -4,20 +4,19 @@ import SellYourCarPage from "./pages/SellYourCarPage";
 import CarsForSalePage from "./pages/CarsForSalePage";
 import HomePage from "./pages/HomePage";
 import MenuPage from "./pages/MenuPage";
-import { Route, Routes } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { Route, Routes, useHref } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { resetCars, resetPage } from "./store";
 
 function App() {
   const dispatch = useDispatch();
-  const location = useLocation();
+  const href = useHref();
 
   useEffect(() => {
     dispatch(resetCars());
     dispatch(resetPage());
-  }, [location]);
+  }, [href]);
   return (
     <div className="App flex flex-col min-h-screen">
       <Header />
