@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { fetchAmountOfCars } from "../index";
 
 const pageSlice = createSlice({
   name: "page",
@@ -18,6 +19,11 @@ const pageSlice = createSlice({
       state.lastItemOnPage =
         state.currentPageIndex * state.itemsPerPage + state.itemsPerPage - 1;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchAmountOfCars.fulfilled, (state, action) => {
+      state.totalPages = Math.ceil(action.payload / state.itemsPerPage);
+    });
   },
 });
 

@@ -35,12 +35,6 @@ const carsSlice = createSlice({
   initialState: {
     carsList: [],
     carsAmount: 0,
-    currentPage: 1,
-    currentPageIndex: 0,
-    firstItemOnPage: 0,
-    lastItemOnPage: 5,
-    itemsPerPage: 6,
-    totalPages: 0,
     searchTerm: "",
     loading: false,
     error: null,
@@ -59,13 +53,6 @@ const carsSlice = createSlice({
         image_url: action.payload.image_url,
       });
     },
-    changePage(state, action) {
-      state.currentPage = action.payload;
-      state.currentPageIndex = state.currentPage - 1;
-      state.firstItemOnPage = state.currentPageIndex * state.itemsPerPage;
-      state.lastItemOnPage =
-        state.currentPageIndex * state.itemsPerPage + state.itemsPerPage - 1;
-    },
     changeSearchTerm(state, action) {
       state.searchTerm = action.payload;
     },
@@ -74,7 +61,6 @@ const carsSlice = createSlice({
     builder
       .addCase(fetchAmountOfCars.fulfilled, (state, action) => {
         state.carsAmount = action.payload;
-        state.totalPages = Math.ceil(state.carsAmount / state.itemsPerPage);
       })
       .addCase(fetchCars.pending, (state) => {
         state.loading = true;
@@ -91,6 +77,5 @@ const carsSlice = createSlice({
   },
 });
 
-export const { changePage, addCar, changeSearchTerm, reset } =
-  carsSlice.actions;
+export const { addCar, changeSearchTerm, reset } = carsSlice.actions;
 export const carsReducer = carsSlice.reducer;
