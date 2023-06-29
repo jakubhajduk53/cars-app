@@ -35,7 +35,6 @@ const carsSlice = createSlice({
   initialState: {
     carsList: [],
     carsAmount: 0,
-    searchTerm: "",
     loading: false,
     error: null,
   },
@@ -52,9 +51,6 @@ const carsSlice = createSlice({
         location: action.payload.location,
         image_url: action.payload.image_url,
       });
-    },
-    changeSearchTerm(state, action) {
-      state.searchTerm = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -77,5 +73,5 @@ const carsSlice = createSlice({
   },
 });
 
-export const { addCar, changeSearchTerm, reset } = carsSlice.actions;
+export const { addCar, reset } = carsSlice.actions;
 export const carsReducer = carsSlice.reducer;

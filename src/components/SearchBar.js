@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Button from "./Button";
 import { useDispatch } from "react-redux";
-import { fetchAmountOfCars } from "../store/slices/carsSlice";
-import { changeSearchTerm } from "../store/slices/carsSlice";
+import { fetchAmountOfCars } from "../store";
+import { changeSearchTerm } from "../store";
 
 function SearchBar() {
   const dispatch = useDispatch();

@@ -10,6 +10,7 @@ const pageSlice = createSlice({
     lastItemOnPage: 5,
     itemsPerPage: 6,
     totalPages: 0,
+    searchTerm: "",
   },
   reducers: {
     changePage(state, action) {
@@ -19,6 +20,15 @@ const pageSlice = createSlice({
       state.lastItemOnPage =
         state.currentPageIndex * state.itemsPerPage + state.itemsPerPage - 1;
     },
+    changeSearchTerm(state, action) {
+      state.currentPage = 1;
+      state.currentPageIndex = 0;
+      state.firstItemOnPage = 0;
+      state.lastItemOnPage = 5;
+      state.itemsPerPage = 6;
+      state.totalPages = 0;
+      state.searchTerm = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAmountOfCars.fulfilled, (state, action) => {
@@ -27,5 +37,5 @@ const pageSlice = createSlice({
   },
 });
 
-export const { changePage } = pageSlice.actions;
+export const { changePage, changeSearchTerm } = pageSlice.actions;
 export const pageReducer = pageSlice.reducer;
