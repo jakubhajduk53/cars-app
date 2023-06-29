@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchCars, changePage, changeSearchTerm } from "../store";
+import { fetchCars, changePage } from "../store";
 import Button from "./Button";
 import CarsListItem from "./CarsListItem";
 
