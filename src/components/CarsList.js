@@ -61,25 +61,29 @@ function CarsList() {
               location={car.location}
             />
           ))
+        ) : searchTerm === "" ? (
+          <p>Loading...</p>
         ) : (
           <p>We are sorry! {searchTerm} not found in our base</p>
         )}
       </div>
-      <div className="bottom-bar fixed left-0 bg-neutral-100 bottom-0 w-full bg-white flex justify-center items-center py-4 ">
-        <Button
-          value="<"
-          onClick={goToPreviousPage}
-          disabled={currentPage === 1}
-        />
-        <p className="mx-2 text-center">
-          Page {currentPage} of {totalPages}
-        </p>
-        <Button
-          value=">"
-          onClick={goToNextPage}
-          disabled={currentPage === totalPages}
-        />
-      </div>
+      {totalPages > 0 ? (
+        <div className="bottom-bar fixed left-0 bg-neutral-100 bottom-0 w-full bg-white flex justify-center items-center py-4 ">
+          <Button
+            value="<"
+            onClick={goToPreviousPage}
+            disabled={currentPage === 1}
+          />
+          <p className="mx-2 text-center">
+            Page {currentPage} of {totalPages}
+          </p>
+          <Button
+            value=">"
+            onClick={goToNextPage}
+            disabled={currentPage === totalPages}
+          />
+        </div>
+      ) : null}
     </div>
   );
 }
