@@ -50,7 +50,7 @@ function CarsList() {
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 m-8">
-        {cars.length > 1 ? (
+        {cars.length > 0 ? (
           cars.map((car) => (
             <CarsListItem
               key={car.id}

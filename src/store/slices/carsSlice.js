@@ -22,7 +22,8 @@ export const fetchCars = createAsyncThunk(
       .from("cars")
       .select("*")
       .range(first, last)
-      .ilike("name", `%${term}%`);
+      .ilike("name", `%${term}%`)
+      .order("id", { ascending: true });
     if (error) {
       throw new Error(error.message);
     }
@@ -58,8 +59,17 @@ const carsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchAmountOfCars.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
       .addCase(fetchAmountOfCars.fulfilled, (state, action) => {
+        state.loading = false;
         state.carsAmount = action.payload;
+      })
+      .addCase(fetchAmountOfCars.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
       })
       .addCase(fetchCars.pending, (state) => {
         state.loading = true;
