@@ -5,6 +5,7 @@ import {
   fetchCars,
   fetchAmountOfCars,
   resetCars,
+  changeSelectedCar,
 } from "./slices/carsSlice";
 import {
   changePage,
@@ -29,4 +30,5 @@ export {
   changeSearchTerm,
   resetCars,
   resetPage,
+  changeSelectedCar,
 };

@@ -36,6 +36,7 @@ const carsSlice = createSlice({
   initialState: {
     carsList: [],
     carsAmount: 0,
+    selectedCar: {},
     loading: false,
     error: null,
   },
@@ -43,6 +44,7 @@ const carsSlice = createSlice({
     resetCars(state, action) {
       state.carsList = [];
       state.carsAmount = 0;
+      state.selectedCar = {};
       state.loading = false;
       state.error = null;
     },
@@ -55,6 +57,17 @@ const carsSlice = createSlice({
         location: action.payload.location,
         image_url: action.payload.image_url,
       });
+    },
+    changeSelectedCar(state, action) {
+      state.selectedCar = {
+        id: action.payload.id,
+        name: action.payload.name,
+        year_of_production: action.payload.year_of_production,
+        price: action.payload.price,
+        location: action.payload.location,
+        image_url: action.payload.image_url,
+      };
+      console.log(state.selectedCar);
     },
   },
   extraReducers: (builder) => {
@@ -86,5 +99,5 @@ const carsSlice = createSlice({
   },
 });
 
-export const { addCar, resetCars } = carsSlice.actions;
+export const { addCar, resetCars, changeSelectedCar } = carsSlice.actions;
 export const carsReducer = carsSlice.reducer;

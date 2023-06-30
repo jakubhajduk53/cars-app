@@ -51,16 +51,7 @@ function CarsList() {
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 m-8">
         {cars.length > 0 ? (
-          cars.map((car) => (
-            <CarsListItem
-              key={car.id}
-              img={car.image_url}
-              name={car.name}
-              price={car.price}
-              yearOfProduction={car.year_of_production}
-              location={car.location}
-            />
-          ))
+          cars.map((car) => <CarsListItem key={car.id} car={car} />)
         ) : searchTerm === "" ? (
           <p>Loading...</p>
         ) : (
