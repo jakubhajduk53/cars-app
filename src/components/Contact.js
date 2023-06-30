@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 const FormComponent = (props) => {
-  const car = useSelector((state) => {
-    return state.selectedCar;
+  const car = useSelector(({ cars: { selectedCar } }) => {
+    return selectedCar;
   });
 
   const [formData, setFormData] = useState({
@@ -12,7 +12,7 @@ const FormComponent = (props) => {
     lastName: "",
     phoneNumber: "",
     email: "",
-    comment: "",
+    comment: `Hi! I just want to ask about ${car.name} availability`,
     inquiryType: "checkAvailability",
   });
 
@@ -24,10 +24,36 @@ const FormComponent = (props) => {
     }));
   };
 
+  const handleInquiryChange = (event) => {
+    const { name, value } = event.target;
+
+    let message = "";
+
+    switch (value) {
+      case "checkAvailability":
+        message = `Hi! I just want to ask about ${car.name} availability`;
+        break;
+      case "getPriceQuote":
+        message = `Hi! Can we negotiate about ${car.name} price?`;
+        break;
+      case "askQuestion":
+        message = `Hi! I just want to ask some questions about ${car.name} `;
+        break;
+      default:
+        message = "";
+    }
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+      comment: message,
+    }));
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.closeModal();
     console.log(formData);
+    props.closeModal();
   };
 
   return (
@@ -80,7 +106,7 @@ const FormComponent = (props) => {
         <select
           name="inquiryType"
           value={formData.inquiryType}
-          onChange={handleChange}
+          onChange={handleInquiryChange}
           className="form-select mt-1 block w-full border border-gray-300 rounded"
         >
           <option value="checkAvailability">Check Availability</option>

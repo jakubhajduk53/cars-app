@@ -32,7 +32,7 @@ function CarsForSalePage() {
       <ReactModal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        className="modal flex items-center justify-center h-full"
+        className="modal flex items-center justify-center"
         overlayClassName="modal-overlay fixed inset-0 bg-black bg-opacity-50"
         ariaHideApp={false}
       >
