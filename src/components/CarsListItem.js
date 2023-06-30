@@ -29,6 +29,7 @@ function CarsListItem(props) {
           value="Check Availability"
           onClick={() => {
             dispatch(changeSelectedCar(car));
+            props.openModal();
           }}
         />
       </div>

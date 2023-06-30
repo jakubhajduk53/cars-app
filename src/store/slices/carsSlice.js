@@ -67,7 +67,6 @@ const carsSlice = createSlice({
         location: action.payload.location,
         image_url: action.payload.image_url,
       };
-      console.log(state.selectedCar);
     },
   },
   extraReducers: (builder) => {
