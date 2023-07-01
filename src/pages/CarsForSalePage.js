@@ -6,9 +6,20 @@ import { fetchAmountOfCars } from "../store/slices/carsSlice";
 import ReactModal from "react-modal";
 import Contact from "../components/Contact";
 import { AiOutlineClose } from "react-icons/ai";
+import { createSelector } from "@reduxjs/toolkit";
+
+const getCarsAmount = (state) => state.cars.carsAmount;
+
+const selectCarsAmount = createSelector(
+  [getCarsAmount],
+  (carsAmount) => carsAmount
+);
 
 function CarsForSalePage() {
+  const dispatch = useDispatch();
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const openModal = () => {
     setModalIsOpen(true);
   };
@@ -17,15 +28,11 @@ function CarsForSalePage() {
     setModalIsOpen(false);
   };
 
-  const dispatch = useDispatch();
+  const amount = useSelector(selectCarsAmount);
 
   useEffect(() => {
     dispatch(fetchAmountOfCars({ term: "" }));
   }, []);
-
-  const amount = useSelector(({ cars: { carsAmount } }) => {
-    return carsAmount;
-  });
 
   return (
     <div className="w-full">
