@@ -120,7 +120,7 @@ const FormComponent = (props) => {
           name="comment"
           value={formData.comment}
           onChange={handleChange}
-          className="form-textarea mt-1 block w-full border border-gray-300 rounded"
+          className="form-textarea mt-1 block w-full border border-gray-300 rounded h-24"
         />
       </label>
       <Button value="Submit" className="mt-1 block w-full" />
