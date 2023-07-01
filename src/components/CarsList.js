@@ -49,7 +49,7 @@ function CarsList(props) {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 m-8">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 m-8">
         {cars.length > 0 ? (
           cars.map((car) => (
             <CarsListItem key={car.id} car={car} openModal={props.openModal} />

@@ -16,15 +16,19 @@ function CarsListItem(props) {
       <img
         src={car.image_url}
         alt={car.name}
-        className="w-64 h-64 mr-32 border border-gray-300"
+        className="w-48 h-48 mr-8 border border-gray-300 xl:mr-32 md:w-64 md:h-64"
       />
       <div>
-        <p className="text-2xl font-semibold mb-2">{car.name}</p>
-        <p className="text-gray-600 text-lg mb-2">Cost: ${car.price}</p>
-        <p className="text-gray-600 text-lg mb-2">
+        <p className="text-xl font-semibold mb-2 md:text-2xl">{car.name}</p>
+        <p className="text-gray-600 text-md mb-2 md:text-lg">
+          Cost: ${car.price}
+        </p>
+        <p className="text-gray-600 text-md mb-2 md:text-lg">
           Year of production: {car.year_of_production}
         </p>
-        <p className="text-gray-600 text-lg mb-4">Location: {car.location}</p>
+        <p className="text-gray-600 text-md mb-4 md:text-lg">
+          Location: {car.location}
+        </p>
         <Button
           value="Check Availability"
           onClick={() => {
