@@ -53,7 +53,7 @@ function CarsForSalePage() {
       </ReactModal>
 
       <SearchBar />
-      {amount > -1 ? <CarsList openModal={openModal} /> : <p>Loading...</p>}
+      {amount >= 0 ? <CarsList openModal={openModal} /> : <p>Loading...</p>}
     </div>
   );
 }
