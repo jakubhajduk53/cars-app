@@ -5,9 +5,22 @@ import Button from "../components/Button";
 import { useDispatch } from "react-redux";
 import { addCar } from "../store";
 import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 function SellYourCarPage() {
   const dispatch = useDispatch();
+
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required("Car name is required"),
+    year_of_production: Yup.number()
+      .required("Year of production is required")
+      .positive("Year of production must be a positive number"),
+    price: Yup.number()
+      .required("Price is required")
+      .positive("Price must be a positive number"),
+    location: Yup.string().required("Location is required"),
+    image_url: Yup.mixed().required("Image is required"),
+  });
 
   const [imagePreview, setImagePreview] = useState(null);
 
@@ -50,57 +63,78 @@ function SellYourCarPage() {
             year_of_production: 0,
             price: 0,
             location: "",
-            image: null,
+            image_url: null,
           }}
           onSubmit={handleSubmit}
+          validationSchema={validationSchema}
         >
-          {({ setFieldValue }) => (
+          {({ setFieldValue, errors, touched }) => (
             <Form className="flex flex-col px-4 py-2 w-full max-w-md">
-              <label htmlFor="name" className="mb-2">
+              <label htmlFor="name" className="mb-2 mt-4">
                 Car name:
               </label>
               <Field
                 type="text"
                 id="name"
                 name="name"
-                className="mb-4 p-2 border border-gray-300 rounded"
+                className="p-2 border border-gray-300 rounded"
                 placeholder="Car name"
               />
+              <ErrorMessage
+                name="name"
+                component="div"
+                className="error mb-4 text-red-500"
+              />
 
-              <label htmlFor="year" className="mb-2">
+              <label htmlFor="year" className="mb-2 mt-4">
                 Year of production:
               </label>
               <Field
                 type="number"
                 id="year"
                 name="year_of_production"
-                className="mb-4 p-2 border border-gray-300 rounded"
+                className="p-2 border border-gray-300 rounded"
                 placeholder="Year of production"
               />
+              <ErrorMessage
+                name="year_of_production"
+                component="div"
+                className="error mb-4 text-red-500"
+              />
 
-              <label htmlFor="price" className="mb-2">
+              <label htmlFor="price" className="mb-2 mt-4">
                 Price:
               </label>
               <Field
                 type="number"
                 id="price"
                 name="price"
-                className="mb-4 p-2 border border-gray-300 rounded"
+                className="p-2 border border-gray-300 rounded"
                 placeholder="Price"
               />
+              <ErrorMessage
+                name="price"
+                component="div"
+                className="error  mb-4 text-red-500"
+              />
 
-              <label htmlFor="location" className="mb-2">
+              <label htmlFor="location" className="mb-2 mt-4">
                 Location:
               </label>
               <Field
                 type="text"
                 id="location"
                 name="location"
-                className="mb-4 p-2 border border-gray-300 rounded"
+                className="p-2 border border-gray-300 rounded"
                 placeholder="Location"
               />
+              <ErrorMessage
+                name="location"
+                component="div"
+                className="error  mb-4 text-red-500"
+              />
 
-              <label htmlFor="image" className="mb-2">
+              <label htmlFor="image" className="mb-2 mt-4">
                 Image:
               </label>
               <input
@@ -113,8 +147,12 @@ function SellYourCarPage() {
                     URL.createObjectURL(event.currentTarget.files[0])
                   );
                 }}
-                className="mb-4"
               />
+              {errors.image_url && touched.image_url && (
+                <div className="error mb-4 text-red-500">
+                  {errors.image_url}
+                </div>
+              )}
               {imagePreview && (
                 <img src={imagePreview} alt="Preview" className="mb-4" />
               )}
