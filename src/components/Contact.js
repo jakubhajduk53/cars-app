@@ -1,31 +1,34 @@
+import React from "react";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import Button from "./Button";
-import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-const FormComponent = (props) => {
+const Contact = (props) => {
   const car = useSelector(({ cars: { selectedCar } }) => {
     return selectedCar;
   });
 
-  const [formData, setFormData] = useState({
+  const initialValues = {
     firstName: "",
     lastName: "",
     phoneNumber: "",
     email: "",
     comment: `Hi! I just want to ask about ${car.name} availability`,
     inquiryType: "checkAvailability",
-  });
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
   };
 
-  const handleInquiryChange = (event) => {
-    const { name, value } = event.target;
+  const validationSchema = Yup.object().shape({
+    firstName: Yup.string().required("First name is required"),
+    lastName: Yup.string().required("Last name is required"),
+    phoneNumber: Yup.string().required("Phone number is required"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    inquiryType: Yup.string().required("Inquiry type is required"),
+    comment: Yup.string().required("Comment is required"),
+  });
+
+  const handleInquiryChange = (event, setFieldValue) => {
+    const { value } = event.target;
 
     let message = "";
 
@@ -43,89 +46,111 @@ const FormComponent = (props) => {
         message = "";
     }
 
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-      comment: message,
-    }));
+    setFieldValue("inquiryType", value);
+    setFieldValue("comment", message);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(formData);
+  const handleSubmit = (values) => {
+    console.log(values);
     props.closeModal();
   };
 
   return (
-    <form
+    <Formik
+      initialValues={initialValues}
       onSubmit={handleSubmit}
-      className="max-w-sm mx-auto mt-8 mb-8 text-lg"
+      validationSchema={validationSchema}
     >
-      <label className="block mb-2">
-        <span className="text-gray-700">First Name:</span>
-        <input
-          type="text"
-          name="firstName"
-          value={formData.firstName}
-          onChange={handleChange}
-          className="form-input mt-1 block w-full border border-gray-300 rounded"
-        />
-      </label>
-      <label className="block mb-2">
-        <span className="text-gray-700">Last Name:</span>
-        <input
-          type="text"
-          name="lastName"
-          value={formData.lastName}
-          onChange={handleChange}
-          className="form-input mt-1 block w-full border border-gray-300 rounded"
-        />
-      </label>
-      <label className="block mb-2">
-        <span className="text-gray-700">Phone Number:</span>
-        <input
-          type="text"
-          name="phoneNumber"
-          value={formData.phoneNumber}
-          onChange={handleChange}
-          className="form-input mt-1 block w-full border border-gray-300 rounded"
-        />
-      </label>
-      <label className="block mb-2">
-        <span className="text-gray-700">Email:</span>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className="form-input mt-1 block w-full border border-gray-300 rounded"
-        />
-      </label>
-      <label className="block mb-2">
-        <span className="text-gray-700">Inquiry Type:</span>
-        <select
-          name="inquiryType"
-          value={formData.inquiryType}
-          onChange={handleInquiryChange}
-          className="form-select mt-1 block w-full border border-gray-300 rounded"
-        >
-          <option value="checkAvailability">Check Availability</option>
-          <option value="getPriceQuote">Get a Price Quote</option>
-          <option value="askQuestion">Ask a Question</option>
-        </select>
-      </label>
-      <label className="block mb-2">
-        <span className="text-gray-700">Comment:</span>
-        <textarea
-          name="comment"
-          value={formData.comment}
-          onChange={handleChange}
-          className="form-textarea mt-1 block w-full border border-gray-300 rounded h-24"
-        />
-      </label>
-      <Button value="Submit" className="mt-1 block w-full" />
-    </form>
+      {({ values, setFieldValue }) => (
+        <Form className="max-w-sm mx-auto mt-8 mb-8 text-lg">
+          <label className="block mb-2">
+            <span className="text-gray-700">First Name:</span>
+            <Field
+              type="text"
+              name="firstName"
+              className="form-input mt-1 block w-full border border-gray-300 rounded"
+            />
+            <ErrorMessage
+              name="firstName"
+              component="div"
+              className="text-red-500"
+            />
+          </label>
+          <label className="block mb-2">
+            <span className="text-gray-700">Last Name:</span>
+            <Field
+              type="text"
+              name="lastName"
+              className="form-input mt-1 block w-full border border-gray-300 rounded"
+            />
+            <ErrorMessage
+              name="lastName"
+              component="div"
+              className="text-red-500"
+            />
+          </label>
+          <label className="block mb-2">
+            <span className="text-gray-700">Phone Number:</span>
+            <Field
+              type="text"
+              name="phoneNumber"
+              className="form-input mt-1 block w-full border border-gray-300 rounded"
+            />
+            <ErrorMessage
+              name="phoneNumber"
+              component="div"
+              className="text-red-500"
+            />
+          </label>
+          <label className="block mb-2">
+            <span className="text-gray-700">Email:</span>
+            <Field
+              type="email"
+              name="email"
+              className="form-input mt-1 block w-full border border-gray-300 rounded"
+            />
+            <ErrorMessage
+              name="email"
+              component="div"
+              className="text-red-500"
+            />
+          </label>
+          <label className="block mb-2">
+            <span className="text-gray-700">Inquiry Type:</span>
+            <Field
+              as="select"
+              name="inquiryType"
+              className="form-select mt-1 block w-full border border-gray-300 rounded"
+              onChange={(event) => handleInquiryChange(event, setFieldValue)}
+            >
+              <option value="checkAvailability">Check Availability</option>
+              <option value="getPriceQuote">Get a Price Quote</option>
+              <option value="askQuestion">Ask a Question</option>
+            </Field>
+            <ErrorMessage
+              name="inquiryType"
+              component="div"
+              className="text-red-500"
+            />
+          </label>
+          <label className="block mb-2">
+            <span className="text-gray-700">Comment:</span>
+            <Field
+              as="textarea"
+              name="comment"
+              className="form-textarea mt-1 block w-full border border-gray-300 rounded h-24"
+            />
+            <ErrorMessage
+              name="comment"
+              component="div"
+              className="text-red-500"
+            />
+          </label>
+          <Button type="submit" value="Submit" className="mt-1 block w-full" />
+        </Form>
+      )}
+    </Formik>
   );
 };
 
-export default FormComponent;
+export default Contact;
