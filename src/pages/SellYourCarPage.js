@@ -11,8 +11,7 @@ function SellYourCarPage() {
 
   const [imagePreview, setImagePreview] = useState(null);
 
-  const CDNURL =
-    "https://fomgpntxpamdvhnbyiyr.supabase.co/storage/v1/object/public/cars/";
+  const CDNURL = process.env.REACT_APP_SUPABASE_CDN_URL;
 
   async function handleSubmit(values) {
     const { name, year_of_production, price, location, image_url } = values;
