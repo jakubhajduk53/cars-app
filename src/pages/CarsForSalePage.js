@@ -20,6 +20,10 @@ function CarsForSalePage() {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(true);
+
+  const amount = useSelector(selectCarsAmount);
+
   const openModal = () => {
     setModalIsOpen(true);
   };
@@ -28,11 +32,15 @@ function CarsForSalePage() {
     setModalIsOpen(false);
   };
 
-  const amount = useSelector(selectCarsAmount);
-
   useEffect(() => {
     dispatch(fetchAmountOfCars({ term: "" }));
   }, []);
+
+  useEffect(() => {
+    if (amount >= 0) {
+      setIsLoading(false);
+    }
+  }, [amount]);
 
   return (
     <div className="w-full">
@@ -53,7 +61,7 @@ function CarsForSalePage() {
       </ReactModal>
 
       <SearchBar />
-      {amount >= 0 ? <CarsList openModal={openModal} /> : <p>Loading...</p>}
+      {!isLoading ? <CarsList openModal={openModal} /> : <p>Loading...</p>}
     </div>
   );
 }
