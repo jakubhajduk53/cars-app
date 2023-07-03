@@ -157,7 +157,7 @@ function SellYourCarPage() {
                 <img src={imagePreview} alt="Preview" className="mb-4" />
               )}
 
-              <Button type="submit" value="Confirm" className="w-full" />
+              <Button type="submit" value="Confirm" className="w-full mt-4" />
             </Form>
           )}
         </Formik>
