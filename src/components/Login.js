@@ -8,7 +8,7 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required("Password is required"),
 });
 
-function Login() {
+function Login(props) {
   const initialValues = {
     login: "",
     password: "",
@@ -19,7 +19,7 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -63,6 +63,14 @@ function Login() {
           <Button type="submit" value="Log In" className="w-full" />
         </Form>
       </Formik>
+      <p
+        onClick={() => {
+          props.handleClick(false);
+        }}
+        className="hover:text-blue-500 cursor-pointer "
+      >
+        Don't have an account?
+      </p>
     </div>
   );
 }
