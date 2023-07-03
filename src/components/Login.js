@@ -2,20 +2,36 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "../components/Button";
+import { supabase } from "../lib/supabaseClient";
+import { useDispatch, useSelector } from "react-redux";
+import { checkUser } from "../store";
 
 const validationSchema = Yup.object().shape({
-  login: Yup.string().required("Login is required"),
+  email: Yup.string().required("Login is required"),
   password: Yup.string().required("Password is required"),
 });
 
 function Login(props) {
+  const dispatch = useDispatch();
+
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+
   const initialValues = {
-    login: "",
+    email: "",
     password: "",
   };
 
-  const handleSubmit = (values) => {
-    console.log(values);
+  const handleSubmit = async (values) => {
+    const { email, password } = values;
+    console.log(supabase);
+
+    const { user, session, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+    if (!error) {
+      dispatch(checkUser());
+    }
   };
 
   return (
@@ -27,17 +43,17 @@ function Login(props) {
       >
         <Form className="bg-white p-8 rounded ">
           <div className="mb-4">
-            <label htmlFor="login" className="block mb-2">
-              Login:
+            <label htmlFor="email" className="block mb-2">
+              Email:
             </label>
             <Field
               type="text"
-              id="login"
-              name="login"
+              id="email"
+              name="email"
               className="w-full px-3 py-2 border rounded"
             />
             <ErrorMessage
-              name="login"
+              name="email"
               component="div"
               className="text-red-500"
             />
@@ -71,6 +87,7 @@ function Login(props) {
       >
         Don't have an account?
       </p>
+      {isLoggedIn ? <p>Hi</p> : null}
     </div>
   );
 }

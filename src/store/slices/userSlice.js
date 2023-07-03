@@ -14,6 +14,7 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     user: [],
+    isLoggedIn: false,
     loading: false,
     error: null,
   },
@@ -26,6 +27,7 @@ const userSlice = createSlice({
       })
       .addCase(checkUser.fulfilled, (state, action) => {
         state.loading = false;
+        state.isLoggedIn = true;
         state.user = action.payload;
       })
       .addCase(checkUser.rejected, (state, action) => {

@@ -13,11 +13,13 @@ import {
   changeSearchTerm,
   resetPage,
 } from "./slices/pageSlice";
+import { userReducer, checkUser } from "./slices/userSlice";
 
 const store = configureStore({
   reducer: {
     cars: carsReducer,
     page: pageReducer,
+    user: userReducer,
   },
 });
 
@@ -31,4 +33,5 @@ export {
   resetCars,
   resetPage,
   changeSelectedCar,
+  checkUser,
 };
