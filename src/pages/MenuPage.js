@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Login from "../components/Login";
+import Register from "../components/Register";
 
 function MenuPage() {
   const [isRegistered, setIsRegistered] = useState(true);
@@ -10,7 +11,11 @@ function MenuPage() {
 
   return (
     <div className="flex w-full justify-center">
-      {isRegistered ? <Login handleClick={handleClick} /> : <p>HA</p>}
+      {isRegistered ? (
+        <Login handleClick={handleClick} />
+      ) : (
+        <Register handleClick={handleClick} />
+      )}
     </div>
   );
 }
