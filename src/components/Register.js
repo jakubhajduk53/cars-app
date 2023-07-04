@@ -136,6 +136,7 @@ function Register(props) {
               id="password"
               name="password"
               className="w-full px-3 py-2 border rounded"
+              autoComplete="on"
             />
             <ErrorMessage
               name="password"
@@ -153,6 +154,7 @@ function Register(props) {
               id="repeatPassword"
               name="repeatPassword"
               className="w-full px-3 py-2 border rounded"
+              autoComplete="on"
             />
             <ErrorMessage
               name="repeatPassword"
