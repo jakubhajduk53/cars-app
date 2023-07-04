@@ -31,7 +31,7 @@ function SellYourCarPage() {
 
     const id = nanoid();
 
-    await supabase.storage.from("cars").upload(id, image_url);
+    await supabase.storage.from("cars-list").upload(id, image_url);
 
     const { data, error } = await supabase
       .from("cars")
