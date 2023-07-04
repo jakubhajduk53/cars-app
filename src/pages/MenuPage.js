@@ -3,6 +3,7 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 import { createSelector } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
+import UserPanel from "../components/UserPanel";
 
 const checkIsLoggedIn = (state) => state.user.isLoggedIn;
 
@@ -23,7 +24,7 @@ function MenuPage() {
   return (
     <div className="flex w-full justify-center">
       {isLoggedIn ? (
-        <p>hi</p>
+        <UserPanel handleClick={handleClick} />
       ) : isRegistered ? (
         <Login handleClick={handleClick} />
       ) : (
