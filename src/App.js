@@ -7,7 +7,7 @@ import MenuPage from "./pages/MenuPage";
 import { Route, Routes, useHref } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { resetCars, resetPage } from "./store";
+import { checkUser, resetCars, resetPage } from "./store";
 
 function App() {
   const dispatch = useDispatch();
@@ -17,6 +17,9 @@ function App() {
     dispatch(resetCars());
     dispatch(resetPage());
   }, [href]);
+  useEffect(() => {
+    dispatch(checkUser());
+  });
 
   return (
     <div className="flex flex-col min-h-screen">

@@ -13,7 +13,6 @@ function UserPanel(props) {
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
-  console.log(user);
 
   const handleSignOut = async () => {
     props.handleClick(true);
