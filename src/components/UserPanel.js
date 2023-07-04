@@ -13,6 +13,11 @@ function UserPanel(props) {
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
+  const {
+    first_name: firstName,
+    last_name: lastName,
+    phone_number: phoneNumber,
+  } = user.user_metadata;
 
   const handleSignOut = async () => {
     props.handleClick(true);
@@ -26,8 +31,16 @@ function UserPanel(props) {
   };
 
   return (
-    <div>
-      <Button onClick={handleSignOut} value="Sign Out" />
+    <div className="flex flex-col">
+      <div>
+        <h3>Welcome back!</h3>
+        <h4>
+          {firstName} {lastName}
+        </h4>
+      </div>
+      <Button value="Your cars" className="mt-1" />
+      <Button value="Options" className="mt-1" />
+      <Button onClick={handleSignOut} value="Sign Out" className="mt-1" />
     </div>
   );
 }
