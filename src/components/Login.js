@@ -3,18 +3,16 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "../components/Button";
 import { supabase } from "../lib/supabaseClient";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { checkUser } from "../store";
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string().required("Login is required"),
+  email: Yup.string().required("Email is required"),
   password: Yup.string().required("Password is required"),
 });
 
 function Login(props) {
   const dispatch = useDispatch();
-
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
 
   const initialValues = {
     email: "",
@@ -23,7 +21,6 @@ function Login(props) {
 
   const handleSubmit = async (values) => {
     const { email, password } = values;
-    console.log(supabase);
 
     const { user, session, error } = await supabase.auth.signInWithPassword({
       email: email,
@@ -88,7 +85,6 @@ function Login(props) {
       >
         Don't have an account?
       </p>
-      {isLoggedIn ? <p>Hi</p> : null}
     </div>
   );
 }

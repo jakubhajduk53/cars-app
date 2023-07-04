@@ -2,7 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { supabase } from "../../lib/supabaseClient";
 
 export const checkUser = createAsyncThunk("user/checkUser", async () => {
-  const { user, error } = await supabase.auth.session();
+  const { data, error } = await supabase.auth.refreshSession();
+  const { session, user } = data;
   if (error) {
     throw new Error(error.message);
   } else {

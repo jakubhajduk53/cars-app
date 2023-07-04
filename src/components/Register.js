@@ -44,11 +44,9 @@ function Register(props) {
       },
     });
     if (!error) {
-      //dispatch(checkUser());
+      dispatch(checkUser());
     }
     props.handleClick(true);
-
-    console.log(values);
   };
 
   return (
