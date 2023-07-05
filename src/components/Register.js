@@ -5,6 +5,7 @@ import Button from "../components/Button";
 import { supabase } from "../lib/supabaseClient";
 import { checkUser } from "../store/slices/userSlice";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required("First name is required"),
@@ -164,14 +165,9 @@ function Register(props) {
           <Button type="submit" value="Sign Up" className="w-full" />
         </Form>
       </Formik>
-      <p
-        onClick={() => {
-          props.handleClick(true);
-        }}
-        className="hover:text-blue-500 cursor-pointer "
-      >
+      <Link to={"/menu/login"} className="hover:text-blue-500 cursor-pointer ">
         Have an account? Log in
-      </p>
+      </Link>
     </div>
   );
 }

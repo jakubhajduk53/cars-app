@@ -179,7 +179,7 @@ function SellYourCarPage() {
           <p className="mb-5 text-lg text-blue-400">
             You must be logged in to sell your car!
           </p>
-          <Link to="/menu">
+          <Link to="/menu/login">
             <p className="hover:text-blue-500 cursor-pointer ">Log in now!</p>
           </Link>
         </div>

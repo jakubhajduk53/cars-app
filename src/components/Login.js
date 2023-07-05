@@ -5,14 +5,18 @@ import Button from "../components/Button";
 import { supabase } from "../lib/supabaseClient";
 import { useDispatch } from "react-redux";
 import { checkUser } from "../store";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required("Email is required"),
   password: Yup.string().required("Password is required"),
 });
 
-function Login(props) {
+function Login() {
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const initialValues = {
     email: "",
@@ -28,6 +32,7 @@ function Login(props) {
     });
     if (!error) {
       dispatch(checkUser());
+      navigate("/menu/panel");
     }
   };
 
@@ -77,14 +82,12 @@ function Login(props) {
           <Button type="submit" value="Log In" className="w-full" />
         </Form>
       </Formik>
-      <p
-        onClick={() => {
-          props.handleClick(false);
-        }}
+      <Link
+        to={"/menu/register"}
         className="hover:text-blue-500 cursor-pointer "
       >
         Don't have an account?
-      </p>
+      </Link>
     </div>
   );
 }

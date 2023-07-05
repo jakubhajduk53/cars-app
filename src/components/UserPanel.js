@@ -4,30 +4,34 @@ import { createSelector } from "@reduxjs/toolkit";
 import { useSelector, useDispatch } from "react-redux";
 import { supabase } from "../lib/supabaseClient";
 import { logOut } from "../store";
+import { useNavigate } from "react-router-dom";
 
 const checkUser = (state) => state.user.user;
 
 const selectUser = createSelector([checkUser], (user) => user);
 
-function UserPanel(props) {
+function UserPanel() {
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+
   const user = useSelector(selectUser);
+
   const {
     first_name: firstName,
     last_name: lastName,
     phone_number: phoneNumber,
-  } = user.user_metadata;
+  } = user.user_metadata || {};
 
   const handleSignOut = async () => {
-    props.handleClick(true);
-
     const { error } = await supabase.auth.signOut();
     if (error) {
       throw new Error(error.message);
     } else {
       dispatch(logOut());
     }
+
+    navigate("/menu/login");
   };
 
   return (
