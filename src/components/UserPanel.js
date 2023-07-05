@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "./Button";
 import { createSelector } from "@reduxjs/toolkit";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,6 +18,21 @@ function UserPanel() {
   const navigate = useNavigate();
 
   const href = useHref();
+
+  const [activeLink, setActiveLink] = useState(href);
+
+  const routes = {
+    options: ["/menu/panel/options"],
+    yourCars: ["/menu/panel/your-cars"],
+  };
+
+  const isActive = (routeName) => {
+    return routes[routeName].includes(activeLink);
+  };
+
+  useEffect(() => {
+    setActiveLink(href);
+  }, [href]);
 
   const panelClasses = classNames("text-base");
 
@@ -47,11 +62,13 @@ function UserPanel() {
           to="/menu/panel/your-cars"
           name="Your cars"
           className={panelClasses}
+          active={isActive("yourCars")}
         />
         <RouterLink
           to="/menu/panel/options"
           name="Options"
           className={panelClasses}
+          active={isActive("options")}
         />
         <Button
           onClick={handleSignOut}
