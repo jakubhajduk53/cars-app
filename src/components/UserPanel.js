@@ -4,7 +4,9 @@ import { createSelector } from "@reduxjs/toolkit";
 import { useSelector, useDispatch } from "react-redux";
 import { supabase } from "../lib/supabaseClient";
 import { logOut } from "../store";
-import { useNavigate, Link, Outlet } from "react-router-dom";
+import { useNavigate, Outlet, useHref } from "react-router-dom";
+import RouterLink from "./RouterLink";
+import classNames from "classnames";
 
 const checkUser = (state) => state.user.user;
 
@@ -14,6 +16,10 @@ function UserPanel() {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+
+  const href = useHref();
+
+  const panelClasses = classNames("text-base");
 
   const user = useSelector(selectUser);
 
@@ -35,19 +41,30 @@ function UserPanel() {
   };
 
   return (
-    <div className="flex flex-col">
-      <div>
-        <h3>Welcome back!</h3>
-        <h4>
-          {firstName} {lastName}
-        </h4>
+    <div className="flex flex-col w-full">
+      <div className="flex justify-center w-full bg-neutral-100 sticky top-0">
+        <RouterLink
+          to="/menu/panel/your-cars"
+          name="Your cars"
+          className={panelClasses}
+        />
+        <RouterLink
+          to="/menu/panel/options"
+          name="Options"
+          className={panelClasses}
+        />
+        <Button
+          onClick={handleSignOut}
+          value="Sign Out"
+          className="hover:text-blue-700 flex items-center gap-1 transition duration-150 md:px-8 text-base"
+        />
       </div>
-      <Link to={"/menu/panel/your-cars"} className="mt-1">
-        <Button value="Your cars" />
-      </Link>
-      <Button value="Options" className="mt-1" />
-      <Button onClick={handleSignOut} value="Sign Out" className="mt-1" />
       <Outlet />
+      {href === "/menu/panel" ? (
+        <div className="text-center text-lg">
+          Welcome back! {firstName} {lastName}
+        </div>
+      ) : null}
     </div>
   );
 }

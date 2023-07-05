@@ -8,6 +8,7 @@ import UserPanel from "./components/UserPanel";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import YourCars from "./components/YourCars";
+import UserOptions from "./components/UserOptions";
 import { Route, Routes, useHref } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -36,6 +37,7 @@ function App() {
           <Route path="menu" element={<MenuPage />}>
             <Route path="panel" element={<UserPanel />}>
               <Route path="your-cars" element={<YourCars />} />
+              <Route path="options" element={<UserOptions />} />
             </Route>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
