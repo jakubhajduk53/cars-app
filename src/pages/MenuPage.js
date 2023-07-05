@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useHref } from "react-router-dom";
 
 const getUserStatus = (state) => state.user.isLoggedIn;
 
@@ -13,6 +13,7 @@ const selectUserStatus = createSelector(
 
 function MenuPage() {
   const navigate = useNavigate();
+  const href = useHref();
 
   const isLoggedIn = useSelector(selectUserStatus);
 
@@ -22,7 +23,7 @@ function MenuPage() {
     } else {
       navigate("/menu/login");
     }
-  }, []);
+  }, [href]);
 
   return (
     <div className="flex w-full justify-center">
