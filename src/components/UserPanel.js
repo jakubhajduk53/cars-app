@@ -4,7 +4,7 @@ import { createSelector } from "@reduxjs/toolkit";
 import { useSelector, useDispatch } from "react-redux";
 import { supabase } from "../lib/supabaseClient";
 import { logOut } from "../store";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link, Outlet } from "react-router-dom";
 
 const checkUser = (state) => state.user.user;
 
@@ -42,9 +42,12 @@ function UserPanel() {
           {firstName} {lastName}
         </h4>
       </div>
-      <Button value="Your cars" className="mt-1" />
+      <Link to={"/menu/panel/your-cars"} className="mt-1">
+        <Button value="Your cars" />
+      </Link>
       <Button value="Options" className="mt-1" />
       <Button onClick={handleSignOut} value="Sign Out" className="mt-1" />
+      <Outlet />
     </div>
   );
 }

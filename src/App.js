@@ -7,6 +7,7 @@ import MenuPage from "./pages/MenuPage";
 import UserPanel from "./components/UserPanel";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import YourCars from "./components/YourCars";
 import { Route, Routes, useHref } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -33,7 +34,9 @@ function App() {
           <Route path="cars-for-sale" element={<CarsForSalePage />} />
           <Route path="sell-your-car" element={<SellYourCarPage />} />
           <Route path="menu" element={<MenuPage />}>
-            <Route path="panel" element={<UserPanel />} />
+            <Route path="panel" element={<UserPanel />}>
+              <Route path="your-cars" element={<YourCars />} />
+            </Route>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
           </Route>
