@@ -16,6 +16,10 @@ const selectIsLoggedIn = createSelector(
   (isLoggedIn) => isLoggedIn
 );
 
+const checkUser = (state) => state.user.user;
+
+const selectUser = createSelector([checkUser], (user) => user);
+
 function SellYourCarPage() {
   const dispatch = useDispatch();
 
@@ -37,6 +41,10 @@ function SellYourCarPage() {
 
   const CDNURL = process.env.REACT_APP_SUPABASE_CDN_URL;
 
+  const user = useSelector(selectUser);
+
+  const { id: userId } = user || {};
+
   async function handleSubmit(values) {
     const { name, year_of_production, price, location, image_url } = values;
 
@@ -53,6 +61,7 @@ function SellYourCarPage() {
           price,
           location,
           image_url: CDNURL + id,
+          owner_id: userId,
         },
       ])
       .select();
