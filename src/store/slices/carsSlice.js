@@ -15,6 +15,20 @@ export const fetchAmountOfCars = createAsyncThunk(
   }
 );
 
+export const fetchAmountOfYourCars = createAsyncThunk(
+  "cars/fetchAmountOfYourCars",
+  async ({ userId }) => {
+    const { count: amount, error } = await supabase
+      .from("cars")
+      .select("*", { count: "exact", head: true })
+      .eq("owner_id", `${userId}`);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return amount;
+  }
+);
+
 export const fetchCars = createAsyncThunk(
   "cars/fetchCars",
   async ({ first, last, term }) => {
@@ -23,6 +37,22 @@ export const fetchCars = createAsyncThunk(
       .select("*")
       .range(first, last)
       .ilike("name", `%${term}%`)
+      .order("id", { ascending: true });
+    if (error) {
+      throw new Error(error.message);
+    }
+    return cars;
+  }
+);
+
+export const fetchYourCars = createAsyncThunk(
+  "cars/fetchYourCars",
+  async ({ first, last, userId }) => {
+    const { data: cars, error } = await supabase
+      .from("cars")
+      .select("*")
+      .eq("owner_id", `${userId}`)
+      .range(first, last)
       .order("id", { ascending: true });
     if (error) {
       throw new Error(error.message);
@@ -92,6 +122,30 @@ const carsSlice = createSlice({
         state.carsList = action.payload;
       })
       .addCase(fetchCars.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(fetchAmountOfYourCars.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchAmountOfYourCars.fulfilled, (state, action) => {
+        state.loading = false;
+        state.carsAmount = action.payload;
+      })
+      .addCase(fetchAmountOfYourCars.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(fetchYourCars.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchYourCars.fulfilled, (state, action) => {
+        state.loading = false;
+        state.carsList = action.payload;
+      })
+      .addCase(fetchYourCars.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });

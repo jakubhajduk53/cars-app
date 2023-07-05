@@ -6,6 +6,8 @@ import {
   fetchAmountOfCars,
   resetCars,
   changeSelectedCar,
+  fetchAmountOfYourCars,
+  fetchYourCars,
 } from "./slices/carsSlice";
 import {
   changePage,
@@ -35,4 +37,6 @@ export {
   changeSelectedCar,
   checkUser,
   logOut,
+  fetchAmountOfYourCars,
+  fetchYourCars,
 };
