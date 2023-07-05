@@ -14,6 +14,17 @@ function Header() {
 
   const [activeLink, setActiveLink] = useState(href);
 
+  const routes = {
+    home: ["/"],
+    carsForSale: ["/cars-for-sale"],
+    sellYourCar: ["/sell-your-car"],
+    menu: ["/menu", "/menu/login", "/menu/register", "/menu/panel"],
+  };
+
+  const isActive = (routeName) => {
+    return routes[routeName].includes(activeLink);
+  };
+
   useEffect(() => {
     setActiveLink(href);
   }, [href]);
@@ -24,25 +35,25 @@ function Header() {
         to="/"
         icon={AiFillHome}
         name="Home"
-        activeLink={activeLink}
+        active={isActive("home")}
       />
       <RouterLink
         to="/cars-for-sale"
         icon={AiFillCar}
         name="Cars for sale"
-        activeLink={activeLink}
+        active={isActive("carsForSale")}
       />
       <RouterLink
         to="/sell-your-car"
         icon={AiOutlineCar}
         name="Sell your car"
-        activeLink={activeLink}
+        active={isActive("sellYourCar")}
       />
       <RouterLink
         to="/menu"
         icon={AiOutlineMenu}
         name="Menu"
-        activeLink={activeLink}
+        active={isActive("menu")}
       />
     </div>
   );
