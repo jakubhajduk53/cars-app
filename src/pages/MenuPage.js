@@ -18,6 +18,9 @@ function MenuPage() {
   const isLoggedIn = useSelector(selectUserStatus);
 
   useEffect(() => {
+    if (href !== "/menu") {
+      return;
+    }
     if (isLoggedIn) {
       navigate("/menu/panel");
     } else {
