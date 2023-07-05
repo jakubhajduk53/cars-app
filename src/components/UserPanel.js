@@ -56,7 +56,7 @@ function UserPanel() {
         <Button
           onClick={handleSignOut}
           value="Sign Out"
-          className="hover:text-blue-700 flex items-center gap-1 transition duration-150 md:px-8 text-base"
+          className="flex items-center gap-1 transition duration-150 md:px-8 text-base hover:text-red-500 bg-transparent hover:bg-transparent"
         />
       </div>
       <Outlet />
