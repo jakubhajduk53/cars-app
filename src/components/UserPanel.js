@@ -57,7 +57,7 @@ function UserPanel() {
 
   return (
     <div className="flex flex-col w-full">
-      <div className="flex justify-center w-full bg-neutral-100 sticky top-0">
+      <div className="flex justify-center w-full bg-neutral-100 sticky top-0 border-t">
         <RouterLink
           to="/menu/panel/your-cars"
           name="Your cars"
