@@ -18,7 +18,14 @@ function Header() {
     home: ["/"],
     carsForSale: ["/cars-for-sale"],
     sellYourCar: ["/sell-your-car"],
-    menu: ["/menu", "/menu/login", "/menu/register", "/menu/panel"],
+    menu: [
+      "/menu",
+      "/menu/login",
+      "/menu/register",
+      "/menu/panel",
+      "/menu/panel/options",
+      "/menu/panel/your-cars",
+    ],
   };
 
   const isActive = (routeName) => {
