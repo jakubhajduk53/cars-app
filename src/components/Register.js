@@ -8,9 +8,21 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
-  firstName: Yup.string().required("First name is required"),
-  lastName: Yup.string().required("Last name is required"),
-  phoneNumber: Yup.string().required("Phone number is required"),
+  firstName: Yup.string()
+    .required("First name is required")
+    .min(2, "First name cannot be shorter than 2 letters")
+    .max(20, "First name cannot be longer than 20 letters")
+    .matches("^[a-zA-Z0-9.s-]*$", "Incorrect value"),
+  lastName: Yup.string()
+    .required("Last name is required")
+    .min(2, "Last name cannot be shorter than 2 letters")
+    .max(20, "Last name cannot be longer than 20 letters")
+    .matches("^[a-zA-Z0-9.s-]*$", "Incorrect value"),
+  phoneNumber: Yup.number()
+    .required("Phone number is required")
+    .positive("Phone number must be a positive number")
+    .min(7, "Phone numbers cannot contain less than 7 digits")
+    .max(15, "Phone numbers cannot contain more than 15 digits"),
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string().required("Password is required"),
   repeatPassword: Yup.string()
@@ -51,13 +63,13 @@ function Register(props) {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-80">
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form className="bg-white p-8 rounded ">
+        <Form className="bg-white p-8 rounded w-full">
           <div className="mb-4">
             <label htmlFor="firstName" className="block mb-2">
               First Name:
