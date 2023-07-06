@@ -5,7 +5,7 @@ import { changeSelectedCar } from "../store";
 
 function CarsListItem(props) {
   const CarsListItemStyles = classNames(
-    "flex items-center justify-center px-4 py-2 gap-8 xl:gap-16 w-full h-full border border-gray-300 hover:border-black",
+    "grid grid-cols-2 border border-gray-300 hover:border-black p-5",
     props.className
   );
 
@@ -15,28 +15,29 @@ function CarsListItem(props) {
 
   return (
     <div className={CarsListItemStyles}>
-      <div className="shrink-0">
+      <div className="">
         <img
           src={car.image_url}
           alt={car.name}
-          className="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 border border-gray-300"
+          className="w-36 h-36 sm:w-52 sm:h-52 md:w-72 md:h-72 border-2 border-blue-300 rounded-xl shadow-2xl shadow-blue-200"
         />
       </div>
-      <div className="w-1/2">
-        <p className="text-xl font-semibold md:text-2xl break-words truncate mb-2">
+      <div className="grid">
+        <p className="text-xl font-semibold md:text-3xl  break-words truncate">
           {car.name}
         </p>
-        <p className="text-gray-600 text-md md:text-lg mb-2">
+        <p className="text-gray-600 text-md md:text-xl italic">
           Cost: ${car.price}
         </p>
-        <p className="text-gray-600 text-md md:text-lg mb-2">
+        <p className="text-gray-600 text-md md:text-xl italic">
           Year of production: {car.year_of_production}
         </p>
-        <p className="text-gray-600 text-md md:text-lg break-words truncate mb-4">
+        <p className="text-gray-600 text-md md:text-xl italic break-words truncate">
           Location: {car.location}
         </p>
         <Button
           value="Check Availability"
+          className="justify-self-end shadow-xl"
           onClick={() => {
             dispatch(changeSelectedCar(car));
             props.openModal();
