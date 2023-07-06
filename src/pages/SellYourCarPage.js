@@ -48,8 +48,8 @@ function SellYourCarPage() {
     location: Yup.string()
       .required("Location is required")
       .matches("^[a-zA-Z0-9.s-]*$", "Incorrect characters")
-      .min(6, "Location should contain more than 5 characters")
-      .max(25, "Location cannot be longer than 24 characters"),
+      .min(4, "Location should contain more than 3 characters")
+      .max(30, "Location cannot be longer than 30 characters"),
 
     image_url: Yup.mixed().required("Image is required"),
   });
@@ -62,7 +62,7 @@ function SellYourCarPage() {
 
   const { id: userId } = user || {};
 
-  async function handleSubmit(values) {
+  async function handleSubmit(values, actions) {
     const { name, year_of_production, price, location, image_url } = values;
 
     const id = nanoid();
@@ -88,6 +88,8 @@ function SellYourCarPage() {
     }
 
     setImagePreview(null);
+
+    actions.resetForm();
   }
 
   return (
@@ -103,7 +105,9 @@ function SellYourCarPage() {
               location: "",
               image_url: null,
             }}
-            onSubmit={handleSubmit}
+            onSubmit={(values, actions) => {
+              handleSubmit(values, actions);
+            }}
             validationSchema={validationSchema}
           >
             {({ setFieldValue, errors, touched }) => (
