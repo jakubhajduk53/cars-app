@@ -47,7 +47,10 @@ function SellYourCarPage() {
       .max(100000000, "Price cannot be higher than 100mln $"),
     location: Yup.string()
       .required("Location is required")
-      .matches("^[a-zA-Z0-9.s-]*$", "Incorrect characters"),
+      .matches("^[a-zA-Z0-9.s-]*$", "Incorrect characters")
+      .min(6, "Location should contain more than 5 characters")
+      .max(25, "Location cannot be longer than 24 characters"),
+
     image_url: Yup.mixed().required("Image is required"),
   });
 
