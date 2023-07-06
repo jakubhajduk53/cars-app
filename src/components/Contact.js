@@ -3,17 +3,32 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "./Button";
 import { useSelector } from "react-redux";
+import { createSelector } from "@reduxjs/toolkit";
+
+const checkUser = (state) => state.user.user;
+
+const selectUser = createSelector([checkUser], (user) => user);
 
 const Contact = (props) => {
   const car = useSelector(({ cars: { selectedCar } }) => {
     return selectedCar;
   });
 
+  const user = useSelector(selectUser);
+
+  const {
+    first_name: firstName,
+    last_name: lastName,
+    phone_number: phoneNumber,
+  } = user.user_metadata || {};
+
+  const { email } = user;
+
   const initialValues = {
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-    email: "",
+    firstName: firstName || "",
+    lastName: lastName || "",
+    phoneNumber: phoneNumber || "",
+    email: email || "",
     comment: `Hi! I just want to ask about ${car.name} availability`,
     inquiryType: "checkAvailability",
   };

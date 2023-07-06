@@ -22,6 +22,7 @@ const userSlice = createSlice({
   reducers: {
     logOut(state) {
       state.isLoggedIn = false;
+      state.user = {};
     },
   },
   extraReducers: (builder) => {
