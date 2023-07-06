@@ -4,13 +4,15 @@ import { useDispatch } from "react-redux";
 import { changeSelectedCar } from "../store";
 
 function CarsListItem(props) {
-  const dispatch = useDispatch();
-  const car = props.car;
-
   const CarsListItemStyles = classNames(
     "flex items-center justify-center px-4 py-2 gap-8 xl:gap-16 w-full h-full border border-gray-300 hover:border-black",
     props.className
   );
+
+  const dispatch = useDispatch();
+
+  const car = props.car;
+
   return (
     <div className={CarsListItemStyles}>
       <div className="shrink-0">
