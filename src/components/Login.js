@@ -37,13 +37,13 @@ function Login() {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-80">
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form className="bg-white p-8 rounded ">
+        <Form className="bg-white p-8 rounded w-full">
           <div className="mb-4">
             <label htmlFor="email" className="block mb-2">
               Email:
