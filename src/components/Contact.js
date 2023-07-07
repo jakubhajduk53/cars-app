@@ -9,10 +9,12 @@ const checkUser = (state) => state.user.user;
 
 const selectUser = createSelector([checkUser], (user) => user);
 
+const checkCar = (state) => state.cars.selectedCar;
+
+const selectCar = createSelector([checkCar], (selectedCar) => selectedCar);
+
 const Contact = (props) => {
-  const car = useSelector(({ cars: { selectedCar } }) => {
-    return selectedCar;
-  });
+  const car = useSelector(selectCar);
 
   const user = useSelector(selectUser);
 
