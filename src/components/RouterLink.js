@@ -23,7 +23,7 @@ const RouterLink = ({
   return (
     <Link to={to} onClick={handleClick}>
       <div className={linkStyles}>
-        {Icon && <Icon />}
+        {Icon && <Icon className="shrink-0" />}
         {name}
       </div>
     </Link>
