@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAmountOfCars } from "../index";
+import { fetchAmountOfCars, fetchAmountOfYourCars } from "../index";
 
 const pageSlice = createSlice({
   name: "page",
@@ -51,6 +51,18 @@ const pageSlice = createSlice({
       state.totalPages = Math.ceil(action.payload / state.itemsPerPage);
     });
     builder.addCase(fetchAmountOfCars.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
+    builder.addCase(fetchAmountOfYourCars.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(fetchAmountOfYourCars.fulfilled, (state, action) => {
+      state.loading = false;
+      state.totalPages = Math.ceil(action.payload / state.itemsPerPage);
+    });
+    builder.addCase(fetchAmountOfYourCars.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
     });

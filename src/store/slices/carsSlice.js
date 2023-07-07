@@ -61,6 +61,16 @@ export const fetchYourCars = createAsyncThunk(
   }
 );
 
+export const deleteYourCar = createAsyncThunk(
+  "cars/deleteYourCar",
+  async ({ carId }) => {
+    const { error } = await supabase.from("cars").delete().eq("id", `${carId}`);
+    if (error) {
+      throw new Error(error.message);
+    }
+  }
+);
+
 const carsSlice = createSlice({
   name: "cars",
   initialState: {
@@ -88,7 +98,7 @@ const carsSlice = createSlice({
         image_url: action.payload.image_url,
       });
     },
-    changeSelectedCar(state, action) {
+    selectCar(state, action) {
       state.selectedCar = {
         id: action.payload.id,
         name: action.payload.name,
@@ -148,9 +158,23 @@ const carsSlice = createSlice({
       .addCase(fetchYourCars.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      })
+      .addCase(deleteYourCar.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteYourCar.fulfilled, (state, action) => {
+        state.loading = false;
+        state.carsList = state.carsList.filter((car) => {
+          return car.id !== action.payload;
+        });
+      })
+      .addCase(deleteYourCar.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
       });
   },
 });
 
-export const { addCar, resetCars, changeSelectedCar } = carsSlice.actions;
+export const { addCar, resetCars, selectCar } = carsSlice.actions;
 export const carsReducer = carsSlice.reducer;

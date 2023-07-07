@@ -5,9 +5,10 @@ import {
   fetchCars,
   fetchAmountOfCars,
   resetCars,
-  changeSelectedCar,
+  selectCar,
   fetchAmountOfYourCars,
   fetchYourCars,
+  deleteYourCar,
 } from "./slices/carsSlice";
 import {
   changePage,
@@ -34,9 +35,10 @@ export {
   changeSearchTerm,
   resetCars,
   resetPage,
-  changeSelectedCar,
+  selectCar,
   checkUser,
   logOut,
   fetchAmountOfYourCars,
   fetchYourCars,
+  deleteYourCar,
 };
