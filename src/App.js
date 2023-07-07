@@ -4,11 +4,11 @@ import SellYourCarPage from "./pages/SellYourCarPage";
 import CarsForSalePage from "./pages/CarsForSalePage";
 import HomePage from "./pages/HomePage";
 import MenuPage from "./pages/MenuPage";
-import UserPanel from "./components/UserPanel";
+import UserPanelPage from "./pages/UserPanelPage";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import YourCars from "./components/YourCars";
-import UserOptions from "./components/UserOptions";
+import YourCarsPage from "./pages/YourCarsPage";
+import UserOptionsPage from "./pages/UserOptionsPage";
 import { Route, Routes, useHref } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -35,9 +35,9 @@ function App() {
           <Route path="cars-for-sale" element={<CarsForSalePage />} />
           <Route path="sell-your-car" element={<SellYourCarPage />} />
           <Route path="menu" element={<MenuPage />}>
-            <Route path="panel" element={<UserPanel />}>
-              <Route path="your-cars" element={<YourCars />} />
-              <Route path="options" element={<UserOptions />} />
+            <Route path="panel" element={<UserPanelPage />}>
+              <Route path="your-cars" element={<YourCarsPage />} />
+              <Route path="options" element={<UserOptionsPage />} />
             </Route>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />

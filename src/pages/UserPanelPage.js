@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Button from "./Button";
+import Button from "../components/Button";
 import { createSelector } from "@reduxjs/toolkit";
 import { useSelector, useDispatch } from "react-redux";
 import { supabase } from "../lib/supabaseClient";
 import { logOut } from "../store";
 import { useNavigate, Outlet, useHref } from "react-router-dom";
-import RouterLink from "./RouterLink";
+import RouterLink from "../components/RouterLink";
 import classNames from "classnames";
 import { AiOutlineLogout, AiOutlineIdcard } from "react-icons/ai";
 import { FiSettings } from "react-icons/fi";
@@ -14,7 +14,7 @@ const checkUser = (state) => state.user.user;
 
 const selectUser = createSelector([checkUser], (user) => user);
 
-function UserPanel() {
+function UserPanelPage() {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -91,4 +91,4 @@ function UserPanel() {
   );
 }
 
-export default UserPanel;
+export default UserPanelPage;

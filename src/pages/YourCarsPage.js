@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
 import { fetchAmountOfYourCars } from "../store";
 import { useEffect, useState } from "react";
-import YourCarsList from "./YourCarsList";
+import YourCarsList from "../components/YourCarsList";
 
 const getCarsAmount = (state) => state.cars.carsAmount;
 
@@ -15,7 +15,7 @@ const checkUser = (state) => state.user.user;
 
 const selectUser = createSelector([checkUser], (user) => user);
 
-function YourCars() {
+function YourCarsPage() {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -40,4 +40,4 @@ function YourCars() {
   return <div>{!isLoading ? <YourCarsList /> : <p>Loading...</p>}</div>;
 }
 
-export default YourCars;
+export default YourCarsPage;
