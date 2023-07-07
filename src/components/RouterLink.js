@@ -2,7 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
 
-const RouterLink = ({ to, icon: Icon, name, active, className }) => {
+const RouterLink = ({
+  to,
+  icon: Icon,
+  name,
+  active,
+  className,
+  handleClick,
+}) => {
   const linkStyles = classNames(
     "px-2 py-4 text-lg",
     {
@@ -14,7 +21,7 @@ const RouterLink = ({ to, icon: Icon, name, active, className }) => {
   );
 
   return (
-    <Link to={to}>
+    <Link to={to} onClick={handleClick}>
       <div className={linkStyles}>
         {Icon && <Icon />}
         {name}
