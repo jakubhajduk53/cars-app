@@ -8,6 +8,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { createSelector } from "@reduxjs/toolkit";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const checkIsLoggedIn = (state) => state.user.isLoggedIn;
 
@@ -22,6 +23,8 @@ const selectUser = createSelector([checkUser], (user) => user);
 
 function SellYourCarPage() {
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
@@ -90,6 +93,8 @@ function SellYourCarPage() {
     setImagePreview(null);
 
     actions.resetForm();
+
+    navigate("/menu/panel/your-cars");
   }
 
   return (
