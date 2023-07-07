@@ -9,9 +9,9 @@ const getCars = (state) => state.cars.carsList;
 
 const selectCars = createSelector([getCars], (carsList) => carsList);
 
-const getLoading = (state) => state.cars.loading;
+const getIsLoaded = (state) => state.cars.isLoaded;
 
-const selectLoading = createSelector([getLoading], (loading) => loading);
+const selectIsLoaded = createSelector([getIsLoaded], (isLoaded) => isLoaded);
 
 const getPageState = (state) => state.page;
 
@@ -28,7 +28,7 @@ function CarsList() {
 
   const user = useSelector(selectUser);
 
-  const loading = useSelector(selectLoading);
+  const isLoaded = useSelector(selectIsLoaded);
 
   const { id: userId } = user || {};
 
@@ -36,14 +36,15 @@ function CarsList() {
     useSelector(selectPage);
 
   useEffect(() => {
-    dispatch(
-      fetchYourCars({
-        first: firstItemOnPage,
-        last: lastItemOnPage,
-        userId: userId,
-      })
-    );
-  }, [currentPage, cars]);
+    if (userId)
+      dispatch(
+        fetchYourCars({
+          first: firstItemOnPage,
+          last: lastItemOnPage,
+          userId: userId,
+        })
+      );
+  }, [currentPage, userId]);
 
   const goToNextPage = () => {
     if (currentPage < totalPages) {
@@ -64,10 +65,10 @@ function CarsList() {
           cars.map((car) => (
             <CarsListItem key={car.id} car={car} yourCar={true} />
           ))
-        ) : loading ? (
-          <p>Loading...</p>
-        ) : (
+        ) : isLoaded && cars.length === 0 ? (
           <p>We are sorry! You don't have cars in your account</p>
+        ) : (
+          <p>Loading...</p>
         )}
       </div>
       {totalPages > 0 ? (

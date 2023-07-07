@@ -68,6 +68,7 @@ export const deleteYourCar = createAsyncThunk(
     if (error) {
       throw new Error(error.message);
     }
+    return carId;
   }
 );
 
@@ -77,6 +78,7 @@ const carsSlice = createSlice({
     carsList: [],
     carsAmount: 0,
     selectedCar: {},
+    isLoaded: false,
     loading: false,
     error: null,
   },
@@ -85,6 +87,7 @@ const carsSlice = createSlice({
       state.carsList = [];
       state.carsAmount = 0;
       state.selectedCar = {};
+      state.isLoaded = false;
       state.loading = false;
       state.error = null;
     },
@@ -130,6 +133,7 @@ const carsSlice = createSlice({
       .addCase(fetchCars.fulfilled, (state, action) => {
         state.loading = false;
         state.carsList = action.payload;
+        state.isLoaded = true;
       })
       .addCase(fetchCars.rejected, (state, action) => {
         state.loading = false;
@@ -142,6 +146,7 @@ const carsSlice = createSlice({
       .addCase(fetchAmountOfYourCars.fulfilled, (state, action) => {
         state.loading = false;
         state.carsAmount = action.payload;
+        state.isLoaded = true;
       })
       .addCase(fetchAmountOfYourCars.rejected, (state, action) => {
         state.loading = false;
@@ -165,9 +170,15 @@ const carsSlice = createSlice({
       })
       .addCase(deleteYourCar.fulfilled, (state, action) => {
         state.loading = false;
+        console.log("ACTION PAYLOAD" + action.payload);
         state.carsList = state.carsList.filter((car) => {
           return car.id !== action.payload;
         });
+        console.log(
+          state.carsList.filter((car) => {
+            return car.id !== action.payload;
+          })
+        );
       })
       .addCase(deleteYourCar.rejected, (state, action) => {
         state.loading = false;

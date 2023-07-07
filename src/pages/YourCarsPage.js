@@ -32,7 +32,7 @@ function YourCarsPage() {
   }, [user]);
 
   useEffect(() => {
-    if (amount > 0) {
+    if (amount >= 0) {
       setIsLoading(false);
     }
   }, [amount]);

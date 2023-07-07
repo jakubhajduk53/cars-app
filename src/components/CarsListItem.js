@@ -42,7 +42,6 @@ function CarsListItem(props) {
             value="Delete Offer"
             className="justify-self-end self-end shadow-xl px-0 py-0 text-sm md:text-base w-20 md:w-40 md:h-12 break-words"
             onClick={() => {
-              console.log(car.id);
               dispatch(deleteYourCar({ carId: car.id }));
             }}
           />
