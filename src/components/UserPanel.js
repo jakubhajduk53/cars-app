@@ -7,6 +7,8 @@ import { logOut } from "../store";
 import { useNavigate, Outlet, useHref } from "react-router-dom";
 import RouterLink from "./RouterLink";
 import classNames from "classnames";
+import { AiOutlineLogout, AiOutlineIdcard } from "react-icons/ai";
+import { FiSettings } from "react-icons/fi";
 
 const checkUser = (state) => state.user.user;
 
@@ -63,17 +65,20 @@ function UserPanel() {
           name="Your cars"
           className={panelClasses}
           active={isActive("yourCars")}
+          icon={AiOutlineIdcard}
         />
         <RouterLink
           to="/menu/panel/options"
           name="Options"
           className={panelClasses}
           active={isActive("options")}
+          icon={FiSettings}
         />
-        <Button
-          onClick={handleSignOut}
-          value="Sign Out"
-          className="flex items-center gap-1 transition duration-150 md:px-8 text-base hover:text-red-500 bg-transparent hover:bg-transparent"
+        <RouterLink
+          handleClick={handleSignOut}
+          name="Sign Out"
+          className={classNames(panelClasses, "hover:text-red-500")}
+          icon={AiOutlineLogout}
         />
       </div>
       <Outlet />
