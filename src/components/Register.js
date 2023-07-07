@@ -12,12 +12,12 @@ const validationSchema = Yup.object().shape({
     .required("First name is required")
     .min(2, "First name cannot be shorter than 2 letters")
     .max(20, "First name cannot be longer than 20 letters")
-    .matches("^[a-zA-Z0-9.s-]*$", "Incorrect value"),
+    .matches("^[a-zA-Z0-9.\\s-]*$", "Incorrect value"),
   lastName: Yup.string()
     .required("Last name is required")
     .min(2, "Last name cannot be shorter than 2 letters")
     .max(20, "Last name cannot be longer than 20 letters")
-    .matches("^[a-zA-Z0-9.s-]*$", "Incorrect value"),
+    .matches("^[a-zA-Z0-9.\\s-]*$", "Incorrect value"),
   phoneNumber: Yup.number()
     .required("Phone number is required")
     .positive("Phone number must be a positive number")

@@ -34,7 +34,7 @@ function SellYourCarPage() {
     name: Yup.string()
       .required("Car name is required")
       .matches(
-        "^[a-zA-Z0-9.s-]*$",
+        "^[a-zA-Z0-9.\\s-]*$",
         "Incorrect value, name should contain letters, numbers, dots, dashes and whitespaces"
       )
       .min(6, "Name should contain more than 5 characters")
@@ -50,7 +50,7 @@ function SellYourCarPage() {
       .max(100000000, "Price cannot be higher than 100mln $"),
     location: Yup.string()
       .required("Location is required")
-      .matches("^[a-zA-Z0-9.s-]*$", "Incorrect characters")
+      .matches("^[a-zA-Z0-9.\\s-]*$", "Incorrect characters")
       .min(4, "Location should contain more than 3 characters")
       .max(30, "Location cannot be longer than 30 characters"),
 
