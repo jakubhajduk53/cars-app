@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "../components/Button";
@@ -18,6 +18,8 @@ function Login() {
 
   const navigate = useNavigate();
 
+  const [loginErrorMessage, setLoginErrorMessage] = useState(undefined);
+
   const initialValues = {
     email: "",
     password: "",
@@ -33,6 +35,8 @@ function Login() {
     if (!error) {
       dispatch(checkUser());
       navigate("/menu/panel");
+    } else {
+      setLoginErrorMessage(error.message);
     }
   };
 
@@ -78,8 +82,12 @@ function Login() {
               className="text-red-500"
             />
           </div>
-
           <Button type="submit" value="Log In" className="w-full" />
+          {loginErrorMessage ? (
+            <div className="text-lg text-red-500 text-center mt-2">
+              {loginErrorMessage}!
+            </div>
+          ) : null}
         </Form>
       </Formik>
       <Link
