@@ -21,7 +21,7 @@ const checkUser = (state) => state.user.user;
 
 const selectUser = createSelector([checkUser], (user) => user);
 
-function CarsList() {
+function YourCarsList(props) {
   const dispatch = useDispatch();
 
   const cars = useSelector(selectCars);
@@ -44,7 +44,7 @@ function CarsList() {
           userId: userId,
         })
       );
-  }, [currentPage, userId]);
+  }, [currentPage, userId, props.closeModal]);
 
   const goToNextPage = () => {
     if (currentPage < totalPages) {
@@ -63,7 +63,12 @@ function CarsList() {
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 m-8">
         {cars.length > 0 ? (
           cars.map((car) => (
-            <CarsListItem key={car.id} car={car} yourCar={true} />
+            <CarsListItem
+              key={car.id}
+              car={car}
+              yourCar={true}
+              openModal={props.openModal}
+            />
           ))
         ) : isLoaded && cars.length === 0 ? (
           <p>We are sorry! You don't have cars in your account</p>
@@ -92,4 +97,4 @@ function CarsList() {
   );
 }
 
-export default CarsList;
+export default YourCarsList;

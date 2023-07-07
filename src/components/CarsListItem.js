@@ -38,13 +38,23 @@ function CarsListItem(props) {
       </div>
       <div className="grid col-span-2">
         {props.yourCar ? (
-          <Button
-            value="Delete Offer"
-            className="justify-self-end self-end shadow-xl px-0 py-0 text-sm md:text-base w-20 md:w-40 md:h-12 break-words"
-            onClick={() => {
-              dispatch(deleteYourCar({ carId: car.id }));
-            }}
-          />
+          <div className="justify-self-end self-end">
+            <Button
+              value="Edit Offer"
+              className="bg-blue-300 hover:bg-blue-400 shadow-xl mb-5 px-0 py-0 text-sm md:text-base w-20 md:w-40 md:h-12 break-words"
+              onClick={() => {
+                dispatch(selectCar(car));
+                props.openModal();
+              }}
+            />
+            <Button
+              value="Delete Offer"
+              className="bg-red-400 hover:bg-red-500 shadow-xl px-0 py-0 text-sm md:text-base w-20 md:w-40 md:h-12 break-words"
+              onClick={() => {
+                dispatch(deleteYourCar({ carId: car.id }));
+              }}
+            />
+          </div>
         ) : (
           <Button
             value="Check Availability"
