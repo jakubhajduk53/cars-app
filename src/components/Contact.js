@@ -77,7 +77,7 @@ const Contact = (props) => {
       validationSchema={validationSchema}
     >
       {({ values, setFieldValue }) => (
-        <Form className="max-w-sm mx-auto mt-8 mb-8 text-lg">
+        <Form className="max-w-sm mx-auto w-72 text-lg">
           <label className="block mb-2">
             <span className="text-gray-700">First Name:</span>
             <Field
