@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { nanoid } from "nanoid";
 import Button from "../components/Button";
@@ -69,6 +69,10 @@ function EditCar({ closeModal }) {
 
     closeModal();
   }
+
+  useEffect(() => {
+    setImagePreview(car.image_url);
+  }, []);
 
   return (
     <div className="flex w-full justify-center py-5">
