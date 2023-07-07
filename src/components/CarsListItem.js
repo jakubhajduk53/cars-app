@@ -1,7 +1,7 @@
 import Button from "./Button";
 import classNames from "classnames";
 import { useDispatch } from "react-redux";
-import { changeSelectedCar } from "../store";
+import { selectCar, deleteYourCar } from "../store";
 
 function CarsListItem(props) {
   const CarsListItemStyles = classNames(
@@ -37,14 +37,25 @@ function CarsListItem(props) {
         </p>
       </div>
       <div className="grid col-span-2">
-        <Button
-          value="Check Availability"
-          className="justify-self-end self-end shadow-xl px-0 py-0 text-sm md:text-base w-20 md:w-40 md:h-12 break-words"
-          onClick={() => {
-            dispatch(changeSelectedCar(car));
-            props.openModal();
-          }}
-        />
+        {props.yourCar ? (
+          <Button
+            value="Delete Offer"
+            className="justify-self-end self-end shadow-xl px-0 py-0 text-sm md:text-base w-20 md:w-40 md:h-12 break-words"
+            onClick={() => {
+              console.log(car.id);
+              dispatch(deleteYourCar({ carId: car.id }));
+            }}
+          />
+        ) : (
+          <Button
+            value="Check Availability"
+            className="justify-self-end self-end shadow-xl px-0 py-0 text-sm md:text-base w-20 md:w-40 md:h-12 break-words"
+            onClick={() => {
+              dispatch(selectCar(car));
+              props.openModal();
+            }}
+          />
+        )}
       </div>
     </div>
   );

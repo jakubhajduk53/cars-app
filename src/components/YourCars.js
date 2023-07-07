@@ -1,16 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
-import { fetchYourCars, fetchAmountOfYourCars } from "../store";
-import { useEffect } from "react";
-import { changePage } from "../store";
-
-const getCars = (state) => state.cars.carsList;
-
-const selectCars = createSelector([getCars], (carsList) => carsList);
-
-const getPageState = (state) => state.page;
-
-const selectPage = createSelector([getPageState], (page) => page);
+import { fetchAmountOfYourCars } from "../store";
+import { useEffect, useState } from "react";
+import YourCarsList from "./YourCarsList";
 
 const getCarsAmount = (state) => state.cars.carsAmount;
 
@@ -25,42 +17,27 @@ const selectUser = createSelector([checkUser], (user) => user);
 
 function YourCars() {
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
 
   const amount = useSelector(selectCarsAmount);
-
-  const cars = useSelector(selectCars);
 
   const user = useSelector(selectUser);
 
   const { id: userId } = user || {};
 
-  const { currentPage, firstItemOnPage, lastItemOnPage, totalPages } =
-    useSelector(selectPage);
-
   useEffect(() => {
     if (userId) {
       dispatch(fetchAmountOfYourCars({ userId }));
-      dispatch(
-        fetchYourCars({
-          first: firstItemOnPage,
-          last: lastItemOnPage,
-          userId: userId,
-        })
-      );
     }
   }, [user]);
 
-  return (
-    <div>
-      {cars.length > 0 ? (
-        <div>
-          {cars.map((car) => {
-            return <div key={car.id}>{car.name}</div>;
-          })}
-        </div>
-      ) : null}
-    </div>
-  );
+  useEffect(() => {
+    if (amount > 0) {
+      setIsLoading(false);
+    }
+  }, [amount]);
+
+  return <div>{!isLoading ? <YourCarsList /> : <p>Loading...</p>}</div>;
 }
 
 export default YourCars;
