@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Button from "../components/Button";
 import { createSelector } from "@reduxjs/toolkit";
 import { useSelector, useDispatch } from "react-redux";
 import { supabase } from "../lib/supabaseClient";
@@ -40,11 +39,8 @@ function UserPanelPage() {
 
   const user = useSelector(selectUser);
 
-  const {
-    first_name: firstName,
-    last_name: lastName,
-    phone_number: phoneNumber,
-  } = user.user_metadata || {};
+  const { first_name: firstName, last_name: lastName } =
+    user.user_metadata || {};
 
   const handleSignOut = async () => {
     const { error } = await supabase.auth.signOut();
