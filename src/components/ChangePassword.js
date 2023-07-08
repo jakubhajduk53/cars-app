@@ -3,8 +3,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "../components/Button";
 import { supabase } from "../lib/supabaseClient";
-import { useSelector } from "react-redux";
-import { createSelector } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
@@ -14,14 +12,8 @@ const validationSchema = Yup.object().shape({
     .required("Repeat password is required"),
 });
 
-const checkUser = (state) => state.user.user;
-
-const selectUser = createSelector([checkUser], (user) => user);
-
 function ChangePassword() {
   const navigate = useNavigate();
-
-  const user = useSelector(selectUser);
 
   const initialValues = {
     password: "",
