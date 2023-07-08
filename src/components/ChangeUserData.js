@@ -4,6 +4,8 @@ import * as Yup from "yup";
 import Button from "./Button";
 import { useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "../lib/supabaseClient";
 
 const checkUser = (state) => state.user.user;
 
@@ -11,6 +13,8 @@ const selectUser = createSelector([checkUser], (user) => user);
 
 const ChangeUserData = () => {
   const user = useSelector(selectUser);
+
+  const navigate = useNavigate();
 
   const [initialValues, setInitialValues] = useState({
     firstName: "",
@@ -42,10 +46,18 @@ const ChangeUserData = () => {
     });
   }, [firstName, lastName, phoneNumber, email]);
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     const { firstName, lastName, phoneNumber, email } = values;
-    console.log(values);
-    // Wykonaj odpowiednie operacje z wartościami formularza
+
+    await supabase.auth.updateUser({
+      data: {
+        first_name: firstName,
+        last_name: lastName,
+        phone_number: phoneNumber,
+      },
+    });
+
+    navigate("/menu/panel/options");
   };
 
   return (
