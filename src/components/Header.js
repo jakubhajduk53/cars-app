@@ -24,6 +24,8 @@ function Header() {
       "/menu/register",
       "/menu/panel",
       "/menu/panel/options",
+      "/menu/panel/options/change-password",
+      "/menu/panel/options/change-userdata",
       "/menu/panel/your-cars",
     ],
   };

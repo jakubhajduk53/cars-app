@@ -23,7 +23,11 @@ function UserPanelPage() {
   const [activeLink, setActiveLink] = useState(href);
 
   const routes = {
-    options: ["/menu/panel/options"],
+    options: [
+      "/menu/panel/options",
+      "/menu/panel/options/change-password",
+      "/menu/panel/options/change-userdata",
+    ],
     yourCars: ["/menu/panel/your-cars"],
   };
 
