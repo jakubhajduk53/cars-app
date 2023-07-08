@@ -13,6 +13,8 @@ import { Route, Routes, useHref } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { checkUser, resetCars, resetPage } from "./store";
+import ChangePassword from "./components/ChangePassword";
+import ChangeUserData from "./components/ChangeUserData";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,7 +39,10 @@ function App() {
           <Route path="menu" element={<MenuPage />}>
             <Route path="panel" element={<UserPanelPage />}>
               <Route path="your-cars" element={<YourCarsPage />} />
-              <Route path="options" element={<UserOptionsPage />} />
+              <Route path="options" element={<UserOptionsPage />}>
+                <Route path="change-password" element={<ChangePassword />} />
+                <Route path="change-userdata" element={<ChangeUserData />} />
+              </Route>
             </Route>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
