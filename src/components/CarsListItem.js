@@ -41,7 +41,7 @@ function CarsListItem(props) {
           <div className="justify-self-end self-end">
             <Button
               value="Edit Offer"
-              className="bg-blue-300 hover:bg-blue-400 shadow-xl mb-5 px-0 py-0 text-sm md:text-base w-20 md:w-40 md:h-12 break-words"
+              className="bg-blue-400 hover:bg-blue-500 shadow-xl mb-5 px-0 py-0 text-sm md:text-base w-20 md:w-40 md:h-12 break-words"
               onClick={() => {
                 dispatch(selectCar(car));
                 props.openModal();
@@ -49,7 +49,7 @@ function CarsListItem(props) {
             />
             <Button
               value="Delete Offer"
-              className="bg-red-400 hover:bg-red-500 shadow-xl px-0 py-0 text-sm md:text-base w-20 md:w-40 md:h-12 break-words"
+              className="bg-red-500 hover:bg-red-600 shadow-xl px-0 py-0 text-sm md:text-base w-20 md:w-40 md:h-12 break-words"
               onClick={() => {
                 dispatch(deleteYourCar({ carId: car.id }));
               }}
