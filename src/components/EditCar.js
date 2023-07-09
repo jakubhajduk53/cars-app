@@ -19,10 +19,7 @@ function EditCar({ closeModal }) {
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .required("Car name is required")
-      .matches(
-        "^[a-zA-Z0-9.\\s-]*$",
-        "Incorrect value, name should contain letters, numbers, dots, dashes and whitespaces"
-      )
+      .matches(/^[\p{L}\d\s-]+$/u, "Incorrect value")
       .min(6, "Name should contain more than 5 characters")
       .max(25, "Name cannot be longer than 24 characters"),
     year_of_production: Yup.number()
@@ -35,8 +32,7 @@ function EditCar({ closeModal }) {
       .positive("Price must be a positive number")
       .max(100000000, "Price cannot be higher than 100mln $"),
     location: Yup.string()
-      .required("Location is required")
-      .matches("^[a-zA-Z0-9.\\s-]*$", "Incorrect characters")
+      .required("Location is required")(/^[\p{L}\d\s]+$/u, "Incorrect value")
       .min(4, "Location should contain more than 3 characters")
       .max(30, "Location cannot be longer than 30 characters"),
 
