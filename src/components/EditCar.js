@@ -52,7 +52,12 @@ function EditCar({ closeModal }) {
 
     const id = nanoid();
 
-    await supabase.storage.from("cars-list").upload(id, image_url);
+    let imageToUpload = image_url;
+
+    if (typeof image_url === "object") {
+      await supabase.storage.from("cars-list").upload(id, image_url);
+      imageToUpload = CDNURL + id;
+    }
 
     await supabase
       .from("cars")
@@ -61,7 +66,7 @@ function EditCar({ closeModal }) {
         year_of_production: year_of_production,
         price: price,
         location: location,
-        image_url: CDNURL + id,
+        image_url: imageToUpload,
       })
       .eq("id", `${car.id}`);
 
