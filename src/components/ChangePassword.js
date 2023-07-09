@@ -27,7 +27,7 @@ function ChangePassword() {
       password: password,
     });
 
-    navigate("/menu/panel/options");
+    navigate("/menu/panel");
   };
 
   return (

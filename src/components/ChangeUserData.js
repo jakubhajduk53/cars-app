@@ -57,7 +57,7 @@ const ChangeUserData = () => {
       },
     });
 
-    navigate("/menu/panel/options");
+    navigate("/menu/panel");
   };
 
   return (

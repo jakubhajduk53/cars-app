@@ -5,7 +5,7 @@ import Button from "../components/Button";
 import { supabase } from "../lib/supabaseClient";
 import { checkUser } from "../store/slices/userSlice";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -31,6 +31,8 @@ const validationSchema = Yup.object().shape({
 
 function Register() {
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const initialValues = {
     firstName: "",
@@ -58,6 +60,8 @@ function Register() {
     if (!error) {
       dispatch(checkUser());
     }
+
+    navigate("/menu/panel");
   };
 
   return (
