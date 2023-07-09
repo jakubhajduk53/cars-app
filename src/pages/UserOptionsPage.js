@@ -3,6 +3,7 @@ import classNames from "classnames";
 import { useHref, Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { MdPassword, MdDataObject } from "react-icons/md";
+import { AiOutlineMail } from "react-icons/ai";
 
 function UserOptionsPage() {
   const panelClasses = classNames("text-base");
@@ -14,6 +15,7 @@ function UserOptionsPage() {
   const routes = {
     password: ["/menu/panel/options/change-password"],
     userdata: ["/menu/panel/options/change-userdata"],
+    email: ["/menu/panel/options/change-email"],
   };
 
   const isActive = (routeName) => {
@@ -40,6 +42,13 @@ function UserOptionsPage() {
           className={panelClasses}
           active={isActive("userdata")}
           icon={MdDataObject}
+        />
+        <RouterLink
+          to="/menu/panel/options/change-email"
+          name="Change email"
+          className={panelClasses}
+          active={isActive("email")}
+          icon={AiOutlineMail}
         />
       </div>
       <Outlet />

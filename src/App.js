@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { checkUser, resetCars, resetPage } from "./store";
 import ChangePassword from "./components/ChangePassword";
 import ChangeUserData from "./components/ChangeUserData";
+import ChangeEmail from "./components/ChangeEmail";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ function App() {
               <Route path="options" element={<UserOptionsPage />}>
                 <Route path="change-password" element={<ChangePassword />} />
                 <Route path="change-userdata" element={<ChangeUserData />} />
+                <Route path="change-email" element={<ChangeEmail />} />
               </Route>
             </Route>
             <Route path="login" element={<Login />} />
