@@ -15,7 +15,7 @@ function CarsListItem(props) {
 
   return (
     <div className={CarsListItemStyles}>
-      <div className="grid col-span-3 relative justify-content-center ">
+      <div className="grid col-span-3 relative justify-content-center overflow-hidden border rounded-xl">
         <div
           className="absolute inset-0 blur-sm bg-cover -m-1"
           style={{
@@ -26,7 +26,7 @@ function CarsListItem(props) {
           <img
             src={car.image_url}
             alt={car.name}
-            className="object-scale-down h-28 sm:h-52 md:h-72 z-10 border rounded-xl"
+            className="object-scale-down h-28 sm:h-52 md:h-72 z-10"
           />
         </div>
       </div>
