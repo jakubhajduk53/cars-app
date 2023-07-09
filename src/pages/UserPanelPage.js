@@ -85,7 +85,7 @@ function UserPanelPage() {
       <Outlet />
       {href === "/menu/panel" ? (
         <div className="text-center text-lg">
-          Welcome back! {firstName} {lastName}
+          Welcome! {firstName} {lastName}
         </div>
       ) : null}
     </div>
