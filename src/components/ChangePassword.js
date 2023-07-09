@@ -37,44 +37,47 @@ function ChangePassword() {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form className="bg-white p-8 rounded w-80 ">
+        <Form className="bg-white p-8 rounded w-80 text-lg">
           <div className="mb-4">
-            <label htmlFor="password" className="block mb-2">
-              New Password:
-            </label>
-            <Field
-              type="password"
-              id="password"
-              name="password"
-              className="w-full px-3 py-2 border rounded"
-              autoComplete="on"
-            />
-            <ErrorMessage
-              name="password"
-              component="div"
-              className="text-red-500"
-            />
+            <div className="block mb-2">
+              <span className="text-gray-700">New Password:</span>
+              <Field
+                type="password"
+                id="password"
+                name="password"
+                className="w-full px-3 py-2 border rounded"
+                autoComplete="on"
+              />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="text-red-500"
+              />
+            </div>
+          </div>
+          <div className="mb-4">
+            <div className="block mb-2">
+              <span className="text-gray-700">New Password:</span>
+              <Field
+                type="password"
+                id="repeatPassword"
+                name="repeatPassword"
+                className="w-full px-3 py-2 border rounded"
+                autoComplete="on"
+              />
+              <ErrorMessage
+                name="repeatPassword"
+                component="div"
+                className="text-red-500"
+              />
+            </div>
           </div>
 
-          <div className="mb-4">
-            <label htmlFor="repeatPassword" className="block mb-2">
-              Repeat New Password:
-            </label>
-            <Field
-              type="password"
-              id="repeatPassword"
-              name="repeatPassword"
-              className="w-full px-3 py-2 border rounded"
-              autoComplete="on"
-            />
-            <ErrorMessage
-              name="repeatPassword"
-              component="div"
-              className="text-red-500"
-            />
-          </div>
-
-          <Button type="submit" value="Change Password" className="w-full" />
+          <Button
+            type="submit"
+            value="Change Password"
+            className="mt-1 w-full"
+          />
         </Form>
       </Formik>
     </div>

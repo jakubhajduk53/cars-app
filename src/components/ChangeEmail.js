@@ -40,7 +40,7 @@ const ChangeEmail = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <Formik
         enableReinitialize={true}
         initialValues={initialValues}
@@ -48,13 +48,13 @@ const ChangeEmail = () => {
         validationSchema={validationSchema}
       >
         {({ values }) => (
-          <Form className="max-w-sm mx-auto w-72 text-lg">
+          <Form className="max-w-sm mx-auto w-72 p-8 text-lg">
             <label className="block mb-2">
               <span className="text-gray-700">Email:</span>
               <Field
                 type="email"
                 name="email"
-                className="form-input mt-1 block w-full border border-gray-300 rounded"
+                className="w-full px-3 py-2 border rounded"
               />
               <ErrorMessage
                 name="email"
@@ -62,11 +62,7 @@ const ChangeEmail = () => {
                 className="text-red-500"
               />
             </label>
-            <Button
-              type="submit"
-              value="Update"
-              className="mt-1 block w-full"
-            />
+            <Button type="submit" value="Update" className="mt-1 w-full" />
           </Form>
         )}
       </Formik>
