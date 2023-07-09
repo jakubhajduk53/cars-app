@@ -55,8 +55,8 @@ function YourCarsPage() {
       <ReactModal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        className="shadow-lg bg-white p-5 max-h-screen overflow-y-auto rounded-lg absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+        className="z-20 shadow-lg bg-white p-5 max-h-screen overflow-y-auto rounded-lg absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        overlayClassName="z-20 fixed inset-0 bg-black bg-opacity-50"
         ariaHideApp={false}
       >
         <div className="flex relative py-12">
