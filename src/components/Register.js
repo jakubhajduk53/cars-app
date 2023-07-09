@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "../components/Button";
@@ -23,7 +23,9 @@ const validationSchema = Yup.object().shape({
     "Invalid phone number. Phone number should contain 7 to 15 digits"
   ),
   email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string().required("Password is required"),
+  password: Yup.string()
+    .required("Password is required")
+    .min(6, "Password should be longer than 5 letters"),
   repeatPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required("Repeat password is required"),
@@ -33,6 +35,8 @@ function Register() {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+
+  const [registerErrorMessage, setRegisterErrorMessage] = useState(undefined);
 
   const initialValues = {
     firstName: "",
@@ -59,9 +63,10 @@ function Register() {
     });
     if (!error) {
       dispatch(checkUser());
+      navigate("/menu/panel");
+    } else {
+      setRegisterErrorMessage(error.message);
     }
-
-    navigate("/menu/panel");
   };
 
   return (
@@ -177,6 +182,11 @@ function Register() {
           </div>
 
           <Button type="submit" value="Sign Up" className="w-full" />
+          {registerErrorMessage ? (
+            <div className="text-lg text-red-500 text-center mt-2">
+              {registerErrorMessage}!
+            </div>
+          ) : null}
         </Form>
       </Formik>
       <Link to={"/menu/login"} className="hover:text-blue-500 cursor-pointer ">
