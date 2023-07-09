@@ -18,11 +18,10 @@ const validationSchema = Yup.object().shape({
     .min(2, "Last name cannot be shorter than 2 letters")
     .max(20, "Last name cannot be longer than 20 letters")
     .matches("^[a-zA-Z0-9.\\s-]*$", "Incorrect value"),
-  phoneNumber: Yup.number()
-    .required("Phone number is required")
-    .positive("Phone number must be a positive number")
-    .min(7, "Phone numbers cannot contain less than 7 digits")
-    .max(15, "Phone numbers cannot contain more than 15 digits"),
+  phoneNumber: Yup.string().matches(
+    /^\d{7,15}$/,
+    "Invalid phone number. Phone number should contain 7 to 15 digits"
+  ),
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string().required("Password is required"),
   repeatPassword: Yup.string()
@@ -30,7 +29,7 @@ const validationSchema = Yup.object().shape({
     .required("Repeat password is required"),
 });
 
-function Register(props) {
+function Register() {
   const dispatch = useDispatch();
 
   const initialValues = {
@@ -45,7 +44,7 @@ function Register(props) {
   const handleSubmit = async (values) => {
     const { firstName, lastName, phoneNumber, email, password } = values;
 
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email: email,
       password: password,
       options: {
@@ -59,7 +58,6 @@ function Register(props) {
     if (!error) {
       dispatch(checkUser());
     }
-    props.handleClick(true);
   };
 
   return (
