@@ -20,10 +20,9 @@ const ChangeUserData = () => {
     firstName: "",
     lastName: "",
     phoneNumber: "",
-    email: "",
   });
 
-  const { user_metadata, email } = user;
+  const { user_metadata } = user;
   const {
     first_name: firstName,
     last_name: lastName,
@@ -33,8 +32,10 @@ const ChangeUserData = () => {
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required("First name is required"),
     lastName: Yup.string().required("Last name is required"),
-    phoneNumber: Yup.string().required("Phone number is required"),
-    email: Yup.string().email("Invalid email").required("Email is required"),
+    phoneNumber: Yup.string().matches(
+      /^\d{7,15}$/,
+      "Invalid phone number. Phone number should contain 7 to 15 digits"
+    ),
   });
 
   useEffect(() => {
@@ -42,12 +43,11 @@ const ChangeUserData = () => {
       firstName: firstName || "",
       lastName: lastName || "",
       phoneNumber: phoneNumber || "",
-      email: email || "",
     });
-  }, [firstName, lastName, phoneNumber, email]);
+  }, [firstName, lastName, phoneNumber]);
 
   const handleSubmit = async (values) => {
-    const { firstName, lastName, phoneNumber, email } = values;
+    const { firstName, lastName, phoneNumber } = values;
 
     await supabase.auth.updateUser({
       data: {
@@ -105,19 +105,6 @@ const ChangeUserData = () => {
               />
               <ErrorMessage
                 name="phoneNumber"
-                component="div"
-                className="text-red-500"
-              />
-            </label>
-            <label className="block mb-2">
-              <span className="text-gray-700">Email:</span>
-              <Field
-                type="email"
-                name="email"
-                className="w-full px-3 py-2 border rounded"
-              />
-              <ErrorMessage
-                name="email"
                 component="div"
                 className="text-red-500"
               />
