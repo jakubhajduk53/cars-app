@@ -41,9 +41,9 @@ function App() {
             <Route path="panel" element={<UserPanelPage />}>
               <Route path="your-cars" element={<YourCarsPage />} />
               <Route path="options" element={<UserOptionsPage />}>
-                <Route path="change-password" element={<ChangePassword />} />
                 <Route path="change-userdata" element={<ChangeUserData />} />
                 <Route path="change-email" element={<ChangeEmail />} />
+                <Route path="change-password" element={<ChangePassword />} />
               </Route>
             </Route>
             <Route path="login" element={<Login />} />

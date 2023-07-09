@@ -30,13 +30,6 @@ function UserOptionsPage() {
     <div>
       <div className="flex justify-center w-full bg-neutral-100 sticky top-0 border-t">
         <RouterLink
-          to="/menu/panel/options/change-password"
-          name="Change password"
-          className={panelClasses}
-          active={isActive("password")}
-          icon={MdPassword}
-        />
-        <RouterLink
           to="/menu/panel/options/change-userdata"
           name="Change user data"
           className={panelClasses}
@@ -49,6 +42,13 @@ function UserOptionsPage() {
           className={panelClasses}
           active={isActive("email")}
           icon={AiOutlineMail}
+        />
+        <RouterLink
+          to="/menu/panel/options/change-password"
+          name="Change password"
+          className={panelClasses}
+          active={isActive("password")}
+          icon={MdPassword}
         />
       </div>
       <Outlet />
