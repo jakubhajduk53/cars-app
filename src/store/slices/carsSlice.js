@@ -170,15 +170,6 @@ const carsSlice = createSlice({
       })
       .addCase(deleteYourCar.fulfilled, (state, action) => {
         state.loading = false;
-        console.log("ACTION PAYLOAD" + action.payload);
-        state.carsList = state.carsList.filter((car) => {
-          return car.id !== action.payload;
-        });
-        console.log(
-          state.carsList.filter((car) => {
-            return car.id !== action.payload;
-          })
-        );
       })
       .addCase(deleteYourCar.rejected, (state, action) => {
         state.loading = false;
