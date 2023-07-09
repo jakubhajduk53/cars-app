@@ -32,7 +32,8 @@ function EditCar({ closeModal }) {
       .positive("Price must be a positive number")
       .max(100000000, "Price cannot be higher than 100mln $"),
     location: Yup.string()
-      .required("Location is required")(/^[\p{L}\d\s]+$/u, "Incorrect value")
+      .required("Location is required")
+      .matches(/^[\p{L}\d\s]+$/u, "Incorrect value")
       .min(4, "Location should contain more than 3 characters")
       .max(30, "Location cannot be longer than 30 characters"),
 
