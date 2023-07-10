@@ -20,15 +20,15 @@ The Menu page is designed for user management. Users can log in, register, and m
 	
 ## Technologies
 Project is created with:
-*JavaScript
-*React
-*Yup
-*Formik
-*React Modal
-*React-Router
-*Redux
-*Tailwind CSS
-*Supabase
+* JavaScript
+* React
+* Yup
+* Formik
+* React Modal
+* React-Router
+* Redux
+* Tailwind CSS
+* Supabase
 	
 ## Setup
 To run this project, install it locally using npm:
