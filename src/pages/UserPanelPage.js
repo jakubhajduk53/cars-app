@@ -1,13 +1,13 @@
+import { RouterLink } from "../components/";
 import React, { useState, useEffect } from "react";
-import { createSelector } from "@reduxjs/toolkit";
 import { useSelector, useDispatch } from "react-redux";
 import { supabase } from "../lib/supabaseClient";
 import { logOut } from "../store";
+import { createSelector } from "@reduxjs/toolkit";
 import { useNavigate, Outlet, useHref } from "react-router-dom";
-import RouterLink from "../components/RouterLink";
-import classNames from "classnames";
 import { AiOutlineLogout, AiOutlineIdcard } from "react-icons/ai";
 import { FiSettings } from "react-icons/fi";
+import classNames from "classnames";
 
 const checkUser = (state) => state.user.user;
 

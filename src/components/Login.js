@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import Button from "../components/Button";
-import { supabase } from "../lib/supabaseClient";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { supabase } from "../lib/supabaseClient";
 import { checkUser } from "../store";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required("Email is required"),

@@ -1,9 +1,9 @@
-import RouterLink from "../components/RouterLink";
-import classNames from "classnames";
-import { useHref, Outlet } from "react-router-dom";
+import { RouterLink } from "../components/";
 import { useState, useEffect } from "react";
+import { useHref, Outlet } from "react-router-dom";
 import { MdPassword, MdDataObject } from "react-icons/md";
 import { AiOutlineMail } from "react-icons/ai";
+import classNames from "classnames";
 
 function UserOptionsPage() {
   const panelClasses = classNames("text-base");

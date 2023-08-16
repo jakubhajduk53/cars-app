@@ -1,16 +1,14 @@
-import React from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import Button from "./Button";
+import React from "react";
 import { useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 const checkUser = (state) => state.user.user;
-
 const selectUser = createSelector([checkUser], (user) => user);
 
 const checkCar = (state) => state.cars.selectedCar;
-
 const selectCar = createSelector([checkCar], (selectedCar) => selectedCar);
 
 const Contact = (props) => {

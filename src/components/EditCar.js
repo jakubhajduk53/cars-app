@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
-import { supabase } from "../lib/supabaseClient";
-import { nanoid } from "nanoid";
 import Button from "../components/Button";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { supabase } from "../lib/supabaseClient";
+import { createSelector } from "@reduxjs/toolkit";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { createSelector } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
+import { nanoid } from "nanoid";
 
 const checkCar = (state) => state.cars.selectedCar;
-
 const selectCar = createSelector([checkCar], (selectedCar) => selectedCar);
 
 function EditCar({ closeModal }) {

@@ -1,11 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
-import { createSelector } from "@reduxjs/toolkit";
-import { fetchAmountOfYourCars } from "../store";
+import { YourCarsList, EditCar } from "../components/";
 import { useEffect, useState } from "react";
-import YourCarsList from "../components/YourCarsList";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAmountOfYourCars } from "../store";
+import { createSelector } from "@reduxjs/toolkit";
 import ReactModal from "react-modal";
 import { AiOutlineClose } from "react-icons/ai";
-import EditCar from "../components/EditCar";
 
 const getCarsAmount = (state) => state.cars.carsAmount;
 

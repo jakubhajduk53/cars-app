@@ -1,12 +1,10 @@
-import CarsList from "../components/CarsList";
-import SearchBar from "../components/SearchBar";
-import { useDispatch, useSelector } from "react-redux";
+import { CarsList, SearchBar, Contact } from "../components/";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createSelector } from "@reduxjs/toolkit";
 import { fetchAmountOfCars } from "../store/slices/carsSlice";
 import ReactModal from "react-modal";
-import Contact from "../components/Contact";
 import { AiOutlineClose } from "react-icons/ai";
-import { createSelector } from "@reduxjs/toolkit";
 
 const getCarsAmount = (state) => state.cars.carsAmount;
 

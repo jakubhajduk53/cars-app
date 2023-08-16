@@ -1,5 +1,5 @@
-import { useState } from "react";
 import Button from "./Button";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchAmountOfCars } from "../store";
 import { changeSearchTerm } from "../store";

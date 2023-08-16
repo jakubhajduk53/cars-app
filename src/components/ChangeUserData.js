@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import Button from "./Button";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 const checkUser = (state) => state.user.user;
-
 const selectUser = createSelector([checkUser], (user) => user);
 
 const ChangeUserData = () => {

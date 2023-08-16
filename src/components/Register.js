@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import Button from "../components/Button";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { supabase } from "../lib/supabaseClient";
 import { checkUser } from "../store/slices/userSlice";
-import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string()

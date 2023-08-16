@@ -1,16 +1,14 @@
+import Button from "./Button";
+import CarsListItem from "./CarsListItem";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCars, changePage } from "../store";
-import Button from "./Button";
-import CarsListItem from "./CarsListItem";
 import { createSelector } from "@reduxjs/toolkit";
 
 const getCars = (state) => state.cars.carsList;
-
 const selectCars = createSelector([getCars], (carsList) => carsList);
 
 const getPageState = (state) => state.page;
-
 const selectPage = createSelector([getPageState], (page) => page);
 
 function CarsList(props) {
