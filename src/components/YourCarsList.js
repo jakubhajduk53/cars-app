@@ -73,7 +73,7 @@ function YourCarsList(props) {
         )}
       </div>
       {totalPages > 0 ? (
-        <div className="bottom-bar fixed left-0 bg-neutral-100 bottom-0 z-20 w-full bg-white flex justify-center items-center py-4 ">
+        <div className="bottom-bar fixed left-0 bottom-0 z-20 w-full bg-white flex justify-center items-center py-4 ">
           <Button
             value="<"
             onClick={goToPreviousPage}
