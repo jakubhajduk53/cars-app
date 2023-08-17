@@ -3,15 +3,8 @@ import React from "react";
 import { supabase } from "../lib/supabaseClient";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import classNames from "classnames";
-
-const validationSchema = Yup.object().shape({
-  password: Yup.string().required("Password is required"),
-  repeatPassword: Yup.string()
-    .oneOf([Yup.ref("password"), null], "Passwords must match")
-    .required("Repeat password is required"),
-});
+import { changePasswordValidationSchema } from "../data/validation";
 
 function ChangePassword() {
   const navigate = useNavigate();
@@ -37,7 +30,7 @@ function ChangePassword() {
     <div className="flex flex-col items-center">
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
+        validationSchema={changePasswordValidationSchema}
         onSubmit={handleSubmit}
       >
         <Form className="flex flex-col gap-1 w-80 p-8">

@@ -5,8 +5,8 @@ import { createSelector } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import classNames from "classnames";
+import { changeUserDataValidationSchema } from "../data/validation";
 
 const checkUser = (state) => state.user.user;
 const selectUser = createSelector([checkUser], (user) => user);
@@ -30,15 +30,6 @@ const ChangeUserData = () => {
     last_name: lastName,
     phone_number: phoneNumber,
   } = user_metadata || {};
-
-  const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required("First name is required"),
-    lastName: Yup.string().required("Last name is required"),
-    phoneNumber: Yup.string().matches(
-      /^\d{7,15}$/,
-      "Invalid phone number. Phone number should contain 7 to 15 digits"
-    ),
-  });
 
   useEffect(() => {
     setInitialValues({
@@ -68,7 +59,7 @@ const ChangeUserData = () => {
         enableReinitialize={true}
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        validationSchema={validationSchema}
+        validationSchema={changeUserDataValidationSchema}
       >
         {({ values }) => (
           <Form className="flex flex-col gap-1 w-80 p-8">

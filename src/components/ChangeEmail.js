@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
 import { supabase } from "../lib/supabaseClient";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import { changeEmailValidationSchema } from "../data/validation";
 
 const checkUser = (state) => state.user.user;
 const selectUser = createSelector([checkUser], (user) => user);
@@ -19,10 +19,6 @@ const ChangeEmail = () => {
   });
 
   const { email } = user;
-
-  const validationSchema = Yup.object().shape({
-    email: Yup.string().email("Invalid email").required("Email is required"),
-  });
 
   useEffect(() => {
     setInitialValues({
@@ -44,7 +40,7 @@ const ChangeEmail = () => {
         enableReinitialize={true}
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        validationSchema={validationSchema}
+        validationSchema={changeEmailValidationSchema}
       >
         {({ values }) => (
           <Form className="flex flex-col gap-1 w-80 p-8">

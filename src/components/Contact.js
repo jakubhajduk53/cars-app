@@ -3,8 +3,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import classNames from "classnames";
+import { contactValidationSchema } from "../data/validation";
 
 const checkUser = (state) => state.user.user;
 const selectUser = createSelector([checkUser], (user) => user);
@@ -35,15 +35,6 @@ const Contact = (props) => {
     comment: `Hi! I just want to ask about ${car.name} availability`,
     inquiryType: "checkAvailability",
   };
-
-  const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required("First name is required"),
-    lastName: Yup.string().required("Last name is required"),
-    phoneNumber: Yup.string().required("Phone number is required"),
-    email: Yup.string().email("Invalid email").required("Email is required"),
-    inquiryType: Yup.string().required("Inquiry type is required"),
-    comment: Yup.string().required("Comment is required"),
-  });
 
   const handleInquiryChange = (event, setFieldValue) => {
     const { value } = event.target;
@@ -77,7 +68,7 @@ const Contact = (props) => {
     <Formik
       initialValues={initialValues}
       onSubmit={handleSubmit}
-      validationSchema={validationSchema}
+      validationSchema={contactValidationSchema}
     >
       {({ values, setFieldValue }) => (
         <Form className="flex flex-col gap-1 w-80">

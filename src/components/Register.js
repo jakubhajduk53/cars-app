@@ -5,31 +5,7 @@ import { supabase } from "../lib/supabaseClient";
 import { checkUser } from "../store/slices/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-
-const validationSchema = Yup.object().shape({
-  firstName: Yup.string()
-    .required("First name is required")
-    .min(2, "First name cannot be shorter than 2 letters")
-    .max(20, "First name cannot be longer than 20 letters")
-    .matches(/^[\p{L}\d\s-]+$/u, "Incorrect value"),
-  lastName: Yup.string()
-    .required("Last name is required")
-    .min(2, "Last name cannot be shorter than 2 letters")
-    .max(20, "Last name cannot be longer than 20 letters")
-    .matches(/^[\p{L}\d\s-]+$/u, "Incorrect value"),
-  phoneNumber: Yup.string().matches(
-    /^\d{7,15}$/,
-    "Invalid phone number. Phone number should contain 7 to 15 digits"
-  ),
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string()
-    .required("Password is required")
-    .min(6, "Password should be longer than 5 letters"),
-  repeatPassword: Yup.string()
-    .oneOf([Yup.ref("password"), null], "Passwords must match")
-    .required("Repeat password is required"),
-});
+import { registerValidationSchema } from "../data/validation";
 
 function Register() {
   const dispatch = useDispatch();
@@ -73,7 +49,7 @@ function Register() {
     <div className="flex flex-col items-center w-80">
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
+        validationSchema={registerValidationSchema}
         onSubmit={handleSubmit}
       >
         <Form className="bg-white p-8 rounded w-full">

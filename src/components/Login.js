@@ -6,12 +6,7 @@ import { checkUser } from "../store";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-
-const validationSchema = Yup.object().shape({
-  email: Yup.string().required("Email is required"),
-  password: Yup.string().required("Password is required"),
-});
+import { loginValidationSchema } from "../data/validation";
 
 function Login() {
   const dispatch = useDispatch();
@@ -44,7 +39,7 @@ function Login() {
     <div className="flex flex-col items-center w-80">
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
+        validationSchema={loginValidationSchema}
         onSubmit={handleSubmit}
       >
         <Form className="bg-white p-8 rounded w-full">
