@@ -1,26 +1,14 @@
 import { CarsList, SearchBar, Contact } from "../components/";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { createSelector } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 import { fetchAmountOfCars } from "../store/slices/carsSlice";
 import ReactModal from "react-modal";
 import { AiOutlineClose } from "react-icons/ai";
-
-const getCarsAmount = (state) => state.cars.carsAmount;
-
-const selectCarsAmount = createSelector(
-  [getCarsAmount],
-  (carsAmount) => carsAmount
-);
 
 function CarsForSalePage() {
   const dispatch = useDispatch();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  const [isLoading, setIsLoading] = useState(true);
-
-  const amount = useSelector(selectCarsAmount);
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -33,12 +21,6 @@ function CarsForSalePage() {
   useEffect(() => {
     dispatch(fetchAmountOfCars({ term: "" }));
   }, []);
-
-  useEffect(() => {
-    if (amount >= 0) {
-      setIsLoading(false);
-    }
-  }, [amount]);
 
   return (
     <div className="w-full">
@@ -57,9 +39,8 @@ function CarsForSalePage() {
           <Contact closeModal={closeModal} />
         </div>
       </ReactModal>
-
       <SearchBar />
-      {!isLoading ? <CarsList openModal={openModal} /> : <p>Loading...</p>}
+      <CarsList openModal={openModal} />
     </div>
   );
 }
