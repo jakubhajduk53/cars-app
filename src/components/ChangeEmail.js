@@ -47,21 +47,22 @@ const ChangeEmail = () => {
         validationSchema={validationSchema}
       >
         {({ values }) => (
-          <Form className="max-w-sm mx-auto w-72 p-8 text-lg">
-            <label className="block mb-2">
-              <span className="text-gray-700">Email:</span>
-              <Field
-                type="email"
-                name="email"
-                className="w-full px-3 py-2 border rounded"
-              />
-              <ErrorMessage
-                name="email"
-                component="div"
-                className="text-red-500"
-              />
+          <Form className="flex flex-col gap-1 w-80 p-8">
+            <label htmlFor="email" className="text-lg text-gray-700">
+              Email:
             </label>
-            <Button type="submit" value="Update" className="mt-1 w-full" />
+            <Field
+              type="email"
+              id="email"
+              name="email"
+              className="w-full px-3 py-2 border rounded"
+            />
+            <ErrorMessage
+              name="email"
+              component="div"
+              className="text-red-500"
+            />
+            <Button type="submit" value="Update" className="w-full mt-1" />
           </Form>
         )}
       </Formik>

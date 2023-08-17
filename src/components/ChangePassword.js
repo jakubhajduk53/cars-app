@@ -4,6 +4,7 @@ import { supabase } from "../lib/supabaseClient";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import classNames from "classnames";
 
 const validationSchema = Yup.object().shape({
   password: Yup.string().required("Password is required"),
@@ -14,6 +15,8 @@ const validationSchema = Yup.object().shape({
 
 function ChangePassword() {
   const navigate = useNavigate();
+
+  const fieldClasses = classNames("w-full px-3 py-2 border rounded");
 
   const initialValues = {
     password: "",
@@ -37,46 +40,45 @@ function ChangePassword() {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form className="bg-white p-8 rounded w-80 text-lg">
-          <div className="mb-4">
-            <div className="block mb-2">
-              <span className="text-gray-700">New Password:</span>
-              <Field
-                type="password"
-                id="password"
-                name="password"
-                className="w-full px-3 py-2 border rounded"
-                autoComplete="on"
-              />
-              <ErrorMessage
-                name="password"
-                component="div"
-                className="text-red-500"
-              />
-            </div>
-          </div>
-          <div className="mb-4">
-            <div className="block mb-2">
-              <span className="text-gray-700">New Password:</span>
-              <Field
-                type="password"
-                id="repeatPassword"
-                name="repeatPassword"
-                className="w-full px-3 py-2 border rounded"
-                autoComplete="on"
-              />
-              <ErrorMessage
-                name="repeatPassword"
-                component="div"
-                className="text-red-500"
-              />
-            </div>
-          </div>
-
+        <Form className="flex flex-col gap-1 w-80 p-8">
+          <>
+            <label htmlFor="password" className="text-lg text-gray-700">
+              New Password:
+            </label>
+            <Field
+              type="password"
+              id="password"
+              name="password"
+              className={fieldClasses}
+              autoComplete="on"
+            />
+            <ErrorMessage
+              name="password"
+              component="div"
+              className="text-red-500"
+            />
+          </>
+          <>
+            <label htmlFor="repeatPassword" className="text-lg text-gray-700">
+              Repeat New Password:
+            </label>
+            <Field
+              type="password"
+              id="repeatPassword"
+              name="repeatPassword"
+              className={fieldClasses}
+              autoComplete="on"
+            />
+            <ErrorMessage
+              name="repeatPassword"
+              component="div"
+              className="text-red-500"
+            />
+          </>
           <Button
             type="submit"
             value="Change Password"
-            className="mt-1 w-full"
+            className="w-full mt-1"
           />
         </Form>
       </Formik>

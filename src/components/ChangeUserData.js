@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import classNames from "classnames";
 
 const checkUser = (state) => state.user.user;
 const selectUser = createSelector([checkUser], (user) => user);
@@ -14,6 +15,8 @@ const ChangeUserData = () => {
   const user = useSelector(selectUser);
 
   const navigate = useNavigate();
+
+  const fieldClasses = classNames("w-full px-3 py-2 border rounded");
 
   const [initialValues, setInitialValues] = useState({
     firstName: "",
@@ -68,47 +71,50 @@ const ChangeUserData = () => {
         validationSchema={validationSchema}
       >
         {({ values }) => (
-          <Form className="max-w-sm mx-auto w-72 p-8 text-lg">
-            <label className="block mb-2">
-              <span className="text-gray-700">First Name:</span>
-              <Field
-                type="text"
-                name="firstName"
-                className="w-full px-3 py-2 border rounded"
-              />
-              <ErrorMessage
-                name="firstName"
-                component="div"
-                className="text-red-500"
-              />
+          <Form className="flex flex-col gap-1 w-80 p-8">
+            <label htmlFor="firstName" className="text-lg text-gray-700">
+              First Name:
             </label>
-            <label className="block mb-2">
-              <span className="text-gray-700">Last Name:</span>
-              <Field
-                type="text"
-                name="lastName"
-                className="w-full px-3 py-2 border rounded"
-              />
-              <ErrorMessage
-                name="lastName"
-                component="div"
-                className="text-red-500"
-              />
+            <Field
+              type="text"
+              id="firstName"
+              name="firstName"
+              className={fieldClasses}
+            />
+            <ErrorMessage
+              name="firstName"
+              component="div"
+              className="text-red-500"
+            />
+            <label htmlFor="lastName" className="text-lg text-gray-700">
+              Last Name:
             </label>
-            <label className="block mb-2">
-              <span className="text-gray-700">Phone Number:</span>
-              <Field
-                type="text"
-                name="phoneNumber"
-                className="w-full px-3 py-2 border rounded"
-              />
-              <ErrorMessage
-                name="phoneNumber"
-                component="div"
-                className="text-red-500"
-              />
+            <Field
+              type="text"
+              id="lastName"
+              name="lastName"
+              className={fieldClasses}
+            />
+            <ErrorMessage
+              name="lastName"
+              component="div"
+              className="text-red-500"
+            />
+            <label htmlFor="phoneNumber" className="text-lg text-gray-700">
+              Phone Number:
             </label>
-            <Button type="submit" value="Update" className="mt-1 w-full" />
+            <Field
+              type="text"
+              id="phoneNumber"
+              name="phoneNumber"
+              className={fieldClasses}
+            />
+            <ErrorMessage
+              name="phoneNumber"
+              component="div"
+              className="text-red-500"
+            />
+            <Button type="submit" value="Update" className="w-full mt-1" />
           </Form>
         )}
       </Formik>
