@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import classNames from "classnames";
 
 const checkUser = (state) => state.user.user;
 const selectUser = createSelector([checkUser], (user) => user);
@@ -15,6 +16,8 @@ const Contact = (props) => {
   const car = useSelector(selectCar);
 
   const user = useSelector(selectUser);
+
+  const fieldClasses = classNames("w-full border border-gray-300 rounded ");
 
   const {
     first_name: firstName,
@@ -77,91 +80,93 @@ const Contact = (props) => {
       validationSchema={validationSchema}
     >
       {({ values, setFieldValue }) => (
-        <Form className="max-w-sm mx-auto w-72 text-lg">
-          <label className="block mb-2">
-            <span className="text-gray-700">First Name:</span>
-            <Field
-              type="text"
-              name="firstName"
-              className="form-input mt-1 block w-full border border-gray-300 rounded"
-            />
-            <ErrorMessage
-              name="firstName"
-              component="div"
-              className="text-red-500"
-            />
+        <Form className="flex flex-col gap-1 w-80">
+          <label htmlFor="firstName" className="text-lg text-gray-700">
+            First Name:
           </label>
-          <label className="block mb-2">
-            <span className="text-gray-700">Last Name:</span>
-            <Field
-              type="text"
-              name="lastName"
-              className="form-input mt-1 block w-full border border-gray-300 rounded"
-            />
-            <ErrorMessage
-              name="lastName"
-              component="div"
-              className="text-red-500"
-            />
+          <Field
+            type="text"
+            id="firstName"
+            name="firstName"
+            className={fieldClasses}
+          />
+          <ErrorMessage
+            name="firstName"
+            component="div"
+            className="text-red-500"
+          />
+          <label htmlFor="lastName" className="text-lg text-gray-700">
+            Last Name:
           </label>
-          <label className="block mb-2">
-            <span className="text-gray-700">Phone Number:</span>
-            <Field
-              type="text"
-              name="phoneNumber"
-              className="form-input mt-1 block w-full border border-gray-300 rounded"
-            />
-            <ErrorMessage
-              name="phoneNumber"
-              component="div"
-              className="text-red-500"
-            />
+          <Field
+            type="text"
+            id="lastName"
+            name="lastName"
+            className={fieldClasses}
+          />
+          <ErrorMessage
+            name="lastName"
+            component="div"
+            className="text-red-500"
+          />
+          <label htmlFor="phoneNumber" className="text-lg text-gray-700">
+            Phone Number:
           </label>
-          <label className="block mb-2">
-            <span className="text-gray-700">Email:</span>
-            <Field
-              type="email"
-              name="email"
-              className="form-input mt-1 block w-full border border-gray-300 rounded"
-            />
-            <ErrorMessage
-              name="email"
-              component="div"
-              className="text-red-500"
-            />
+          <Field
+            type="text"
+            id="phoneNumber"
+            name="phoneNumber"
+            className={fieldClasses}
+          />
+          <ErrorMessage
+            name="phoneNumber"
+            component="div"
+            className="text-red-500"
+          />
+          <label htmlFor="email" className="text-lg text-gray-700">
+            Email:
           </label>
-          <label className="block mb-2">
-            <span className="text-gray-700">Inquiry Type:</span>
-            <Field
-              as="select"
-              name="inquiryType"
-              className="form-select mt-1 block w-full border border-gray-300 rounded"
-              onChange={(event) => handleInquiryChange(event, setFieldValue)}
-            >
-              <option value="checkAvailability">Check Availability</option>
-              <option value="getPriceQuote">Get a Price Quote</option>
-              <option value="askQuestion">Ask a Question</option>
-            </Field>
-            <ErrorMessage
-              name="inquiryType"
-              component="div"
-              className="text-red-500"
-            />
+          <Field
+            type="email"
+            id="email"
+            name="email"
+            className={fieldClasses}
+          />
+          <ErrorMessage name="email" component="div" className="text-red-500" />
+          <label htmlFor="inquiryType" className="text-lg text-gray-700">
+            Inquiry Type:
           </label>
-          <label className="block mb-2">
-            <span className="text-gray-700">Comment:</span>
-            <Field
-              as="textarea"
-              name="comment"
-              className="form-textarea mt-1 block w-full border border-gray-300 rounded h-24"
-            />
-            <ErrorMessage
-              name="comment"
-              component="div"
-              className="text-red-500"
-            />
+          <Field
+            as="select"
+            id="inquiryType"
+            name="inquiryType"
+            className={fieldClasses}
+            onChange={(event) => handleInquiryChange(event, setFieldValue)}
+          >
+            <option value="checkAvailability">Check Availability</option>
+            <option value="getPriceQuote">Get a Price Quote</option>
+            <option value="askQuestion">Ask a Question</option>
+          </Field>
+          <ErrorMessage
+            name="inquiryType"
+            component="div"
+            className="text-red-500"
+          />
+          <label htmlFor="comment" className="text-lg text-gray-700">
+            Comment:
           </label>
-          <Button type="submit" value="Submit" className="mt-1 block w-full" />
+          <Field
+            as="textarea"
+            id="comment"
+            name="comment"
+            className={fieldClasses + "h-24 overflow-y-scroll"}
+          />
+          <ErrorMessage
+            name="comment"
+            component="div"
+            className="text-red-500"
+          />
+          <Button type="submit" value="Submit" className="mt-1 w-full" />
         </Form>
       )}
     </Formik>
