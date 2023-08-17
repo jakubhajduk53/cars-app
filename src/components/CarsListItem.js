@@ -9,6 +9,14 @@ function CarsListItem(props) {
     props.className
   );
 
+  const carDescriptionsClasses = classNames(
+    "text-gray-600 text-sm sm:text-lg md:text-xl italic "
+  );
+
+  const carListItemButtonClasses = classNames(
+    "w-16 sm:w-24 md:w-40 md:h-12 shadow-xl text-xs md:text-base "
+  );
+
   const dispatch = useDispatch();
 
   const car = props.car;
@@ -34,22 +42,22 @@ function CarsListItem(props) {
         <p className="text-md font-semibold sm:text-xl md:text-3xl break-words truncate">
           {car.name}
         </p>
-        <p className="text-gray-600 text-sm sm:text-lg md:text-xl italic">
-          Cost: ${car.price}
-        </p>
-        <p className="text-gray-600 text-sm sm:text-lg md:text-xl italic">
+        <p className={carDescriptionsClasses}>Cost: ${car.price}</p>
+        <p className={carDescriptionsClasses}>
           Year of production: {car.year_of_production}
         </p>
-        <p className="text-gray-600 text-sm sm:text-lg md:text-xl italic break-words truncate">
+        <p className={carDescriptionsClasses + "break-words truncate"}>
           Location: {car.location}
         </p>
       </div>
-      <div className="grid col-span-2">
+      <div className="grid col-span-2 place-content-end gap-5">
         {props.yourCar ? (
-          <div className="justify-self-end self-end">
+          <>
             <Button
               value="Edit Offer"
-              className="bg-blue-400 hover:bg-blue-500 shadow-xl mb-5 text-xs w-16 sm:w-24 md:text-base md:w-40 md:h-12"
+              className={
+                carListItemButtonClasses + " bg-blue-400 hover:bg-blue-500"
+              }
               onClick={() => {
                 dispatch(selectCar(car));
                 props.openModal();
@@ -57,16 +65,21 @@ function CarsListItem(props) {
             />
             <Button
               value="Delete Offer"
-              className="bg-red-500 hover:bg-red-600 shadow-xl text-xs w-16 sm:w-24 md:text-base  md:w-40 md:h-12"
+              className={
+                carListItemButtonClasses + " bg-red-500 hover:bg-red-600"
+              }
               onClick={() => {
                 dispatch(deleteYourCar({ carId: car.id }));
               }}
             />
-          </div>
+          </>
         ) : (
           <Button
             value="Check Availability"
-            className="justify-self-end self-end shadow-xl text-xs w-16 sm:w-24 md:text-base md:w-40 md:h-12 break-words"
+            className={
+              carListItemButtonClasses +
+              "justify-self-end place-self-end break-words"
+            }
             onClick={() => {
               dispatch(selectCar(car));
               props.openModal();

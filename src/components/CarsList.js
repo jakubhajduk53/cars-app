@@ -47,7 +47,7 @@ function CarsList(props) {
   };
 
   return (
-    <div>
+    <>
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 m-8">
         {cars.length > 0 ? (
           cars.map((car) => (
@@ -60,7 +60,7 @@ function CarsList(props) {
         )}
       </div>
       {totalPages > 0 ? (
-        <div className="bottom-bar fixed left-0 bg-neutral-100 bottom-0 z-20 w-full bg-white flex justify-center items-center py-4 ">
+        <div className="flex justify-center items-center fixed w-full bottom-0 z-20 py-4 bg-white">
           <Button
             value="<"
             onClick={goToPreviousPage}
@@ -76,7 +76,7 @@ function CarsList(props) {
           />
         </div>
       ) : null}
-    </div>
+    </>
   );
 }
 
