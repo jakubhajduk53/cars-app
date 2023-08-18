@@ -1,5 +1,4 @@
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 import SellYourCarPage from "./pages/SellYourCarPage";
 import CarsForSalePage from "./pages/CarsForSalePage";
 import HomePage from "./pages/HomePage";
@@ -51,7 +50,6 @@ function App() {
           </Route>
         </Routes>
       </div>
-      <Footer />
     </div>
   );
 }
