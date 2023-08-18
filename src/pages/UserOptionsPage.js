@@ -4,6 +4,7 @@ import { useHref, Outlet } from "react-router-dom";
 import { MdPassword, MdDataObject } from "react-icons/md";
 import { AiOutlineMail } from "react-icons/ai";
 import classNames from "classnames";
+import { userOptionsRoutes } from "../data/routes";
 
 function UserOptionsPage() {
   const panelClasses = classNames("text-base");
@@ -12,14 +13,8 @@ function UserOptionsPage() {
 
   const [activeLink, setActiveLink] = useState(href);
 
-  const routes = {
-    password: ["/menu/panel/options/change-password"],
-    userdata: ["/menu/panel/options/change-userdata"],
-    email: ["/menu/panel/options/change-email"],
-  };
-
   const isActive = (routeName) => {
-    return routes[routeName].includes(activeLink);
+    return userOptionsRoutes[routeName].includes(activeLink);
   };
 
   useEffect(() => {

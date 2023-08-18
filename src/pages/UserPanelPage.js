@@ -8,6 +8,7 @@ import { useNavigate, Outlet, useHref } from "react-router-dom";
 import { AiOutlineLogout, AiOutlineIdcard } from "react-icons/ai";
 import { FiSettings } from "react-icons/fi";
 import classNames from "classnames";
+import { userPanelRoutes } from "../data/routes";
 
 const checkUser = (state) => state.user.user;
 
@@ -22,18 +23,8 @@ function UserPanelPage() {
 
   const [activeLink, setActiveLink] = useState(href);
 
-  const routes = {
-    options: [
-      "/menu/panel/options",
-      "/menu/panel/options/change-password",
-      "/menu/panel/options/change-userdata",
-      "/menu/panel/options/change-email",
-    ],
-    yourCars: ["/menu/panel/your-cars"],
-  };
-
   const isActive = (routeName) => {
-    return routes[routeName].includes(activeLink);
+    return userPanelRoutes[routeName].includes(activeLink);
   };
 
   useEffect(() => {
