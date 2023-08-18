@@ -10,6 +10,7 @@ function ChangePassword() {
   const navigate = useNavigate();
 
   const fieldClasses = classNames("w-full px-3 py-2 border rounded");
+  const labelClasses = classNames("text-lg text-gray-700");
 
   const initialValues = {
     password: "",
@@ -35,7 +36,7 @@ function ChangePassword() {
       >
         <Form className="flex flex-col gap-1 w-80 p-8">
           <>
-            <label htmlFor="password" className="text-lg text-gray-700">
+            <label htmlFor="password" className={labelClasses}>
               New Password:
             </label>
             <Field
@@ -52,7 +53,7 @@ function ChangePassword() {
             />
           </>
           <>
-            <label htmlFor="repeatPassword" className="text-lg text-gray-700">
+            <label htmlFor="repeatPassword" className={labelClasses}>
               Repeat New Password:
             </label>
             <Field

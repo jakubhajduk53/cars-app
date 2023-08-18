@@ -18,6 +18,7 @@ const Contact = (props) => {
   const user = useSelector(selectUser);
 
   const fieldClasses = classNames("w-full px-3 py-2 border rounded");
+  const labelClasses = classNames("text-lg text-gray-700");
 
   const {
     first_name: firstName,
@@ -72,7 +73,7 @@ const Contact = (props) => {
     >
       {({ values, setFieldValue }) => (
         <Form className="flex flex-col gap-1 w-80">
-          <label htmlFor="firstName" className="text-lg ">
+          <label htmlFor="firstName" className={labelClasses}>
             First Name:
           </label>
           <Field
@@ -86,7 +87,7 @@ const Contact = (props) => {
             component="div"
             className="text-red-500"
           />
-          <label htmlFor="lastName" className="text-lg ">
+          <label htmlFor="lastName" className={labelClasses}>
             Last Name:
           </label>
           <Field
@@ -100,7 +101,7 @@ const Contact = (props) => {
             component="div"
             className="text-red-500"
           />
-          <label htmlFor="phoneNumber" className="text-lg ">
+          <label htmlFor="phoneNumber" className={labelClasses}>
             Phone Number:
           </label>
           <Field
@@ -114,7 +115,7 @@ const Contact = (props) => {
             component="div"
             className="text-red-500"
           />
-          <label htmlFor="email" className="text-lg ">
+          <label htmlFor="email" className={labelClasses}>
             Email:
           </label>
           <Field
@@ -124,7 +125,7 @@ const Contact = (props) => {
             className={fieldClasses}
           />
           <ErrorMessage name="email" component="div" className="text-red-500" />
-          <label htmlFor="inquiryType" className="text-lg ">
+          <label htmlFor="inquiryType" className={labelClasses}>
             Inquiry Type:
           </label>
           <Field
@@ -143,7 +144,7 @@ const Contact = (props) => {
             component="div"
             className="text-red-500"
           />
-          <label htmlFor="comment" className="text-lg ">
+          <label htmlFor="comment" className={labelClasses}>
             Comment:
           </label>
           <Field

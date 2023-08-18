@@ -17,6 +17,7 @@ const ChangeUserData = () => {
   const navigate = useNavigate();
 
   const fieldClasses = classNames("w-full px-3 py-2 border rounded");
+  const labelClasses = classNames("text-lg text-gray-700");
 
   const [initialValues, setInitialValues] = useState({
     firstName: "",
@@ -63,7 +64,7 @@ const ChangeUserData = () => {
       >
         {({ values }) => (
           <Form className="flex flex-col gap-1 w-80 p-8">
-            <label htmlFor="firstName" className="text-lg text-gray-700">
+            <label htmlFor="firstName" className={labelClasses}>
               First Name:
             </label>
             <Field
@@ -77,7 +78,7 @@ const ChangeUserData = () => {
               component="div"
               className="text-red-500"
             />
-            <label htmlFor="lastName" className="text-lg text-gray-700">
+            <label htmlFor="lastName" className={labelClasses}>
               Last Name:
             </label>
             <Field
@@ -91,7 +92,7 @@ const ChangeUserData = () => {
               component="div"
               className="text-red-500"
             />
-            <label htmlFor="phoneNumber" className="text-lg text-gray-700">
+            <label htmlFor="phoneNumber" className={labelClasses}>
               Phone Number:
             </label>
             <Field
