@@ -6,24 +6,14 @@ import { createSelector } from "@reduxjs/toolkit";
 import ReactModal from "react-modal";
 import { AiOutlineClose } from "react-icons/ai";
 
-const getCarsAmount = (state) => state.cars.carsAmount;
-
-const selectCarsAmount = createSelector(
-  [getCarsAmount],
-  (carsAmount) => carsAmount
-);
-
 const checkUser = (state) => state.user.user;
 
 const selectUser = createSelector([checkUser], (user) => user);
 
 function YourCarsPage() {
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(true);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  const amount = useSelector(selectCarsAmount);
 
   const user = useSelector(selectUser);
 
@@ -34,12 +24,6 @@ function YourCarsPage() {
       dispatch(fetchAmountOfYourCars({ userId }));
     }
   }, [user]);
-
-  useEffect(() => {
-    if (amount >= 0) {
-      setIsLoading(false);
-    }
-  }, [amount]);
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -54,8 +38,8 @@ function YourCarsPage() {
       <ReactModal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        className="z-20 shadow-lg bg-white p-5 max-h-screen overflow-y-auto rounded-lg absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        overlayClassName="z-20 fixed inset-0 bg-black bg-opacity-50"
+        className="absolute max-h-screen left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 p-5 z-20 bg-white overflow-y-auto rounded-lg shadow-lg "
+        overlayClassName="fixed inset-0 bg-black bg-opacity-50 z-20 "
         ariaHideApp={false}
       >
         <div className="flex relative py-12">
@@ -66,11 +50,7 @@ function YourCarsPage() {
           <EditCar closeModal={closeModal} />
         </div>
       </ReactModal>
-      {!isLoading ? (
-        <YourCarsList openModal={openModal} closeModal={closeModal} />
-      ) : (
-        <p>Loading...</p>
-      )}
+      <YourCarsList openModal={openModal} closeModal={closeModal} />
     </div>
   );
 }

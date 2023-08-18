@@ -31,7 +31,7 @@ function UserPanelPage() {
     setActiveLink(href);
   }, [href]);
 
-  const panelClasses = classNames("text-base");
+  const panelClasses = classNames("text-base ");
 
   const user = useSelector(selectUser);
 
@@ -69,7 +69,7 @@ function UserPanelPage() {
         <RouterLink
           handleClick={handleSignOut}
           name="Sign Out"
-          className={classNames(panelClasses, "hover:text-red-500")}
+          className={classNames(panelClasses, " hover:text-red-500")}
           icon={AiOutlineLogout}
         />
       </div>
