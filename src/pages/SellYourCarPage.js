@@ -158,7 +158,9 @@ function SellYourCarPage() {
                 {errors.image_url && touched.image_url && (
                   <div className="text-red-500">{errors.image_url}</div>
                 )}
-                {imagePreview && <img src={imagePreview} alt="Preview" />}
+                {imagePreview && (
+                  <img src={imagePreview} alt="Preview" className="w-80 h-80" />
+                )}
 
                 <Button type="submit" value="Confirm" className="w-full mt-1" />
               </Form>
