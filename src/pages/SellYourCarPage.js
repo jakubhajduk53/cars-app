@@ -8,40 +8,35 @@ import { Link, useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { nanoid } from "nanoid";
 import { sellYourCarValidationSchema } from "../data/validation";
+import classNames from "classnames";
+
+const CDNURL = process.env.REACT_APP_SUPABASE_CDN_URL;
 
 const checkIsLoggedIn = (state) => state.user.isLoggedIn;
-
 const selectIsLoggedIn = createSelector(
   [checkIsLoggedIn],
   (isLoggedIn) => isLoggedIn
 );
 
 const checkUser = (state) => state.user.user;
-
 const selectUser = createSelector([checkUser], (user) => user);
 
 function SellYourCarPage() {
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
+  const fieldClasses = classNames("w-full px-3 py-2 border rounded");
+
   const isLoggedIn = useSelector(selectIsLoggedIn);
-
   const [imagePreview, setImagePreview] = useState(null);
-
-  const CDNURL = process.env.REACT_APP_SUPABASE_CDN_URL;
-
   const user = useSelector(selectUser);
-
   const { id: userId } = user || {};
 
   async function handleSubmit(values, actions) {
     const { name, year_of_production, price, location, image_url } = values;
-
     const id = nanoid();
 
     await supabase.storage.from("cars-list").upload(id, image_url);
-
     const { data, error } = await supabase
       .from("cars")
       .insert([
@@ -61,17 +56,16 @@ function SellYourCarPage() {
     }
 
     setImagePreview(null);
-
     actions.resetForm();
 
     navigate("/menu/panel/your-cars");
   }
 
   return (
-    <div className="flex w-full justify-center py-5">
+    <div className="flex w-full justify-center mt-5">
       {isLoggedIn ? (
         <div>
-          <h2 className="text-lg font-bold mb-4 text-center">Sell your car</h2>
+          <h2 className="text-4xl text-center mb-2">Sell your car</h2>
           <Formik
             initialValues={{
               name: "",
@@ -86,72 +80,68 @@ function SellYourCarPage() {
             validationSchema={sellYourCarValidationSchema}
           >
             {({ setFieldValue, errors, touched }) => (
-              <Form className="flex flex-col px-4 py-2 w-full max-w-md">
-                <label htmlFor="name" className="mb-2 mt-4">
+              <Form className="flex flex-col gap-1 w-full">
+                <label htmlFor="name" className="text-lg">
                   Car name:
                 </label>
                 <Field
                   type="text"
                   id="name"
                   name="name"
-                  className="p-2 border border-gray-300 rounded"
+                  className={fieldClasses}
                   placeholder="Car name"
                 />
                 <ErrorMessage
                   name="name"
                   component="div"
-                  className="error mb-4 text-red-500"
+                  className="text-red-500"
                 />
-
-                <label htmlFor="year" className="mb-2 mt-4">
+                <label htmlFor="year" className="text-lg">
                   Year of production:
                 </label>
                 <Field
                   type="number"
                   id="year"
                   name="year_of_production"
-                  className="p-2 border border-gray-300 rounded"
+                  className={fieldClasses}
                   placeholder="Year of production"
                 />
                 <ErrorMessage
                   name="year_of_production"
                   component="div"
-                  className="error mb-4 text-red-500"
+                  className="text-red-500"
                 />
-
-                <label htmlFor="price" className="mb-2 mt-4">
+                <label htmlFor="price" className="text-lg">
                   Price:
                 </label>
                 <Field
                   type="number"
                   id="price"
                   name="price"
-                  className="p-2 border border-gray-300 rounded"
+                  className={fieldClasses}
                   placeholder="Price"
                 />
                 <ErrorMessage
                   name="price"
                   component="div"
-                  className="error  mb-4 text-red-500"
+                  className="text-red-500"
                 />
-
-                <label htmlFor="location" className="mb-2 mt-4">
+                <label htmlFor="location" className="text-lg">
                   Location:
                 </label>
                 <Field
                   type="text"
                   id="location"
                   name="location"
-                  className="p-2 border border-gray-300 rounded"
+                  className={fieldClasses}
                   placeholder="Location"
                 />
                 <ErrorMessage
                   name="location"
                   component="div"
-                  className="error  mb-4 text-red-500"
+                  className="text-red-500"
                 />
-
-                <label htmlFor="image" className="mb-2 mt-4">
+                <label htmlFor="image" className="text-lg">
                   Image:
                 </label>
                 <input
@@ -166,15 +156,11 @@ function SellYourCarPage() {
                   }}
                 />
                 {errors.image_url && touched.image_url && (
-                  <div className="error mb-4 text-red-500">
-                    {errors.image_url}
-                  </div>
+                  <div className="text-red-500">{errors.image_url}</div>
                 )}
-                {imagePreview && (
-                  <img src={imagePreview} alt="Preview" className="mb-4" />
-                )}
+                {imagePreview && <img src={imagePreview} alt="Preview" />}
 
-                <Button type="submit" value="Confirm" className="w-full mt-4" />
+                <Button type="submit" value="Confirm" className="w-full mt-1" />
               </Form>
             )}
           </Formik>
