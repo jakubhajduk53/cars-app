@@ -6,7 +6,6 @@ import ChangePassword from "./ChangePassword";
 import ChangeUserData from "./ChangeUserData";
 import Contact from "./Contact";
 import EditCar from "./EditCar";
-import Footer from "./Footer";
 import Header from "./Header";
 import Login from "./Login";
 import Register from "./Register";
@@ -23,7 +22,6 @@ export {
   ChangeUserData,
   Contact,
   EditCar,
-  Footer,
   Header,
   Login,
   Register,
