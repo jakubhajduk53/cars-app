@@ -17,7 +17,7 @@ const Contact = (props) => {
 
   const user = useSelector(selectUser);
 
-  const fieldClasses = classNames("w-full border border-gray-300 rounded ");
+  const fieldClasses = classNames("w-full px-3 py-2 border rounded");
 
   const {
     first_name: firstName,
@@ -72,7 +72,7 @@ const Contact = (props) => {
     >
       {({ values, setFieldValue }) => (
         <Form className="flex flex-col gap-1 w-80">
-          <label htmlFor="firstName" className="text-lg text-gray-700">
+          <label htmlFor="firstName" className="text-lg ">
             First Name:
           </label>
           <Field
@@ -86,7 +86,7 @@ const Contact = (props) => {
             component="div"
             className="text-red-500"
           />
-          <label htmlFor="lastName" className="text-lg text-gray-700">
+          <label htmlFor="lastName" className="text-lg ">
             Last Name:
           </label>
           <Field
@@ -100,7 +100,7 @@ const Contact = (props) => {
             component="div"
             className="text-red-500"
           />
-          <label htmlFor="phoneNumber" className="text-lg text-gray-700">
+          <label htmlFor="phoneNumber" className="text-lg ">
             Phone Number:
           </label>
           <Field
@@ -114,7 +114,7 @@ const Contact = (props) => {
             component="div"
             className="text-red-500"
           />
-          <label htmlFor="email" className="text-lg text-gray-700">
+          <label htmlFor="email" className="text-lg ">
             Email:
           </label>
           <Field
@@ -124,7 +124,7 @@ const Contact = (props) => {
             className={fieldClasses}
           />
           <ErrorMessage name="email" component="div" className="text-red-500" />
-          <label htmlFor="inquiryType" className="text-lg text-gray-700">
+          <label htmlFor="inquiryType" className="text-lg ">
             Inquiry Type:
           </label>
           <Field
@@ -143,7 +143,7 @@ const Contact = (props) => {
             component="div"
             className="text-red-500"
           />
-          <label htmlFor="comment" className="text-lg text-gray-700">
+          <label htmlFor="comment" className="text-lg ">
             Comment:
           </label>
           <Field
