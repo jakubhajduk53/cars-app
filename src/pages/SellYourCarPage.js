@@ -6,8 +6,8 @@ import { addCar } from "../store";
 import { createSelector } from "@reduxjs/toolkit";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import { nanoid } from "nanoid";
+import { sellYourCarValidationSchema } from "../data/validation";
 
 const checkIsLoggedIn = (state) => state.user.isLoggedIn;
 
@@ -26,32 +26,6 @@ function SellYourCarPage() {
   const navigate = useNavigate();
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
-
-  const currentYear = new Date().getFullYear();
-
-  const validationSchema = Yup.object().shape({
-    name: Yup.string()
-      .required("Car name is required")
-      .matches(/^[\p{L}\d\s-]+$/u, "Incorrect value")
-      .min(6, "Name should contain more than 5 characters")
-      .max(25, "Name cannot be longer than 24 characters"),
-    year_of_production: Yup.number()
-      .required("Year of production is required")
-      .positive("Year of production must be a positive number")
-      .min(1901, "Year must be higher than 1900")
-      .max(currentYear, `Year cannot be higher than ${currentYear}`),
-    price: Yup.number()
-      .required("Price is required")
-      .positive("Price must be a positive number")
-      .max(100000000, "Price cannot be higher than 100mln $"),
-    location: Yup.string()
-      .required("Location is required")
-      .matches(/^[\p{L}\d\s-]+$/u, "Incorrect value")
-      .min(4, "Location should contain more than 3 characters")
-      .max(30, "Location cannot be longer than 30 characters"),
-
-    image_url: Yup.mixed().required("Image is required"),
-  });
 
   const [imagePreview, setImagePreview] = useState(null);
 
@@ -109,7 +83,7 @@ function SellYourCarPage() {
             onSubmit={(values, actions) => {
               handleSubmit(values, actions);
             }}
-            validationSchema={validationSchema}
+            validationSchema={sellYourCarValidationSchema}
           >
             {({ setFieldValue, errors, touched }) => (
               <Form className="flex flex-col px-4 py-2 w-full max-w-md">

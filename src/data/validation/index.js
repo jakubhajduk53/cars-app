@@ -83,3 +83,27 @@ export const registerValidationSchema = Yup.object().shape({
     .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required("Repeat password is required"),
 });
+
+export const sellYourCarValidationSchema = Yup.object().shape({
+  name: Yup.string()
+    .required("Car name is required")
+    .matches(/^[\p{L}\d\s-]+$/u, "Incorrect value")
+    .min(6, "Name should contain more than 5 characters")
+    .max(25, "Name cannot be longer than 24 characters"),
+  year_of_production: Yup.number()
+    .required("Year of production is required")
+    .positive("Year of production must be a positive number")
+    .min(1901, "Year must be higher than 1900")
+    .max(currentYear, `Year cannot be higher than ${currentYear}`),
+  price: Yup.number()
+    .required("Price is required")
+    .positive("Price must be a positive number")
+    .max(100000000, "Price cannot be higher than 100mln $"),
+  location: Yup.string()
+    .required("Location is required")
+    .matches(/^[\p{L}\d\s-]+$/u, "Incorrect value")
+    .min(4, "Location should contain more than 3 characters")
+    .max(30, "Location cannot be longer than 30 characters"),
+
+  image_url: Yup.mixed().required("Image is required"),
+});
