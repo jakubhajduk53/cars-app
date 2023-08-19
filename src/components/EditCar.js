@@ -6,11 +6,15 @@ import { createSelector } from "@reduxjs/toolkit";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { nanoid } from "nanoid";
 import { editCarValidationSchema } from "../data/validation";
+import classNames from "classnames";
 
 const checkCar = (state) => state.cars.selectedCar;
 const selectCar = createSelector([checkCar], (selectedCar) => selectedCar);
 
 function EditCar({ closeModal }) {
+  const fieldClasses = classNames("w-full px-3 py-2 border rounded");
+  const labelClasses = classNames("text-lg text-gray-700");
+
   const car = useSelector(selectCar);
 
   const [imagePreview, setImagePreview] = useState(null);
@@ -52,7 +56,7 @@ function EditCar({ closeModal }) {
   return (
     <div className="flex w-full justify-center py-5">
       <div>
-        <h2 className="text-lg font-bold mb-4 text-center">Edit your car</h2>
+        <h2 className="text-3xl text-center">Edit your car</h2>
         <Formik
           initialValues={{
             name: car.name || "",
@@ -67,15 +71,15 @@ function EditCar({ closeModal }) {
           validationSchema={editCarValidationSchema}
         >
           {({ setFieldValue, errors, touched }) => (
-            <Form className="flex flex-col px-4 py-2 w-full max-w-md">
-              <label htmlFor="name" className="mb-2 mt-4">
+            <Form className="flex flex-col gap-1 w-80 p-8">
+              <label htmlFor="name" className={labelClasses}>
                 Car name:
               </label>
               <Field
                 type="text"
                 id="name"
                 name="name"
-                className="p-2 border border-gray-300 rounded"
+                className={fieldClasses}
                 placeholder="Car name"
               />
               <ErrorMessage
@@ -84,14 +88,14 @@ function EditCar({ closeModal }) {
                 className="error mb-4 text-red-500"
               />
 
-              <label htmlFor="year" className="mb-2 mt-4">
+              <label htmlFor="year" className={labelClasses}>
                 Year of production:
               </label>
               <Field
                 type="number"
                 id="year"
                 name="year_of_production"
-                className="p-2 border border-gray-300 rounded"
+                className={fieldClasses}
                 placeholder="Year of production"
               />
               <ErrorMessage
@@ -100,14 +104,14 @@ function EditCar({ closeModal }) {
                 className="error mb-4 text-red-500"
               />
 
-              <label htmlFor="price" className="mb-2 mt-4">
+              <label htmlFor="price" className={labelClasses}>
                 Price:
               </label>
               <Field
                 type="number"
                 id="price"
                 name="price"
-                className="p-2 border border-gray-300 rounded"
+                className={fieldClasses}
                 placeholder="Price"
               />
               <ErrorMessage
@@ -116,14 +120,14 @@ function EditCar({ closeModal }) {
                 className="error  mb-4 text-red-500"
               />
 
-              <label htmlFor="location" className="mb-2 mt-4">
+              <label htmlFor="location" className={labelClasses}>
                 Location:
               </label>
               <Field
                 type="text"
                 id="location"
                 name="location"
-                className="p-2 border border-gray-300 rounded"
+                className={fieldClasses}
                 placeholder="Location"
               />
               <ErrorMessage
@@ -132,7 +136,7 @@ function EditCar({ closeModal }) {
                 className="error  mb-4 text-red-500"
               />
 
-              <label htmlFor="image" className="mb-2 mt-4">
+              <label htmlFor="image" className={labelClasses}>
                 Image:
               </label>
               <input
@@ -155,7 +159,7 @@ function EditCar({ closeModal }) {
                 <img src={imagePreview} alt="Preview" className="mb-4" />
               )}
 
-              <Button type="submit" value="Confirm" className="w-full mt-4" />
+              <Button type="submit" value="Confirm" className="w-full mt-1" />
             </Form>
           )}
         </Formik>
