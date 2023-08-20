@@ -5,15 +5,13 @@ import { createSelector } from "@reduxjs/toolkit";
 import { supabase } from "../lib/supabaseClient";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { changeEmailValidationSchema } from "../data/validation";
-import classNames from "classnames";
+import { labelClasses } from "../data/classes";
 
 const checkUser = (state) => state.user.user;
 const selectUser = createSelector([checkUser], (user) => user);
 
 const ChangeEmail = () => {
   const user = useSelector(selectUser);
-
-  const labelClasses = classNames("text-lg text-gray-700");
 
   const [sendEmailMessage, setSendEmailMessage] = useState(false);
 

@@ -5,8 +5,8 @@ import { createSelector } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import classNames from "classnames";
 import { changeUserDataValidationSchema } from "../data/validation";
+import { labelClasses, fieldClasses } from "../data/classes";
 
 const checkUser = (state) => state.user.user;
 const selectUser = createSelector([checkUser], (user) => user);
@@ -15,9 +15,6 @@ const ChangeUserData = () => {
   const user = useSelector(selectUser);
 
   const navigate = useNavigate();
-
-  const fieldClasses = classNames("w-full px-3 py-2 border rounded");
-  const labelClasses = classNames("text-lg text-gray-700");
 
   const [initialValues, setInitialValues] = useState({
     firstName: "",

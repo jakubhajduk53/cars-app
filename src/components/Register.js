@@ -6,14 +6,11 @@ import { checkUser } from "../store/slices/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { registerValidationSchema } from "../data/validation";
-import classNames from "classnames";
+import { labelClasses, fieldClasses } from "../data/classes";
 
 function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const fieldClasses = classNames("w-full px-3 py-2 border rounded");
-  const labelClasses = classNames("text-lg text-gray-700");
 
   const [registerErrorMessage, setRegisterErrorMessage] = useState(undefined);
 

@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { nanoid } from "nanoid";
 import { sellYourCarValidationSchema } from "../data/validation";
-import classNames from "classnames";
+import { fieldClasses, labelClasses } from "../data/classes";
 
 const CDNURL = process.env.REACT_APP_SUPABASE_CDN_URL;
 
@@ -24,8 +24,6 @@ const selectUser = createSelector([checkUser], (user) => user);
 function SellYourCarPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const fieldClasses = classNames("w-full px-3 py-2 border rounded");
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const [imagePreview, setImagePreview] = useState(null);
@@ -65,7 +63,7 @@ function SellYourCarPage() {
     <div className="flex w-full justify-center mt-5">
       {isLoggedIn ? (
         <div>
-          <h2 className="text-4xl text-center mb-2">Sell your car</h2>
+          <h2 className="text-4xl text-center">Sell your car</h2>
           <Formik
             initialValues={{
               name: "",
@@ -80,8 +78,8 @@ function SellYourCarPage() {
             validationSchema={sellYourCarValidationSchema}
           >
             {({ setFieldValue, errors, touched }) => (
-              <Form className="flex flex-col gap-1 w-full">
-                <label htmlFor="name" className="text-lg">
+              <Form className="flex flex-col gap-1 w-80 p-8 pt-4">
+                <label htmlFor="name" className={labelClasses}>
                   Car name:
                 </label>
                 <Field
@@ -96,7 +94,7 @@ function SellYourCarPage() {
                   component="div"
                   className="text-red-500"
                 />
-                <label htmlFor="year" className="text-lg">
+                <label htmlFor="year" className={labelClasses}>
                   Year of production:
                 </label>
                 <Field
@@ -111,7 +109,7 @@ function SellYourCarPage() {
                   component="div"
                   className="text-red-500"
                 />
-                <label htmlFor="price" className="text-lg">
+                <label htmlFor="price" className={labelClasses}>
                   Price:
                 </label>
                 <Field
@@ -126,7 +124,7 @@ function SellYourCarPage() {
                   component="div"
                   className="text-red-500"
                 />
-                <label htmlFor="location" className="text-lg">
+                <label htmlFor="location" className={labelClasses}>
                   Location:
                 </label>
                 <Field
@@ -141,7 +139,7 @@ function SellYourCarPage() {
                   component="div"
                   className="text-red-500"
                 />
-                <label htmlFor="image" className="text-lg">
+                <label htmlFor="image" className={labelClasses}>
                   Image:
                 </label>
                 <input

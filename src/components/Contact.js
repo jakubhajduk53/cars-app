@@ -3,8 +3,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import classNames from "classnames";
 import { contactValidationSchema } from "../data/validation";
+import { labelClasses, fieldClasses } from "../data/classes";
 
 const checkUser = (state) => state.user.user;
 const selectUser = createSelector([checkUser], (user) => user);
@@ -16,9 +16,6 @@ const Contact = (props) => {
   const car = useSelector(selectCar);
 
   const user = useSelector(selectUser);
-
-  const fieldClasses = classNames("w-full px-3 py-2 border rounded");
-  const labelClasses = classNames("text-lg text-gray-700");
 
   const {
     first_name: firstName,

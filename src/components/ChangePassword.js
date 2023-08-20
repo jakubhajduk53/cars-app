@@ -3,14 +3,11 @@ import React from "react";
 import { supabase } from "../lib/supabaseClient";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import classNames from "classnames";
 import { changePasswordValidationSchema } from "../data/validation";
+import { labelClasses, fieldClasses } from "../data/classes";
 
 function ChangePassword() {
   const navigate = useNavigate();
-
-  const fieldClasses = classNames("w-full px-3 py-2 border rounded");
-  const labelClasses = classNames("text-lg text-gray-700");
 
   const initialValues = {
     password: "",
