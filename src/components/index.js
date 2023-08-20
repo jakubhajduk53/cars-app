@@ -12,6 +12,7 @@ import Register from "./Register";
 import RouterLink from "./RouterLink";
 import SearchBar from "./SearchBar";
 import YourCarsList from "./YourCarsList";
+import PaginationControl from "./PaginationControl";
 
 export {
   Button,
@@ -28,4 +29,5 @@ export {
   RouterLink,
   SearchBar,
   YourCarsList,
+  PaginationControl,
 };
