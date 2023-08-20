@@ -1,4 +1,3 @@
-import Button from "./Button";
 import CarsListItem from "./CarsListItem";
 import PaginationControl from "./PaginationControl";
 import React, { useEffect } from "react";

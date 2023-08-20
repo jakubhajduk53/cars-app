@@ -1,9 +1,8 @@
-import Button from "./Button";
 import CarsListItem from "./CarsListItem";
 import PaginationControl from "./PaginationControl";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchCars, changePage } from "../store";
+import { fetchCars } from "../store";
 import { createSelector } from "@reduxjs/toolkit";
 
 const getCars = (state) => state.cars.carsList;
@@ -34,18 +33,6 @@ function CarsList(props) {
       })
     );
   }, [currentPage, searchTerm]);
-
-  const goToNextPage = () => {
-    if (currentPage < totalPages) {
-      dispatch(changePage(currentPage + 1));
-    }
-  };
-
-  const goToPreviousPage = () => {
-    if (currentPage > 1) {
-      dispatch(changePage(currentPage - 1));
-    }
-  };
 
   return (
     <>
