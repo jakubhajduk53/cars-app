@@ -1,5 +1,6 @@
 import Button from "./Button";
 import CarsListItem from "./CarsListItem";
+import PaginationControl from "./PaginationControl";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCars, changePage } from "../store";
@@ -53,23 +54,7 @@ function CarsList(props) {
           <CarsListItem key={car.id} car={car} openModal={props.openModal} />
         ))}
       </div>
-      {totalPages > 0 ? (
-        <div className="flex justify-center items-center fixed w-full bottom-0 z-20 py-4 bg-white">
-          <Button
-            value="<"
-            onClick={goToPreviousPage}
-            disabled={currentPage === 1}
-          />
-          <p className="mx-2 text-center">
-            Page {currentPage} of {totalPages}
-          </p>
-          <Button
-            value=">"
-            onClick={goToNextPage}
-            disabled={currentPage === totalPages}
-          />
-        </div>
-      ) : null}
+      {totalPages > 0 ? <PaginationControl /> : null}
     </>
   );
 }

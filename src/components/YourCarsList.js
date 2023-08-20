@@ -1,8 +1,9 @@
 import Button from "./Button";
 import CarsListItem from "./CarsListItem";
+import PaginationControl from "./PaginationControl";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { changePage, fetchYourCars } from "../store";
+import { fetchYourCars } from "../store";
 import { createSelector } from "@reduxjs/toolkit";
 
 const getCars = (state) => state.cars.carsList;
@@ -42,18 +43,6 @@ function YourCarsList(props) {
       );
   }, [currentPage, userId, props.closeModal]);
 
-  const goToNextPage = () => {
-    if (currentPage < totalPages) {
-      dispatch(changePage(currentPage + 1));
-    }
-  };
-
-  const goToPreviousPage = () => {
-    if (currentPage > 1) {
-      dispatch(changePage(currentPage - 1));
-    }
-  };
-
   return (
     <div>
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 m-8">
@@ -72,23 +61,7 @@ function YourCarsList(props) {
           <p>Loading...</p>
         )}
       </div>
-      {totalPages > 0 ? (
-        <div className="bottom-bar fixed left-0 bottom-0 z-20 w-full bg-white flex justify-center items-center py-4 ">
-          <Button
-            value="<"
-            onClick={goToPreviousPage}
-            disabled={currentPage === 1}
-          />
-          <p className="mx-2 text-center">
-            Page {currentPage} of {totalPages}
-          </p>
-          <Button
-            value=">"
-            onClick={goToNextPage}
-            disabled={currentPage === totalPages}
-          />
-        </div>
-      ) : null}
+      {totalPages > 0 ? <PaginationControl /> : null}
     </div>
   );
 }
