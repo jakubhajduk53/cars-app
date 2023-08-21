@@ -17,6 +17,7 @@ const ChangeEmail = () => {
 
   const [initialValues, setInitialValues] = useState({
     email: "",
+    newEmail: "",
   });
 
   const { email } = user;
@@ -28,8 +29,8 @@ const ChangeEmail = () => {
   }, [email]);
 
   const handleSubmit = async (values) => {
-    const { email } = values;
-    setInitialValues({ email: email });
+    const { newEmail } = values;
+    setInitialValues({ newEmail: newEmail });
     await supabase.auth.updateUser({ email: email });
 
     setSendEmailMessage(true);
@@ -43,19 +44,34 @@ const ChangeEmail = () => {
         onSubmit={handleSubmit}
         validationSchema={changeEmailValidationSchema}
       >
-        {({ values }) => (
+        {() => (
           <Form className="flex flex-col gap-1 w-80 p-8">
             <label htmlFor="email" className={labelClasses}>
-              Email:
+              Your Current Email:
             </label>
             <Field
               type="email"
               id="email"
               name="email"
               className="w-full px-3 py-2 border rounded"
+              disabled={true}
             />
             <ErrorMessage
               name="email"
+              component="div"
+              className="text-red-500"
+            />
+            <label htmlFor="email" className={labelClasses}>
+              New Email:
+            </label>
+            <Field
+              type="email"
+              id="newEmail"
+              name="newEmail"
+              className="w-full px-3 py-2 border rounded"
+            />
+            <ErrorMessage
+              name="newEmail"
               component="div"
               className="text-red-500"
             />
@@ -68,7 +84,7 @@ const ChangeEmail = () => {
           Confirmation email was sent to:
           <span className="text-blue-400 font-semibold">
             {" "}
-            {initialValues.email}
+            {initialValues.newEmail}
           </span>
         </p>
       ) : null}
