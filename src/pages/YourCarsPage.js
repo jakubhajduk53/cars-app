@@ -31,12 +31,12 @@ function YourCarsPage() {
   };
 
   return (
-    <div>
+    <div className="w-full">
       <ReactModal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        className="absolute max-h-screen left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 p-5 z-20 bg-white overflow-y-auto rounded-lg shadow-lg "
-        overlayClassName="fixed inset-0 bg-black bg-opacity-50 z-20 "
+        className="absolute max-h-screen left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 p-5 z-20 bg-white overflow-y-auto rounded-lg shadow-lg"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-50 z-20"
         ariaHideApp={false}
       >
         <div className="flex relative py-12">
