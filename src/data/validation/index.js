@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 export const changeEmailValidationSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Email is required"),
+  newEmail: Yup.string().email("Invalid email").required("Email is required"),
 });
 
 export const changePasswordValidationSchema = Yup.object().shape({

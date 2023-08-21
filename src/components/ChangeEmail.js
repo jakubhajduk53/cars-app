@@ -25,12 +25,17 @@ const ChangeEmail = () => {
   useEffect(() => {
     setInitialValues({
       email: email || "",
+      newEmail: "",
     });
   }, [email]);
 
   const handleSubmit = async (values) => {
     const { newEmail } = values;
-    setInitialValues({ newEmail: newEmail });
+    setInitialValues((prevValues) => ({
+      ...prevValues,
+      newEmail: newEmail,
+    }));
+
     await supabase.auth.updateUser({ email: email });
 
     setSendEmailMessage(true);
