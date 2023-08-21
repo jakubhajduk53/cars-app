@@ -18,7 +18,7 @@ function Header() {
   }, [href]);
 
   return (
-    <div className="flex justify-center bg-neutral-100 sticky top-0">
+    <div className="flex justify-center items-center bg-neutral-100 sticky top-0">
       {headerInfo.map((header) => {
         return (
           <RouterLink
