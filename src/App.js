@@ -1,20 +1,22 @@
-import Header from "./components/Header";
+import {
+  Header,
+  ChangePassword,
+  ChangeUserData,
+  ChangeEmail,
+  Login,
+  Register,
+} from "./components/";
 import SellYourCarPage from "./pages/SellYourCarPage";
 import CarsForSalePage from "./pages/CarsForSalePage";
 import HomePage from "./pages/HomePage";
 import MenuPage from "./pages/MenuPage";
 import UserPanelPage from "./pages/UserPanelPage";
-import Login from "./components/Login";
-import Register from "./components/Register";
 import YourCarsPage from "./pages/YourCarsPage";
 import UserOptionsPage from "./pages/UserOptionsPage";
-import { Route, Routes, useHref } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { checkUser, resetCars, resetPage } from "./store";
-import ChangePassword from "./components/ChangePassword";
-import ChangeUserData from "./components/ChangeUserData";
-import ChangeEmail from "./components/ChangeEmail";
+import { Route, Routes, useHref } from "react-router-dom";
 
 function App() {
   const dispatch = useDispatch();
