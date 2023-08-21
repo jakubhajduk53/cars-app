@@ -83,7 +83,7 @@ const carsSlice = createSlice({
     error: null,
   },
   reducers: {
-    resetCars(state, action) {
+    resetCars(state) {
       state.carsList = [];
       state.carsAmount = 0;
       state.selectedCar = {};

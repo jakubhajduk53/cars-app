@@ -26,6 +26,7 @@ function App() {
     dispatch(resetCars());
     dispatch(resetPage());
   }, [href]);
+
   useEffect(() => {
     dispatch(checkUser());
   });

@@ -68,7 +68,7 @@ const Contact = (props) => {
       onSubmit={handleSubmit}
       validationSchema={contactValidationSchema}
     >
-      {({ values, setFieldValue }) => (
+      {({ setFieldValue }) => (
         <Form className="flex flex-col gap-1 w-80">
           <label htmlFor="firstName" className={labelClasses}>
             First Name:

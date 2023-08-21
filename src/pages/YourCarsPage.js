@@ -7,16 +7,13 @@ import ReactModal from "react-modal";
 import { AiOutlineClose } from "react-icons/ai";
 
 const checkUser = (state) => state.user.user;
-
 const selectUser = createSelector([checkUser], (user) => user);
 
 function YourCarsPage() {
   const dispatch = useDispatch();
-
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const user = useSelector(selectUser);
-
   const { id: userId } = user || {};
 
   useEffect(() => {
